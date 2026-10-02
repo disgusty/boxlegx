@@ -483,8 +483,13 @@ ThemeData _holo(Brightness brightness) {
     listTileTheme: ListTileThemeData(
       selectedColor: accent,
       iconColor: p.textSecondary,
-      titleTextStyle: TextStyle(fontSize: 18, color: p.textPrimary),
-      subtitleTextStyle: TextStyle(fontSize: 14, color: p.textSecondary),
+      // От textTheme (inherit: false), как у стилей других тем: ListTile
+      // анимирует стиль текста при смене темы, а TextStyle.lerp не умеет
+      // переходить между inherit true/false.
+      titleTextStyle: textTheme.titleMedium!
+          .copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: p.textPrimary),
+      subtitleTextStyle: textTheme.bodyMedium!
+          .copyWith(fontSize: 14, color: p.textSecondary),
     ),
     dividerTheme: DividerThemeData(color: p.listDivider, thickness: 1),
     // Holo без карточек: плоская подложка с тонкой рамкой.

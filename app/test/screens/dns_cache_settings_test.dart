@@ -121,12 +121,16 @@ void main() {
     expect(find.text('4000'), findsOneWidget);
     expect(
         tester
-            .widget<SwitchListTile>(find.byKey(const ValueKey('dns_optimistic')))
+            .widget<SwitchListTile>(find.descendant(
+                of: find.byKey(const ValueKey('dns_optimistic')),
+                matching: find.byType(SwitchListTile)))
             .value,
         isTrue);
     expect(
         tester
-            .widget<SwitchListTile>(find.byKey(const ValueKey('dns_store_cache')))
+            .widget<SwitchListTile>(find.descendant(
+                of: find.byKey(const ValueKey('dns_store_cache')),
+                matching: find.byType(SwitchListTile)))
             .value,
         isTrue);
     await close(tester);

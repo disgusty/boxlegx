@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lxbox/theme/styled_widgets.dart';
 import 'package:lxbox/controllers/home_controller.dart';
 import 'package:lxbox/controllers/subscription_controller.dart';
 import 'package:lxbox/models/config_node.dart';
@@ -90,7 +91,8 @@ void main() {
     await pump(tester, tag: 'ts', sub: subWith(userServer()));
     final tabs = tester.widget<TabBar>(find.byType(TabBar)).tabs;
     expect(tabs.length, 4);
-    expect((tabs[2] as Tab).text, 'Network');
+    // Порядок вкладок: Network — третья, перед Diagnostics.
+    expect((tabs[2] as StyledTab).text, 'Network');
     expect(selectedTab(tester), 0);
   });
 

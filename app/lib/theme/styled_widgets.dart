@@ -91,24 +91,29 @@ class SectionTitle extends StatelessWidget {
       return Text(text,
           style: style ?? Theme.of(context).textTheme.titleMedium);
     }
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: p.sectionLine, width: 2)),
-      ),
-      child: Text(
-        text.toUpperCase(),
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w700,
-          color: p.textSecondary,
-        ),
-      ),
+    final label = Text(
+      text.toUpperCase(),
+      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: p.textSecondary,
+          ),
     );
+    return LayoutBuilder(builder: (context, constraints) {
+      // Во всю ширину с линией снизу — только при ограниченной ширине
+      // (в Row её нет: там заголовок — просто подпись).
+      if (!constraints.hasBoundedWidth) return label;
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: p.sectionLine, width: 2)),
+        ),
+        child: label,
+      );
+    });
   }
 }
-
 /// Вкладка с текстом. В Holo подпись ЗАГЛАВНЫМИ (Widget.Holo.ActionBar.TabText:
 /// textAllCaps, 12sp bold — размер и вес задаёт TabBarTheme).
 class StyledTab extends StatelessWidget implements PreferredSizeWidget {
