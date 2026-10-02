@@ -4,6 +4,7 @@ import '../../services/backup_service.dart';
 import '../../services/format_utils.dart' show formatDateTime;
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 class ImportDialogResult {
   const ImportDialogResult({required this.include, required this.merge});
   final Set<BackupCategory> include;
@@ -24,7 +25,7 @@ Future<ImportDialogResult?> showImportPreview(
     builder: (ctx) => StatefulBuilder(
       builder: (ctx, set) {
         final servers = c.splitServerLists();
-        return AlertDialog(
+        return StyledAlertDialog(
           title: Text(getLocalText.s("Import backup")),
           content: SingleChildScrollView(
             child: Column(
@@ -178,7 +179,7 @@ Future<ImportDialogResult?> showImportPreview(
                       if (!merge) {
                         final ok = await showDialog<bool>(
                           context: ctx,
-                          builder: (cctx) => AlertDialog(
+                          builder: (cctx) => StyledAlertDialog(
                             title: Text(getLocalText.s("Replace all data?")),
                             content: Text(getLocalText.s("This will overwrite your current data in the selected categories. This cannot be undone.")),
                             actions: [

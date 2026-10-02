@@ -5,6 +5,7 @@ import '../../../services/l10n/locale_controller.dart';
 import '../../../widgets/app_bottom_sheet.dart';
 import 'node_notifications_view.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §460 W2b / §479 — шторка уведомлений узла из списка подписки.
 ///
 /// Строка под узлом (`NodeWarningRow`) показывает заголовок старшего кода и
@@ -55,10 +56,7 @@ class NodeWarningsSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  getLocalText.s("Notifications"),
-                  style: theme.textTheme.titleMedium,
-                ),
+                SectionTitle(getLocalText.s("Notifications")),
                 if (sourceLabel != null && sourceLabel!.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 2),

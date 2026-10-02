@@ -17,6 +17,7 @@ import 'dns_settings_screen/resolved_server.dart';
 import '../services/l10n/locale_controller.dart';
 import '../legacy/pop_scope.dart';
 
+import '../theme/styled_widgets.dart';
 /// §117 задача 4 — полноэкранный редактор DNS-сервера (locked decision №8).
 /// Паттерн 1:1 с [CustomRuleEditScreen]: Scaffold-route,
 /// `DefaultTabController(2)` (Params / JSON), AppBar с back-guard
@@ -146,7 +147,7 @@ class _DnsServerEditScreenState extends State<DnsServerEditScreen> {
       if (_ctrl.isNew && widget.existingTags.contains(tag)) {
         final replace = await showDialog<bool>(
           context: context,
-          builder: (ctx) => AlertDialog(
+          builder: (ctx) => StyledAlertDialog(
             title: Text(getLocalText.s("Tag \"%s\" exists", tag)),
             content: Text(getLocalText.s("Replace the existing server with this one?")),
             actions: [
@@ -191,7 +192,7 @@ class _DnsServerEditScreenState extends State<DnsServerEditScreen> {
     }
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Reset to default?")),
         content: Text(getLocalText.s("Discard the override and restore the %1\$s definition of \"%2\$s\"?", overrides.name, resolved.tag)),
         actions: [
@@ -277,8 +278,8 @@ class _DnsServerEditScreenState extends State<DnsServerEditScreen> {
               ],
               bottom: TabBar(
                 tabs: [
-                  Tab(text: getLocalText.s("Params")),
-                  Tab(text: getLocalText.s("JSON")),
+                  StyledTab(text: getLocalText.s("Params")),
+                  StyledTab(text: getLocalText.s("JSON")),
                 ],
               ),
             ),

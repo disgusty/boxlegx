@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart' show MaterialColor;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../legacy/legacy_platform.dart';
+import 'accent.dart';
 
 /// Стиль интерфейса (App Settings → Appearance).
 enum UiStyle {
@@ -32,6 +34,7 @@ class AppStyle extends ChangeNotifier {
   // Читает и MainActivity (FlutterSharedPreferences, ключ с префиксом
   // `flutter.`) — до старта движка.
   static const _softwareKey = 'app_software_rendering';
+  static const _accentKey = 'app_accent_index';
 
   UiStyle _style = UiStyle.material3;
   UiStyle get style => _style;
@@ -46,6 +49,11 @@ class AppStyle extends ChangeNotifier {
   /// чей GPU-драйвер не тянет Skia (пустой экран). Действует со следующего
   /// запуска: флаг движка читается в MainActivity до его старта.
   bool _softwareRendering = false;
+
+  /// Акцентный цвет стилей Material 3 / Material 1 (номер в [AccentPalette]).
+  /// Фон и светлая/тёмная тема от него не зависят; Holo его не использует.
+  MaterialColor _accent = AccentPalette.defaultColor;
+  MaterialColor get accent => _accent;
   bool get softwareRendering => _softwareRendering;
 
   Future<void> _load() async {
@@ -61,6 +69,7 @@ class AppStyle extends ChangeNotifier {
       );
       _reduceMotion = prefs.getBool(_motionKey) ?? true;
       _softwareRendering = prefs.getBool(_softwareKey) ?? false;
+      _accent = AccentPalette.byIndex(prefs.getInt(_accentKey));
       notifyListeners();
     } catch (_) {
       // Prefs недоступны — остаются дефолты.
@@ -81,6 +90,14 @@ class AppStyle extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_motionKey, value);
+  }
+
+  Future<void> setAccent(MaterialColor color) async {
+    if (color == _accent) return;
+    _accent = color;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_accentKey, AccentPalette.colors.indexOf(color));
   }
 
   Future<void> setSoftwareRendering(bool value) async {

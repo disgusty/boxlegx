@@ -8,6 +8,7 @@ import '../../../services/url_launcher.dart' as ul;
 import '../../../vpn/box_vpn_client.dart';
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §047 Public Intent API — вкладка App Settings → Automation.
 ///
 /// Самодостаточный StatefulWidget: грузит/сохраняет свои настройки сам (через
@@ -88,7 +89,7 @@ class _AutomationTabState extends State<AutomationTab> {
   Future<bool?> _confirmEnableReceiver() {
     return showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Enable command receiver?")),
         content: Text(getLocalText.s("Any app on this device will be able to control the VPN via broadcast commands while this is on. Only turn it on if you use Tasker / Macrodroid and understand the implications.")),
         actions: [
@@ -125,7 +126,7 @@ class _AutomationTabState extends State<AutomationTab> {
   Future<bool?> _showEmitExplainer() {
     return showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Emitting events outward")),
         content: Text(getLocalText.s("Enabling this category lets other apps receive L×Box events.\n\nEvents do NOT contain subscription / config secrets — only labels (node tags, group names, status).")),
         actions: [
@@ -167,8 +168,7 @@ class _AutomationTabState extends State<AutomationTab> {
     return ListView(
       padding: widget.padding,
       children: [
-        Text(getLocalText.s("Automation API"),
-            style: theme.textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Automation API")),
         const SizedBox(height: 4),
         Text(
           getLocalText.s("Control L×Box from Tasker / Macrodroid / Llama and other automation apps via Android broadcast intents."),
@@ -179,7 +179,7 @@ class _AutomationTabState extends State<AutomationTab> {
         // ─── Master ───
         Text(getLocalText.s("Command receiver"),
             style: theme.textTheme.titleSmall),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Accept automation commands")),
           subtitle: Text(getLocalText.s("Start / Stop / Toggle / Switch / Refresh / … (default OFF)")),
           secondary: const Icon(Icons.settings_remote),
@@ -233,7 +233,7 @@ class _AutomationTabState extends State<AutomationTab> {
             style: muted,
           ),
         ),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Lifecycle")),
           subtitle: const Text(
             // l10n-exempt: broadcast event names (wire values)
@@ -247,7 +247,7 @@ class _AutomationTabState extends State<AutomationTab> {
                   (x) => _emitLifecycle = x)
               : null,
         ),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("State")),
           subtitle: const Text(
               // l10n-exempt: broadcast event names (wire values)
@@ -258,7 +258,7 @@ class _AutomationTabState extends State<AutomationTab> {
                   SettingsStorage.setAutomationEmitState, (x) => _emitState = x)
               : null,
         ),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Subscription")),
           // l10n-exempt: broadcast event names (wire values)
           subtitle: const Text('SUB_REFRESHED · SUB_REFRESH_FAILED'),

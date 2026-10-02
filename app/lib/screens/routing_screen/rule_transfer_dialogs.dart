@@ -6,6 +6,7 @@ import '../../services/format_utils.dart' show formatDateTime;
 import '../../services/l10n/locale_controller.dart';
 import '../../services/rule_transfer.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §396 — диалоги экспорта/импорта правил. Чистая презентация (стиль
 /// `routing_screen_menus.dart` / `import_preview_dialog.dart` бэкапа):
 /// показывают диалог и возвращают выбор, state-мутации остаются в экране.
@@ -414,7 +415,7 @@ Future<RuleImportSelection?> showRuleImportPreview(
           );
         }
 
-        return AlertDialog(
+        return StyledAlertDialog(
           title: Text(getLocalText.s("Import rules")),
           content: SizedBox(
             width: double.maxFinite,

@@ -14,6 +14,7 @@ import '../../services/l10n/locale_controller.dart';
 import '../../services/file_import.dart';
 import '../backup_screen/restore_summary.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Empty-state quick-restore flow.
 ///
 /// Open SAF file picker → parse backup file → `applyImport(merge: false,
@@ -64,7 +65,7 @@ Future<void> restoreFromBackup(
       if (!context.mounted) return;
       showDialog<void>(
         context: context,
-        builder: (ctx) => AlertDialog(
+        builder: (ctx) => StyledAlertDialog(
           title: Text(getLocalText.s("Invalid backup")),
           content: Text(e.message),
           actions: [

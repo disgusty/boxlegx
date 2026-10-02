@@ -41,6 +41,7 @@ import 'chain_edit/chain_hop_targets.dart';
 import '../widgets/app_bottom_sheet.dart';
 import '../legacy/pop_scope.dart';
 
+import '../theme/styled_widgets.dart';
 /// Результат редактора: saved (с обновлённой цепочкой) или deleted.
 class ChainEditResult {
   const ChainEditResult._({this.saved, this.wasDeleted = false});
@@ -373,7 +374,7 @@ class _ChainEditScreenState extends State<ChainEditScreen> with SnackHelper {
           padding: EdgeInsets.fromLTRB(
               16, 12, 16, MediaQuery.of(context).padding.bottom + 32),
           children: [
-            SwitchListTile(
+            StyledSwitchListTile(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: Text(getLocalText.s("Enabled"),
@@ -569,7 +570,7 @@ class _ChainEditScreenState extends State<ChainEditScreen> with SnackHelper {
             style: const TextStyle(fontSize: 14),
           ),
           const SizedBox(height: 8),
-          SwitchListTile(
+          StyledSwitchListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Strip evasion tricks from links"),

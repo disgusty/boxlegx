@@ -547,6 +547,9 @@
   "A workspace with this name already exists. Its saved state will be replaced.": {
     "value": "已存在同名工作区。其已保存状态将被替换。"
   },
+  "Accent color": {
+    "value": "强调色"
+  },
   "ACTIVE": {
     "value": "在用"
   },
@@ -993,6 +996,9 @@
   },
   "Clear all sites?": {
     "value": "清空所有网站？"
+  },
+  "Color of the top bar and controls. The background stays the same.": {
+    "value": "顶部栏和控件的颜色。背景保持不变。"
   },
   "Connect": {
     "value": "连接"
@@ -2994,6 +3000,12 @@
   },
   "Nothing imported": {
     "value": "未导入任何内容"
+  },
+  "OFF": {
+    "value": "关"
+  },
+  "ON": {
+    "value": "开"
   },
   "On Android 4.x the list is applied by the core's routing rules: excluded apps still pass through the tunnel, but go directly, bypassing the VPN server.": {
     "value": "在 Android 4.x 上，该列表通过核心的路由规则生效：被排除的应用仍会经过隧道，但会直连，不经过 VPN 服务器。"

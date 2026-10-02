@@ -22,6 +22,7 @@ import 'custom_rule_edit/tabs/view_tab.dart';
 import '../services/l10n/locale_controller.dart';
 import '../legacy/pop_scope.dart';
 
+import '../theme/styled_widgets.dart';
 /// Редактор `CustomRule` (spec §030).
 ///
 /// Все match-поля заполняются параллельно — sing-box внутри категории
@@ -435,8 +436,8 @@ class _CustomRuleEditScreenState extends State<CustomRuleEditScreen>
               ],
               bottom: TabBar(
                 tabs: [
-                  Tab(text: getLocalText.s("Params")),
-                  Tab(text: getLocalText.s(1, "View")),
+                  StyledTab(text: getLocalText.s("Params")),
+                  StyledTab(text: getLocalText.s(1, "View")),
                 ],
               ),
             ),

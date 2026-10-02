@@ -32,6 +32,7 @@ import 'dns_settings_screen/widgets/resolver_picker.dart';
 import 'lazy_persist_mixin.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// DNS Settings (§014, §061 dns-rules-refactor, бывший feature §041).
 ///
 /// §061 — DNS rules refactored to first-class named/toggleable model
@@ -595,7 +596,6 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
       );
     }
 
-    final theme = Theme.of(context);
     // §219 — цепочки геттеров вычисляем ОДИН раз за build (каждый заново
     // прогонял _customRules/_rules): _displayedServers→_ruleRefsByTag→
     // _customRules, _ruleMirrors, _ruleDisplayRows звались по 2-3 раза.
@@ -623,8 +623,7 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
           // --- Servers ---
           Row(
             children: [
-              Text(getLocalText.s("DNS Servers"),
-                  style: theme.textTheme.titleMedium),
+              SectionTitle(getLocalText.s("DNS Servers")),
               const Spacer(),
               IconButton(icon: const Icon(Icons.add), onPressed: _addServer),
             ],
@@ -662,7 +661,7 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
           // --- DNS Rules (§061 dns-rules-refactor) ---
           Row(
             children: [
-              Text(getLocalText.s("DNS Rules"), style: theme.textTheme.titleMedium),
+              SectionTitle(getLocalText.s("DNS Rules")),
               const Spacer(),
               TextButton.icon(
                 onPressed: _addUserRule,
@@ -784,7 +783,7 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
             ),
             onChanged: _applyCacheCapacity,
           ),
-          SwitchListTile(
+          StyledSwitchListTile(
             key: const ValueKey('dns_optimistic'),
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Serve stale answers")),
@@ -796,7 +795,7 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
               _markDirty();
             }),
           ),
-          SwitchListTile(
+          StyledSwitchListTile(
             key: const ValueKey('dns_store_cache'),
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Keep DNS cache after restart")),
@@ -829,7 +828,7 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
     final running = widget.homeController.state.tunnelUp;
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Clear DNS cache?")),
         content: Text(
           getLocalText.s("This deletes the DNS cache (FakeIP allocations and cached responses).\n\n%s", running

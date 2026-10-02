@@ -6,6 +6,7 @@ import 'overview_models.dart';
 import '../../services/l10n/locale_controller.dart';
 import '../../widgets/safe_bottom.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Overview tab of StatsScreen; receives data via props on each parent refresh.
 /// `_expanded` is local state of this widget.
 ///
@@ -94,7 +95,7 @@ class _OverviewTabState extends State<OverviewTab> {
           ),
         ),
         const SizedBox(height: 16),
-        Text(getLocalText.s("Traffic by Rule"), style: theme.textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Traffic by Rule")),
         const SizedBox(height: 8),
         if (sorted.isEmpty)
           Center(child: Text(getLocalText.s("No active connections")))

@@ -6,6 +6,7 @@ import '../../../widgets/outbound_picker.dart';
 import '../../../widgets/reorder_grab_strip.dart';
 import '../routing_screen_helpers.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// Один tile custom-rule на табе Rules (spec §030): drag-handle, switch,
 /// имя, ☁-статус (опционально), outbound-picker и subtitle. Вся state-логика
 /// (download/enable/reorder/edit/delete) живёт в экране и приходит сюда
@@ -91,7 +92,7 @@ class CustomRuleTile extends StatelessWidget {
     // но свич остаётся включённым: намерение пользователя не меняется.
     final active = rule.enabled && !waitingForDownload;
     final subtitleColor = active ? cs.primary : cs.onSurfaceVariant;
-    final Widget toggle = Switch(
+    final Widget toggle = StyledSwitch(
       value: rule.enabled,
       // §264 — locked-пресет нельзя выключить (disabled свич).
       onChanged: locked ? null : onSwitchChanged,

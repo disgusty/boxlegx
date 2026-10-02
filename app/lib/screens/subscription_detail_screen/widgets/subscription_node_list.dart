@@ -12,6 +12,7 @@ import '../node_inspect_screen.dart';
 import '../../../services/l10n/locale_controller.dart';
 import '../../../widgets/app_bottom_sheet.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// Nodes-tab list: actionable-warning banner + node rows with §283 toggle,
 /// label/tag, protocol + server:port subtitle, inline warning and a
 /// long-press copy menu.
@@ -159,7 +160,7 @@ class SubscriptionNodeList extends StatelessWidget {
           leading: togglable
               ? SizedBox(
                   width: 40,
-                  child: Switch(
+                  child: StyledSwitch(
                     value: !disabled,
                     onChanged: (_) => onToggleNode!(node),
                   ),

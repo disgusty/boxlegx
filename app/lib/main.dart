@@ -314,9 +314,10 @@ class LxBoxApp extends StatelessWidget {
         final reduce = appStyle.reduceMotion;
         return MaterialApp(
           title: 'L×Box',
-          theme: buildAppTheme(style, Brightness.light, reduceMotion: reduce),
-          darkTheme:
-              buildAppTheme(style, Brightness.dark, reduceMotion: reduce),
+          theme: buildAppTheme(style, Brightness.light,
+              reduceMotion: reduce, accent: appStyle.accent),
+          darkTheme: buildAppTheme(style, Brightness.dark,
+              reduceMotion: reduce, accent: appStyle.accent),
           themeMode: themeNotifier.mode,
           // Плавная смена темы перерисовывает всё дерево ~200 мс; при
           // упрощённых анимациях — мгновенно.

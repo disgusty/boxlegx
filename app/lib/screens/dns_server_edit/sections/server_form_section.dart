@@ -6,6 +6,7 @@ import '../../../services/dns/tailscale_endpoint_options.dart'
 import '../edit_controller.dart';
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §117 задача 4b — структурная форма inline-DNS-сервера: режимы
 /// **UDP / DoT / DoH** (sing-box `udp`/`tls`/`https`) + адрес/порт,
 /// для DoH — path, для DoT/DoH — TLS SNI, для hostname-адреса —
@@ -448,7 +449,7 @@ class _TailscaleSection extends StatelessWidget {
             },
           ),
         const SizedBox(height: 8),
-        SwitchListTile(
+        StyledSwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(getLocalText.s("Accept default resolvers")),
           subtitle: Text(

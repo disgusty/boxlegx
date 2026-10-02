@@ -7,6 +7,7 @@ import '../../services/template_loader.dart';
 import '../../services/l10n/locale_controller.dart';
 import '../../widgets/app_bottom_sheet.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §070 — modal bottom sheet опций сортировки нод (long-press по sort-кнопке
 /// в [NodesHeader]). Sheet остаётся открытым — можно тоггнуть несколько опций
 /// подряд; `StatefulBuilder` перерисовывает чекбоксы локально. Изменения сразу
@@ -28,8 +29,7 @@ Future<void> showSortOptionsMenu(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(getLocalText.s("Sort options"),
-                    style: Theme.of(sheetCtx).textTheme.titleMedium),
+                SectionTitle(getLocalText.s("Sort options")),
                 const SizedBox(height: 12),
                 // §100 — выбор режима сортировки (incl. Custom = ручная,
                 // включает видимые drag-полоски §098). Раньше manual входился
@@ -144,8 +144,7 @@ Future<void> showPingSettings(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(getLocalText.s("Ping Settings"),
-                  style: Theme.of(ctx).textTheme.titleMedium),
+              SectionTitle(getLocalText.s("Ping Settings")),
               const SizedBox(height: 8),
               if (canApplyToGroup) ...[
                 SegmentedButton<bool>(

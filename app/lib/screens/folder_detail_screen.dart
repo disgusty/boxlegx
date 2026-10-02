@@ -36,6 +36,7 @@ import '../services/file_import.dart';
 import '../widgets/app_bottom_sheet.dart';
 import '../theme/app_style.dart';
 
+import '../theme/styled_widgets.dart';
 /// §234 — экран папки серверов. Зеркалит SubscriptionDetailScreen: вкладка
 /// членов (per-member toggle, drag-reorder, long-press меню) + Settings
 /// (общий SubscriptionSettingsTab: tag prefix / detour на всю папку).
@@ -389,7 +390,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     final timeoutCtl = TextEditingController(text: '${target.timeoutMs}');
     final saved = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Ping target")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -459,7 +460,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     final ctl = TextEditingController(text: '${_thresholds.orangeMs}');
     final ms = await showDialog<int>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Disable slow servers")),
         content: TextField(
           controller: ctl,
@@ -558,7 +559,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     }
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Delete unreachable?")),
         content: Text(getLocalText.plural("Remove %d servers that failed the test (unreachable or broken)?", dead.length)),
         actions: [
@@ -614,7 +615,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
         );
     final saved = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Ping color thresholds")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -851,7 +852,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     final ctl = TextEditingController();
     final url = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Add servers by URL")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -923,7 +924,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     final ctl = TextEditingController(text: member.raw);
     final newRaw = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Edit server")),
         content: TextField(
           controller: ctl,
@@ -993,7 +994,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     final member = _folder.members[memberIndex];
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Delete server?")),
         content: Text(getLocalText.s("Remove \"%s\" from this folder?", _memberTitle(member))),
         actions: [
@@ -1151,8 +1152,8 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
           bottom: TabBar(
             controller: _tabCtrl,
             tabs: [
-              Tab(text: getLocalText.s("Servers")),
-              Tab(text: getLocalText.s("Settings")),
+              StyledTab(text: getLocalText.s("Servers")),
+              StyledTab(text: getLocalText.s("Settings")),
             ],
           ),
         ),
@@ -1179,8 +1180,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
               Icon(Icons.folder_open,
                   size: 48, color: theme.colorScheme.onSurfaceVariant),
               const SizedBox(height: 12),
-              Text(getLocalText.s("Folder is empty"),
-                  style: theme.textTheme.titleMedium),
+              SectionTitle(getLocalText.s("Folder is empty")),
               const SizedBox(height: 4),
               Text(
                 getLocalText.s("Add servers with the + button above, or long-press a standalone server on the Servers screen and choose \"Move to folder…\"."),
@@ -1702,7 +1702,7 @@ class _MemberTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: SizedBox(
         width: 40,
-        child: Switch(
+        child: StyledSwitch(
           value: member.enabled,
           onChanged: (_) => onToggle(),
         ),

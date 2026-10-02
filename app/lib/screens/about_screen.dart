@@ -12,6 +12,7 @@ import '../vpn/box_vpn_client.dart';
 import '../services/l10n/locale_controller.dart';
 import '../widgets/safe_bottom.dart';
 
+import '../theme/styled_widgets.dart';
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key, this.openDonate = false});
 
@@ -221,7 +222,7 @@ class AboutScreen extends StatelessWidget {
   void _showDonateDialog(BuildContext context) {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Support L×Box")),
         contentPadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
         content: SizedBox(

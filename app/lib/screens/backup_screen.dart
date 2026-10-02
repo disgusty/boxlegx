@@ -32,6 +32,7 @@ import '../services/url_launcher.dart';
 import '../widgets/safe_bottom.dart';
 
 
+import '../theme/styled_widgets.dart';
 /// Backup & restore UI — спека [§040F](../../../docs/spec/tasks/040F-backup-restore-ui/spec.md).
 class BackupScreen extends StatefulWidget {
   const BackupScreen({super.key});
@@ -535,7 +536,7 @@ class _BackupScreenState extends State<BackupScreen> with SnackHelper {
 
     return showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Import backup")),
         content: SingleChildScrollView(child: Text(lines.join('\n'))),
         actions: [
@@ -569,7 +570,7 @@ class _BackupScreenState extends State<BackupScreen> with SnackHelper {
   void _showError(String title, String message) {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(title),
         content: Text(message),
         actions: [

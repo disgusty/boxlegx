@@ -6,6 +6,7 @@ import '../dns_format.dart';
 import 'dns_badge.dart';
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §117 (решение №6) — атомарная mirror-группа в списке DNS Rules.
 ///
 /// Содержимое (DNS-правила пресетов + mirror'ы routing-правил с DNS-опцией)
@@ -147,7 +148,7 @@ class DnsMirrorTile extends StatelessWidget {
         // серого свитча (читался бы как «выключено») нейтральная иконка.
         leading: onToggle == null
             ? Icon(Icons.dns_outlined, size: 22, color: cs.onSurfaceVariant)
-            : Switch(value: enabled, onChanged: onToggle),
+            : StyledSwitch(value: enabled, onChanged: onToggle),
         title: Text(
           title.isNotEmpty ? title : getLocalText.s("(unnamed rule)"),
           style: TextStyle(
@@ -262,7 +263,7 @@ class DnsRuleAspectsTile extends StatelessWidget {
       // Server: свитч (вкл/выкл, сервер помнится — удаление в редакторе).
       // Force IPv4: свитча нет (onToggle == null) — только крестик-удаление.
       leading: row.onToggle != null
-          ? Switch(value: row.enabled, onChanged: row.onToggle)
+          ? StyledSwitch(value: row.enabled, onChanged: row.onToggle)
           : Icon(Icons.dns_outlined, size: 20, color: cs.onSurfaceVariant),
       title: Text(
         label,

@@ -12,6 +12,7 @@ import '../vpn/cc_channel.dart';
 import 'app_bottom_sheet.dart';
 import 'safe_bottom.dart';
 
+import '../theme/styled_widgets.dart';
 /// Задача 581 — вызовы ядра вкладки Network. Отдельно от [CcChannel], чтобы
 /// тесты подставляли свои.
 class TailscaleNetworkActions {
@@ -271,7 +272,7 @@ class _TailscaleNetworkTabState extends State<TailscaleNetworkTab> {
   Future<void> _logout(CcTailscaleStatus s) async {
     final ok = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Log out?")),
         content: Text(
           s.keyAuth
@@ -588,7 +589,7 @@ class _TailscalePingSheetState extends State<TailscalePingSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.peer.hostName, style: theme.textTheme.titleMedium),
+            SectionTitle(widget.peer.hostName),
             const SizedBox(height: 8),
             if (_results.isEmpty && !_stopped) const LinearProgressIndicator(),
             for (final r in _results)

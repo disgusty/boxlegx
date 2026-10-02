@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Confirm-диалоги для App Settings → Diagnostics.
 ///
 /// Чистый UI: показывают `AlertDialog` и возвращают выбор юзера. Сами
@@ -15,7 +16,7 @@ class AppSettingsDialogs {
   static Future<bool?> confirmQuitApp(BuildContext context) {
     return showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Quit & reopen app?")),
         content: Text(getLocalText.s("This will fully close the app process so the new \"Forward sing-box logs\" value is picked up at next launch (Libbox.setup is one-shot per process). VPN service will stop. Tap the app icon to reopen.")),
         actions: [
@@ -38,7 +39,7 @@ class AppSettingsDialogs {
   static Future<bool?> openAppInfoHint(BuildContext context) {
     return showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Find these toggles")),
         content: SingleChildScrollView(
           child: Text(

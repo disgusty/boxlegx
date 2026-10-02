@@ -6,6 +6,7 @@ import 'edit_controller.dart';
 import '../../services/l10n/locale_controller.dart';
 import '../../widgets/app_bottom_sheet.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §247 — модальное окно «Action & Resolve» (за ⚙ рядом с Action-пикером).
 ///
 /// Три режима одного правила:
@@ -354,14 +355,14 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
               title: Text(getLocalText.s("Advanced DNS options"),
                   style: theme.textTheme.titleSmall),
               children: [
-                SwitchListTile(
+                StyledSwitchListTile(
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   value: _disableCache,
                   onChanged: (v) => setState(() => _disableCache = v),
                   title: Text(getLocalText.s("Disable cache")),
                 ),
-                SwitchListTile(
+                StyledSwitchListTile(
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   value: _disableOptimisticCache,

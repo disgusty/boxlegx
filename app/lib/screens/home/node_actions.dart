@@ -13,6 +13,7 @@ import '../../services/contract/body_sanitizer.dart'
 import '../../services/tag_resolver.dart';
 import '../outbound_view_screen.dart';
 import '../../services/l10n/locale_controller.dart';
+import '../../theme/styled_widgets.dart';
 import '../../vpn/cc_channel.dart' show CcEndpointState;
 
 /// Node long-press action helpers.
@@ -167,7 +168,7 @@ NodeSpec? _findNodeByDisplayTag(
 Future<bool> _confirmPrivateKeyInLink(BuildContext context) async {
   final ok = await showDialog<bool>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(getLocalText.s("Link contains a private key")),
       content: Text(getLocalText.s(
           "Anyone who gets this link can use the key. Copy it only to move "

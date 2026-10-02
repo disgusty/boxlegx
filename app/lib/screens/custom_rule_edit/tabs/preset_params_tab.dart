@@ -8,6 +8,7 @@ import '../edit_controller.dart';
 import 'params_tab.dart' show ParamsTabActions;
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §053 Stage 3 — Params tab для preset-ветки (§033 / §045).
 ///
 /// Если preset null — broken-preset fallback с Delete-кнопкой.
@@ -204,7 +205,7 @@ class PresetParamsTab extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            Switch(
+            StyledSwitch(
               value: c.enabled,
               // §264 — locked-пресет нельзя выключить (disabled и в редакторе).
               onChanged: preset.locked ? null : c.setEnabled,
@@ -473,7 +474,7 @@ class _PresetVarWidget extends StatelessWidget {
                   ),
                 )
               else
-                Switch(
+                StyledSwitch(
                   value: current,
                   onChanged: (val) async {
                     // §265 — ref-var пишем в глобальный userVars.

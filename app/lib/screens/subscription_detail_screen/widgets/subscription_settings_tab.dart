@@ -14,6 +14,7 @@ import '../subscription_detail_format.dart';
 import '../../../services/l10n/locale_controller.dart';
 import '../../../widgets/safe_bottom.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// Settings tab: tag-prefix field, detour-mode radio group (+ sub-options) and
 /// the subscription-info block. Extracted verbatim from `_buildSettingsTab` /
 /// `_buildSubscriptionInfo`. All mutation/persist/dialog logic stays in the
@@ -383,7 +384,7 @@ class SubscriptionSettingsTab extends StatelessWidget {
     final cs = theme.colorScheme;
     final id = entry.identity; // null = Default
     return [
-      SwitchListTile(
+      StyledSwitchListTile(
         secondary: const Icon(Icons.badge_outlined),
         title: Text(getLocalText.s("Custom identity")),
         subtitle: Text(getLocalText.s(
@@ -413,7 +414,7 @@ class SubscriptionSettingsTab extends StatelessWidget {
             style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
           ),
         ),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Send HWID")),
           subtitle: Text(getLocalText.s("Send x-hwid + device headers on every subscription fetch — for panels with HWID device limits (Remnawave). Off by default.")),
           secondary: const Icon(Icons.devices_outlined),
@@ -504,13 +505,13 @@ class SubscriptionSettingsTab extends StatelessWidget {
   Widget _registerToggles(BuildContext context) => Padding(
         padding: const EdgeInsets.only(left: 24),
         child: Column(children: [
-          SwitchListTile(
+          StyledSwitchListTile(
             title: Text(getLocalText.s("Register detour servers")),
             subtitle: Text(getLocalText.s("Add detour servers to proxy groups (visible in node list)")),
             value: entry.registerDetourServers,
             onChanged: onRegisterDetourServersChanged,
           ),
-          SwitchListTile(
+          StyledSwitchListTile(
             title: Text(getLocalText.s("Register detour in auto group")),
             subtitle: Text(getLocalText.s("Include detour servers in auto-proxy-out urltest")),
             value: entry.registerDetourInAuto,

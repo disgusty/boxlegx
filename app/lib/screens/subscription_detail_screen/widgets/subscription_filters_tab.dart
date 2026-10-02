@@ -11,6 +11,7 @@ import '../../../services/node_hash.dart' show disabledNodeCount;
 import '../../../services/subscription/import_rules.dart';
 import '../../../widgets/safe_bottom.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §302 — «Filters» tab: per-subscription import-rules (REPLACE + DISABLE +
 /// ENABLE §332),
 /// применяемые к телу подписки на импорте/обновлении. CRUD + drag-reorder +
@@ -268,7 +269,7 @@ class _SubscriptionFiltersTabState extends State<SubscriptionFiltersTab> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Общий тумблер набора.
-        SwitchListTile(
+        StyledSwitchListTile(
           value: _setEnabled,
           onChanged: (v) {
             widget.entry.importRulesEnabled = v;
@@ -360,7 +361,7 @@ class _SubscriptionFiltersTabState extends State<SubscriptionFiltersTab> {
                 : '  OR  ');
     return ListTile(
       key: key,
-      leading: Switch(
+      leading: StyledSwitch(
         value: rule.enabled,
         onChanged: (v) => _toggleRuleAt(i, v),
       ),
@@ -565,8 +566,8 @@ class _RuleEditorScreenState extends State<_RuleEditorScreen> {
           ],
           bottom: TabBar(
             tabs: [
-              Tab(text: getLocalText.s("Rule")),
-              Tab(text: getLocalText.s("Matches")),
+              StyledTab(text: getLocalText.s("Rule")),
+              StyledTab(text: getLocalText.s("Matches")),
             ],
           ),
         ),

@@ -23,6 +23,7 @@ import 'owner_navigation.dart';
 import 'subscriptions_screen/entry_warnings.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// §258 — экран деталей outbound'а («View details» из меню ноды): вкладки
 /// **Overview** (основные параметры + рантайм-цепочка detour, хопы
 /// кликабельны → экран владельца) и **JSON** (прежний read-only дамп §099
@@ -278,11 +279,11 @@ class _OutboundViewScreenState extends State<OutboundViewScreen> {
             isScrollable: true,
             tabAlignment: TabAlignment.start,
             tabs: [
-              Tab(text: getLocalText.s("Overview")),
+              StyledTab(text: getLocalText.s("Overview")),
               // l10n-exempt: acronym, same in all locales
-              const Tab(text: 'JSON'),
-              if (hasDependents) Tab(text: getLocalText.s("Dependents")),
-              if (tailscale) Tab(text: getLocalText.s("Network")),
+              const StyledTab(text: 'JSON'),
+              if (hasDependents) StyledTab(text: getLocalText.s("Dependents")),
+              if (tailscale) StyledTab(text: getLocalText.s("Network")),
               NodeDiagnosticsTabLabel(warnings: warnings),
             ],
           ),
@@ -551,7 +552,7 @@ class _OutboundViewScreenState extends State<OutboundViewScreen> {
       children: [
         if (value != null) _kvRow(context, 'Endpoint state', value),
         if (hs.tunnelUp && st.isNotEmpty)
-          SwitchListTile(
+          StyledSwitchListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Node enabled")),

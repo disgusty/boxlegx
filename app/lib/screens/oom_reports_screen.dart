@@ -12,6 +12,7 @@ import '../services/ui_helpers.dart';
 import '../widgets/big_text_view.dart';
 import '../widgets/safe_bottom.dart';
 
+import '../theme/styled_widgets.dart';
 /// §318 — вкладка «OOM» на экране Debug: снимки памяти, снятые ядром.
 ///
 /// Пишет их oom-killer ядра (§271) при превышении порога RSS: pprof-профили
@@ -135,10 +136,7 @@ class _OomReportsTabState extends State<OomReportsTab>
               Icon(Icons.memory_outlined,
                   size: 40, color: Theme.of(context).colorScheme.outline),
               const SizedBox(height: 12),
-              Text(
-                getLocalText.s("No OOM reports"),
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+              SectionTitle(getLocalText.s("No OOM reports")),
               const SizedBox(height: 8),
               Text(
                 getLocalText.s("The core has not hit its memory limit. Snapshots appear here only when the OOM killer fires."),

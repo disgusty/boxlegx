@@ -14,6 +14,7 @@ import '../services/l10n/locale_controller.dart';
 import '../widgets/safe_bottom.dart';
 import '../widgets/urltest_idle_hint.dart';
 
+import '../theme/styled_widgets.dart';
 /// Итог редактора: `null` у [replace] — свёртка снята.
 typedef SourceReplaceResult = ({SourceReplace? replace});
 
@@ -211,7 +212,7 @@ class _SourceReplaceScreenState extends State<SourceReplaceScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16).withSafeBottom(context),
         children: [
-          SwitchListTile(
+          StyledSwitchListTile(
             key: const ValueKey('source-replace-toggle'),
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Replace with a group")),

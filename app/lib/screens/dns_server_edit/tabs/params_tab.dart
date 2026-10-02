@@ -7,6 +7,7 @@ import '../edit_controller.dart';
 import '../sections/server_form_section.dart';
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §117 задача 4 — Params tab редактора DNS-сервера. Состав по `kind`:
 ///
 /// - общее: Description + Enabled (при locked — disabled, показан ON,
@@ -59,7 +60,7 @@ class DnsServerParamsTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        SwitchListTile(
+        StyledSwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(getLocalText.s("Enabled")),
           // §117 lifecycle (locked №7): реферимый сервер force-include'ится

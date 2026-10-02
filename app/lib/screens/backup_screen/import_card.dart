@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 class ImportCard extends StatelessWidget {
   const ImportCard({super.key, required this.busy, required this.onImport});
   final bool busy;
@@ -21,7 +22,7 @@ class ImportCard extends StatelessWidget {
               children: [
                 const Icon(Icons.download_outlined),
                 const SizedBox(width: 8),
-                Text(getLocalText.s(1, "Import"), style: theme.textTheme.titleMedium),
+                SectionTitle(getLocalText.s(1, "Import")),
               ],
             ),
             const SizedBox(height: 4),

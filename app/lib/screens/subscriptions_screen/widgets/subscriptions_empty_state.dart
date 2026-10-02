@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../services/l10n/locale_controller.dart';
 import '../../../widgets/safe_bottom.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// Onboarding card (night T5-1): вместо голого "No subscriptions yet"
 /// показываем карточку с 3-step start — пользователь сразу видит что
 /// делать. ListView+AlwaysScrollable чтобы pull-to-refresh (T3-2)
@@ -37,8 +38,7 @@ class SubscriptionsEmptyState extends StatelessWidget {
                   children: [
                     Icon(Icons.rocket_launch, color: cs.primary),
                     const SizedBox(width: 10),
-                    Text(getLocalText.s("Getting started"),
-                        style: Theme.of(context).textTheme.titleMedium),
+                    SectionTitle(getLocalText.s("Getting started")),
                   ],
                 ),
                 const SizedBox(height: 14),

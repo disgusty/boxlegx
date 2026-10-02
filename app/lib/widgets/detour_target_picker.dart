@@ -11,6 +11,7 @@ import '../services/tag_resolver.dart';
 import '../services/l10n/locale_controller.dart';
 import 'app_bottom_sheet.dart';
 
+import '../theme/styled_widgets.dart';
 /// §239 — выбранная цель detour-пикера.
 class DetourTarget {
   const DetourTarget({required this.link, required this.display});
@@ -264,8 +265,7 @@ Future<DetourTarget?> showDetourTargetPicker(
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text(getLocalText.s("Detour server"),
-                    style: theme.textTheme.titleMedium),
+                child: SectionTitle(getLocalText.s("Detour server")),
               ),
               ListTile(
                 leading: const Icon(Icons.block_flipped, size: 20),

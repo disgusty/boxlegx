@@ -4,6 +4,7 @@ import '../screens/custom_rule_edit/validators.dart';
 import 'wifi_entry.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// §053 Stage 1 — extract «Manual add Wi-Fi» dialog из
 /// `custom_rule_edit_screen.dart`. Self-contained, возвращает либо
 /// валидный `WifiEntry`, либо `null` если юзер cancel'нул.
@@ -21,7 +22,7 @@ Future<WifiEntry?> showWifiManualAddDialog(BuildContext context) async {
   return showDialog<WifiEntry>(
     context: context,
     builder: (ctx) => StatefulBuilder(
-      builder: (ctx, setDlgState) => AlertDialog(
+      builder: (ctx, setDlgState) => StyledAlertDialog(
         title: Text(getLocalText.s("Add Wi-Fi network")),
         content: Column(
           mainAxisSize: MainAxisSize.min,

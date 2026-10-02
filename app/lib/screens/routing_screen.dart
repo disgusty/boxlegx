@@ -52,6 +52,7 @@ import 'tun_apps_tab.dart';
 import '../services/l10n/locale_controller.dart';
 import '../theme/app_style.dart';
 
+import '../theme/styled_widgets.dart';
 part 'routing_screen/routing_srs_cache.dart';
 
 class RoutingScreen extends StatefulWidget {
@@ -297,11 +298,11 @@ class _RoutingScreenState extends State<RoutingScreen>
               isScrollable: true,
               tabAlignment: TabAlignment.start,
               tabs: [
-                Tab(text: getLocalText.s("Directions")),
-                Tab(text: getLocalText.s("Presets")),
-                Tab(text: getLocalText.s("Rules")),
-                Tab(text: getLocalText.s("Tunnel apps")),
-                Tab(text: getLocalText.s("Sites")),
+                StyledTab(text: getLocalText.s("Directions")),
+                StyledTab(text: getLocalText.s("Presets")),
+                StyledTab(text: getLocalText.s("Rules")),
+                StyledTab(text: getLocalText.s("Tunnel apps")),
+                StyledTab(text: getLocalText.s("Sites")),
               ],
             ),
           ),

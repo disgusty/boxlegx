@@ -30,6 +30,7 @@ import '../services/subscription/subscription_identity.dart'
 import 'lazy_persist_mixin.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 class VpnModeTab extends StatefulWidget {
   const VpnModeTab({
     super.key,
@@ -376,9 +377,9 @@ class _VpnModeTabState extends State<VpnModeTab>
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 16),
-          Text(getLocalText.s("Tunnel options"), style: tt.titleMedium),
+          SectionTitle(getLocalText.s("Tunnel options")),
           const SizedBox(height: 4),
-          SwitchListTile(
+          StyledSwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Keep VPN on exit")),
             subtitle: Text(getLocalText.s("VPN stays active when app is closed")),
@@ -386,7 +387,7 @@ class _VpnModeTabState extends State<VpnModeTab>
             value: _keepOnExit,
             onChanged: _tunTogglesLoaded ? _toggleKeepOnExit : null,
           ),
-          SwitchListTile(
+          StyledSwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(getLocalText.s("Allow VPN bypass")),
             subtitle: Text(
@@ -404,7 +405,7 @@ class _VpnModeTabState extends State<VpnModeTab>
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 16),
-          Text(getLocalText.s("Local proxy"), style: tt.titleMedium),
+          SectionTitle(getLocalText.s("Local proxy")),
           const SizedBox(height: 12),
 
           // ─── PROTOCOL (proxy_type → dropdown) ───
@@ -447,7 +448,7 @@ class _VpnModeTabState extends State<VpnModeTab>
           const SizedBox(height: 16),
 
           // ─── AUTH (proxy_auth → switch; forced-on for non-loopback) ───
-          SwitchListTile(
+          StyledSwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(_authNode.title),
             subtitle: Text(

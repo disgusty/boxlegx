@@ -18,6 +18,7 @@ import '../../widgets/app_bottom_sheet.dart';
 import '../node_settings_screen.dart';
 import '../subscription_detail_screen/node_inspect_screen.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Имён в тексте плашки — до трёх, остальные уходят в хвост «+%d more».
 const _kNamesInBanner = 3;
 
@@ -52,7 +53,7 @@ Future<CoreRejectPrompt> showCoreRejectPrompt(
     BuildContext context, int limit) async {
   final answer = await showDialog<CoreRejectPrompt>(
     context: context,
-    builder: (dCtx) => AlertDialog(
+    builder: (dCtx) => StyledAlertDialog(
       title: Text(getLocalText
           .plural("%d servers disabled — there may be more", limit)),
       content: Column(
@@ -164,10 +165,7 @@ Future<void> showCoreRejectList(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                coreRejectBannerTitle(nodes.length),
-                style: Theme.of(sheetCtx).textTheme.titleMedium,
-              ),
+              child: SectionTitle(coreRejectBannerTitle(nodes.length)),
             ),
             for (final d in nodes)
               Builder(

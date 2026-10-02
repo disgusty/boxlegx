@@ -4,6 +4,7 @@ import '../../../services/settings_storage.dart';
 import '../../../services/l10n/locale_controller.dart';
 import '../../../theme/app_style.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// Diagnostics tab для App Settings.
 ///
 /// Stateless — state-снимок и callback'и приходят от
@@ -91,8 +92,7 @@ class DiagnosticsTab extends StatelessWidget {
     return ListView(
       padding: padding,
       children: [
-        Text(getLocalText.s("System setup"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("System setup")),
         const SizedBox(height: 8),
         ListTile(
           leading: Icon(
@@ -174,10 +174,9 @@ class DiagnosticsTab extends StatelessWidget {
           onTap: onAppInfoTap,
         ),
         const Divider(height: 32),
-        Text(getLocalText.s("Developer"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Developer")),
         const SizedBox(height: 8),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Debug API")),
           subtitle: Text(
             debugEnabled
@@ -251,7 +250,7 @@ class DiagnosticsTab extends StatelessWidget {
         // снимают через Debug API `PUT /settings/config_locked` или этим
         // toggle'ом). При выключении Debug API toggle выше — lock auto-снимется.
         if (debugEnabled)
-          SwitchListTile(
+          StyledSwitchListTile(
             title: Text(getLocalText.s("Lock config (debug)")),
             subtitle: Text(
               configLocked
@@ -275,7 +274,7 @@ class DiagnosticsTab extends StatelessWidget {
           color: coreLogsHighlighted
               ? Theme.of(context).colorScheme.tertiaryContainer
               : Colors.transparent,
-          child: SwitchListTile(
+          child: StyledSwitchListTile(
             title: Text(getLocalText.s("Forward sing-box logs")),
             subtitle: Text(
               coreLogsEnabled
@@ -318,7 +317,7 @@ class DiagnosticsTab extends StatelessWidget {
         // фича теряет смысл. 5-минутный stickiness отсекает drive-by
         // сети (магазин/проход). Toggle для тех кто не хочет logging.
         const Divider(height: 8),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Auto-record visited Wi-Fi networks")),
           subtitle: Text(
             autoRecordWifi
@@ -376,7 +375,7 @@ class _CoreLogsVerboseTileState extends State<_CoreLogsVerboseTile> {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
+    return StyledSwitchListTile(
       title: Text(getLocalText.s("Verbose (TRACE/DEBUG)")),
       subtitle: Text(
         getLocalText.s("Applies immediately. Very chatty on live traffic — enable, reproduce, grab the log, disable."),

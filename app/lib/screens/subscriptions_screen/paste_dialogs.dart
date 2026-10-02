@@ -5,12 +5,13 @@ import '../subscription_detail_screen/widgets/node_warnings_sheet.dart'
     show showNodeWarningsSheet;
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Dialog «Unknown format» — показывает обрезанный текст clipboard'а.
 /// Поведение 1:1 с прежней inline-версией в `_pasteFromClipboard`.
 void showUnknownFormatDialog(BuildContext context, String text) {
   showDialog(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(getLocalText.s("Add from clipboard")),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -47,7 +48,7 @@ Future<bool?> showConfirmAddDialog(
     BuildContext context, ClipboardAnalysis analysis) {
   return showDialog<bool>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(getLocalText.s("Add from clipboard")),
       content: Column(
         mainAxisSize: MainAxisSize.min,

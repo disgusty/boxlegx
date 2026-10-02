@@ -22,6 +22,7 @@ import '../../../models/source_chain.dart';
 import '../../../services/l10n/locale_controller.dart';
 import '../../../widgets/reorder_grab_strip.dart';
 
+import '../../../theme/styled_widgets.dart';
 class ChainEntryTile extends StatelessWidget {
   const ChainEntryTile({
     super.key,
@@ -46,7 +47,7 @@ class ChainEntryTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: SizedBox(
         width: 40,
-        child: Switch(
+        child: StyledSwitch(
           value: chain.enabled,
           onChanged: (_) => onToggle(),
         ),

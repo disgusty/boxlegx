@@ -6,6 +6,7 @@ import '../../services/community_servers_loader.dart';
 import '../../services/url_launcher.dart';
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Загрузка community-манифеста + dialog выбора public test-server list.
 /// Поведение 1:1 с прежним `_pickPublicTestServer`: при ошибке/пустом
 /// списке — snackbar; при выборе записи — `onSelectSource(list.source)`.
@@ -33,7 +34,7 @@ Future<void> pickPublicTestServer(
 
   showDialog<void>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(getLocalText.s("Get Public Test Servers")),
       contentPadding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       content: Column(

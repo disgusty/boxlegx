@@ -736,6 +736,9 @@
   "A workspace with this name already exists. Its saved state will be replaced.": {
     "value": "Рабочее пространство с таким именем уже есть. Его сохранённое состояние будет заменено."
   },
+  "Accent color": {
+    "value": "Акцентный цвет"
+  },
   "ACTIVE": {
     "value": "АКТИВЕН"
   },
@@ -1182,6 +1185,9 @@
   },
   "Clear all sites?": {
     "value": "Очистить список сайтов?"
+  },
+  "Color of the top bar and controls. The background stays the same.": {
+    "value": "Цвет верхней панели и элементов управления. Фон не меняется."
   },
   "Connect": {
     "value": "Подключить"
@@ -3237,6 +3243,12 @@
   },
   "Nothing imported": {
     "value": "Ничего не импортировано"
+  },
+  "OFF": {
+    "value": "ВЫКЛ"
+  },
+  "ON": {
+    "value": "ВКЛ"
   },
   "On Android 4.x the list is applied by the core's routing rules: excluded apps still pass through the tunnel, but go directly, bypassing the VPN server.": {
     "value": "На Android 4.x список применяется правилами маршрутизации ядра: исключённые приложения всё равно проходят через туннель, но идут напрямую, минуя VPN-сервер."

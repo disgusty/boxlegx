@@ -15,6 +15,7 @@ import '../../services/l10n/locale_controller.dart';
 import '../../services/file_import.dart';
 import '../../widgets/app_bottom_sheet.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Long-press bottom-sheet для записи подписки/сервера. Поведение 1:1 с
 /// прежним `_showContextMenu` — копировать URL, share, update,
 /// reset fail-count, delete-with-confirm. §234 — у папки своё меню
@@ -133,7 +134,7 @@ void showEntryContextMenu(
               Navigator.pop(ctx);
               final confirmed = await showDialog<bool>(
                 context: context,
-                builder: (dCtx) => AlertDialog(
+                builder: (dCtx) => StyledAlertDialog(
                   title: Text(deleteEntryTitle(entry.list)), // §603
                   content: Text(getLocalText.s("Remove \"%s\"?", entry.displayName)),
                   actions: [
@@ -222,7 +223,7 @@ Future<void> showEditSourceDialog(
   await showDialog<void>(
     context: context,
     builder: (dCtx) => StatefulBuilder(
-      builder: (dCtx, setLocal) => AlertDialog(
+      builder: (dCtx, setLocal) => StyledAlertDialog(
         title: Text(getLocalText.s("Edit source")),
         content: Column(
           mainAxisSize: MainAxisSize.min,

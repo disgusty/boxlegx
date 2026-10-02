@@ -8,6 +8,7 @@ import 'outbound_picker.dart';
 import 'var_values_model.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// Рендерит список [WizardVar] с секция-заголовками и типизированными
 /// контролами:
 ///
@@ -190,7 +191,7 @@ class _TemplateVarListViewState extends State<TemplateVarListView> {
     }
     switch (v.type) {
       case 'bool':
-        return SwitchListTile(
+        return StyledSwitchListTile(
           title: Text(v.title.isNotEmpty ? v.title : v.name),
           subtitle: v.tooltip.isNotEmpty
               ? Text(v.tooltip, style: const TextStyle(fontSize: 12))

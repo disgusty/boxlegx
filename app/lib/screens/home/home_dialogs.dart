@@ -13,6 +13,7 @@ import '../../vpn/box_vpn_client.dart';
 import '../../widgets/wifi_permission_dialog.dart';
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Подтверждение остановки VPN: если активных соединений > 3 — показываем
 /// диалог (их закрытие оборвёт сессии), иначе останавливаем сразу через
 /// [controller].
@@ -24,7 +25,7 @@ void confirmStop(
   if (state.traffic.activeConnections > 3) {
     showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Stop VPN?")),
         content: Text(
           getLocalText.plural("%d active connections will be closed.", state.traffic.activeConnections),

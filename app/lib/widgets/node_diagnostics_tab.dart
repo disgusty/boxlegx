@@ -17,6 +17,7 @@ import '../vpn/cc_channel.dart';
 import 'banner_palette.dart';
 import 'safe_bottom.dart';
 
+import '../theme/styled_widgets.dart';
 /// §392 — вкладка Diagnostics: выпадающий список предопределённых чекеров,
 /// кнопка запуска и СЫРОЙ ответ в поле ниже.
 ///
@@ -438,7 +439,7 @@ class NodeDiagnosticsTabLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = getLocalText.s("Diagnostics");
-    if (warnings.isEmpty) return Tab(text: label);
+    if (warnings.isEmpty) return StyledTab(text: label);
 
     final hasError =
         warnings.any((w) => w.severity == WarningSeverity.error);

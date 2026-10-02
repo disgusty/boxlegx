@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §103 фаза 4 — карточка переноса настроек между телефоном и десктопным
 /// лаунчером (LX Backup).
 ///
@@ -36,10 +37,7 @@ class LxTransferCard extends StatelessWidget {
                 const Icon(Icons.swap_horiz),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
-                    getLocalText.s("Transfer to desktop"),
-                    style: theme.textTheme.titleMedium,
-                  ),
+                  child: SectionTitle(getLocalText.s("Transfer to desktop")),
                 ),
               ],
             ),

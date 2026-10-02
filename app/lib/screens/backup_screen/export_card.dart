@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../services/backup_service.dart';
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 class ExportCard extends StatelessWidget {
   const ExportCard({
     super.key,
@@ -39,7 +40,7 @@ class ExportCard extends StatelessWidget {
               children: [
                 const Icon(Icons.upload_outlined),
                 const SizedBox(width: 8),
-                Text(getLocalText.s("Export"), style: theme.textTheme.titleMedium),
+                SectionTitle(getLocalText.s("Export")),
               ],
             ),
             const SizedBox(height: 4),

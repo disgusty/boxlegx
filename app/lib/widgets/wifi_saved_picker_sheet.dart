@@ -8,6 +8,7 @@ import 'wifi_entry.dart';
 import '../services/l10n/locale_controller.dart';
 import 'app_bottom_sheet.dart';
 
+import '../theme/styled_widgets.dart';
 /// §053 Stage 1 — extract bottom sheet «Pick saved Wi-Fi» из
 /// `custom_rule_edit_screen.dart`. Self-contained: сам грузит данные
 /// (`getCustomRules` + `getWifiHistory` + `getAutoRecordWifi`),
@@ -151,10 +152,7 @@ Future<List<WifiEntry>?> showWifiSavedPickerSheet(
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        getLocalText.s("Saved networks"),
-                        style: Theme.of(ctx).textTheme.titleMedium,
-                      ),
+                      child: SectionTitle(getLocalText.s("Saved networks")),
                     ),
                     IconButton(
                       icon: const Icon(Icons.close),

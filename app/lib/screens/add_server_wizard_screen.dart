@@ -19,6 +19,7 @@ import '../services/subscription/subscription_identity.dart';
 import '../widgets/safe_bottom.dart';
 import '../models/tailscale_bundle.dart';
 
+import '../theme/styled_widgets.dart';
 // SocksSpec.emit() требует TemplateVars — для wizard-created SOCKS5 без
 // substitution используем пустые. Это match'ит manual UserServer pattern
 // (no template processing).
@@ -363,13 +364,13 @@ class _AddServerWizardScreenState extends State<AddServerWizardScreen>
           isScrollable: true,
           tabAlignment: TabAlignment.start,
           tabs: [
-            Tab(text: getLocalText.s("SOCKS5")),
-            Tab(text: getLocalText.s("HTTP")),
-            Tab(text: getLocalText.s("Paste URI")),
-            Tab(text: getLocalText.s("Paste JSON")),
+            StyledTab(text: getLocalText.s("SOCKS5")),
+            StyledTab(text: getLocalText.s("HTTP")),
+            StyledTab(text: getLocalText.s("Paste URI")),
+            StyledTab(text: getLocalText.s("Paste JSON")),
             // §435 — последней, чтобы индексы прежних вкладок не поехали.
             // l10n-exempt: protocol name
-            const Tab(text: 'Tailscale'),
+            const StyledTab(text: 'Tailscale'),
           ],
         ),
       ),
@@ -472,14 +473,14 @@ class _AddServerWizardScreenState extends State<AddServerWizardScreen>
               autocorrect: false,
             ),
             const SizedBox(height: 12),
-            SwitchListTile(
+            StyledSwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(getLocalText.s("Ephemeral")),
               subtitle: Text(getLocalText.s("The device is removed from the tailnet when it goes offline")),
               value: _tsEphemeral,
               onChanged: (v) => setState(() => _tsEphemeral = v),
             ),
-            SwitchListTile(
+            StyledSwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(getLocalText.s("Accept routes")),
               subtitle: Text(getLocalText.s("Use subnet routes advertised by other tailnet devices")),
@@ -667,7 +668,7 @@ class _AddServerWizardScreenState extends State<AddServerWizardScreen>
               obscureText: true,
             ),
             const SizedBox(height: 12),
-            SwitchListTile(
+            StyledSwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(getLocalText.s("HTTPS (TLS to proxy)")),
               subtitle: Text(getLocalText.s("Connect to the proxy over TLS; Host is used as the SNI. ALPN, insecure and the other TLS options can be set later on the node's JSON tab (Edit JSON).")),

@@ -33,6 +33,7 @@ import 'subscription_detail_screen/widgets/subscription_settings_tab.dart';
 import 'subscription_detail_screen/widgets/subscription_source_tab.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 class SubscriptionDetailScreen extends StatefulWidget {
   const SubscriptionDetailScreen({
     super.key,
@@ -401,7 +402,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
     if (_hasEnableRules) {
       final ok = await showDialog<bool>(
         context: context,
-        builder: (ctx) => AlertDialog(
+        builder: (ctx) => StyledAlertDialog(
           title: Text(getLocalText.s("Disable unreachable")),
           content: Text([
             getLocalText.plural(
@@ -434,7 +435,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
     final ctl = TextEditingController(text: '${_probeThresholds.orangeMs}');
     final ms = await showDialog<int>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Disable slow servers")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -542,7 +543,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
           if (canToggleAll)
             SizedBox(
               width: 40,
-              child: Switch(
+              child: StyledSwitch(
                 value: !allOff,
                 onChanged: (v) => unawaited(_toggleAllNodes(v)),
               ),
@@ -659,7 +660,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
   Future<void> _delete() async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(deleteEntryTitle(widget.entry.list)), // §603
         content: Text(getLocalText.s("Remove \"%s\"?", widget.entry.displayName)),
         actions: [
@@ -748,10 +749,10 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
           controller: _tabCtrl,
           isScrollable: true,
           tabs: [
-            Tab(text: getLocalText.s("Nodes")),
-            Tab(text: getLocalText.s("Settings")),
-            Tab(text: getLocalText.s("Source")),
-            Tab(text: getLocalText.s("Filters")),
+            StyledTab(text: getLocalText.s("Nodes")),
+            StyledTab(text: getLocalText.s("Settings")),
+            StyledTab(text: getLocalText.s("Source")),
+            StyledTab(text: getLocalText.s("Filters")),
           ],
         ),
       ),
@@ -939,7 +940,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
     final ctl = TextEditingController(text: initial);
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(title),
         content: TextField(
           controller: ctl,

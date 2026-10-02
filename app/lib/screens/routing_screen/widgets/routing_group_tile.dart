@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/direction.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §125 — тайл Направления на табе Directions. Switch слева (вкл/выкл), тап по телу →
 /// редактор Направления. `vpn-1` всегда включён и неудаляем (switch disabled).
 class RoutingDirectionTile extends StatelessWidget {
@@ -33,7 +34,7 @@ class RoutingDirectionTile extends StatelessWidget {
     final reqStr = isRequired ? ' · required' : '';
     return ListTile(
       contentPadding: const EdgeInsets.only(left: 8, right: 8),
-      leading: Switch(
+      leading: StyledSwitch(
         value: isRequired ? true : direction.enabled,
         onChanged: isRequired ? null : onToggle,
       ),

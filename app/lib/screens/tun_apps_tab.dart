@@ -24,6 +24,7 @@ import 'lazy_persist_mixin.dart';
 import 'settings_screen.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 class TunAppsTab extends StatefulWidget {
   const TunAppsTab({
     super.key,
@@ -115,7 +116,7 @@ class _TunAppsTabState extends State<TunAppsTab>
   void _clearAll() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Clear all apps?")),
         content: Text(
           getLocalText.plural("Remove all %1\$d apps from the list. Mode (%2\$s) is kept.", _cfg.packages.length, _cfg.mode),
@@ -154,7 +155,7 @@ class _TunAppsTabState extends State<TunAppsTab>
   void _showHelp() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Tunnel apps — OS-level split")),
         content: SingleChildScrollView(
           child: Text(getLocalText.s("This is OS-level split-tunneling. It controls which apps see the VPN tunnel at all — packets from excluded apps go directly via cellular/wifi without entering sing-box.\n\n• Off — every app uses the VPN (default)\n• Allow-list — ONLY listed apps go through VPN; everything else bypasses\n• Deny-list — listed apps bypass VPN; everything else goes through\n\nNote: apps in the Allow-list still go through your normal routing rules. Apps that bypass the tunnel are not visible to sing-box at all — your custom rules with package_name will not match them.\n\nChanges apply when the tunnel is created next — restart or reload the core from the home screen banner (Android reads the list only while creating the tun interface).\n\nIn Proxy mode there is no tun interface, so this list has no effect.")),
@@ -194,7 +195,7 @@ class _TunAppsTabState extends State<TunAppsTab>
         // ─── Header: Mode + tooltip + overflow ───
         Row(
           children: [
-            Text(getLocalText.s("Mode"), style: tt.titleMedium),
+            SectionTitle(getLocalText.s("Mode")),
             const SizedBox(width: 4),
             Tooltip(
               message:
@@ -281,10 +282,7 @@ class _TunAppsTabState extends State<TunAppsTab>
           const SizedBox(height: 16),
           Row(
             children: [
-              Text(
-                getLocalText.s("Apps in this list (%d)", _cfg.packages.length),
-                style: tt.titleMedium,
-              ),
+              SectionTitle(getLocalText.s("Apps in this list (%d)", _cfg.packages.length)),
               const Spacer(),
               FilledButton.tonalIcon(
                 onPressed: _pickApps,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../vpn/cc_channel.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// §208 (SPEC 019 V2) — попап с текущим составом пула round_robin-группы.
 /// Открывается из контекстного меню auto-ноды («View pool»). Снапшот тянется
 /// через `getPool` (unary RPC ядра); пустой → «Pool not available».
@@ -106,7 +107,7 @@ class _PoolDialogState extends State<_PoolDialog> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return AlertDialog(
+    return StyledAlertDialog(
       title: Row(
         children: [
           const Icon(Icons.hub_outlined, size: 18),

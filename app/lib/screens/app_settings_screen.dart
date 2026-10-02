@@ -26,6 +26,7 @@ import 'app_settings_screen/widgets/subscriptions_tab.dart';
 import 'backup_screen.dart';
 import '../theme/app_style.dart';
 
+import '../theme/styled_widgets.dart';
 class AppSettingsScreen extends StatefulWidget {
   const AppSettingsScreen({
     super.key,
@@ -507,11 +508,11 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> with WidgetsBindi
               title: Text(getLocalText.s("App Settings")),
               bottom: _FadingTabBar(
                 tabs: [
-                  Tab(text: getLocalText.s("General")),
-                  Tab(text: getLocalText.s("Appearance")),
-                  Tab(text: getLocalText.s("Subscriptions")),
-                  Tab(text: getLocalText.s("Diagnostics")),
-                  Tab(text: getLocalText.s("Automation")),
+                  StyledTab(text: getLocalText.s("General")),
+                  StyledTab(text: getLocalText.s("Appearance")),
+                  StyledTab(text: getLocalText.s("Subscriptions")),
+                  StyledTab(text: getLocalText.s("Diagnostics")),
+                  StyledTab(text: getLocalText.s("Automation")),
                 ],
               ),
             ),
@@ -544,7 +545,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> with WidgetsBindi
     final ctl = TextEditingController(text: initial);
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(title),
         content: TextField(
           controller: ctl,
@@ -795,7 +796,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> with WidgetsBindi
           text: options.contains(_region) ? '' : _region.toUpperCase());
       picked = await showDialog<String>(
         context: context,
-        builder: (ctx) => AlertDialog(
+        builder: (ctx) => StyledAlertDialog(
           title: Text(getLocalText.s("Country code (2 letters)")),
           content: TextField(
             controller: ctl,

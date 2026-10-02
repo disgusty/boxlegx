@@ -11,6 +11,7 @@ import '../../widgets/lx_code_editor.dart';
 import '../../widgets/node_diagnostics_tab.dart';
 import '../../widgets/tailscale_network_tab.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §302 — экран разбора одной ноды подписки: две вкладки.
 ///
 /// - **JSON** — что нода превратится в конфиге (`emit`), то есть результат
@@ -108,11 +109,11 @@ class _NodeInspectScreenState extends State<NodeInspectScreen> {
             isScrollable: true,
             tabAlignment: TabAlignment.start,
             tabs: [
-              Tab(text: getLocalText.s("JSON")),
-              Tab(text: getLocalText.s("Source")),
+              StyledTab(text: getLocalText.s("JSON")),
+              StyledTab(text: getLocalText.s("Source")),
               if (hasReplacements)
-                Tab(text: getLocalText.s("Replacements")),
-              if (tailscale) Tab(text: getLocalText.s("Network")),
+                StyledTab(text: getLocalText.s("Replacements")),
+              if (tailscale) StyledTab(text: getLocalText.s("Network")),
               // §392/§501 — диагностика + уведомления узла; точка на ярлыке
               // при наличии предупреждений.
               NodeDiagnosticsTabLabel(warnings: warnings),

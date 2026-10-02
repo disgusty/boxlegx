@@ -27,6 +27,7 @@ import 'filter_panel.dart';
 import '../../../services/l10n/locale_controller.dart';
 import '../../../widgets/safe_bottom.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §328 — предикат полноэкранного гайда «Add a server».
 ///
 /// «Нет серверов» ≠ «нет файла конфига»: конфиг становится непустым при нуле
@@ -705,7 +706,7 @@ class HomeNodeList extends StatelessWidget {
 
     final choice = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Apply to %s", label)),
         content: Text(getLocalText.s("Use \"%s\" as…", pattern)),
         // Горизонтально (Row), порядок: Direction filter → Default → Cancel.

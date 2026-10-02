@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../services/l10n/locale_controller.dart';
 import 'update_status_row.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// General tab для App Settings.
 ///
 /// Stateless — все значения и callback'и приходят от
@@ -63,8 +64,7 @@ class GeneralTab extends StatelessWidget {
       children: [
         // §425 — регион использования: общая настройка, потребители — пулы
         // WARP (loc.<cc>), дальше региональные дефолты правил.
-        Text(getLocalText.s("Region"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Region")),
         const SizedBox(height: 8),
         ListTile(
           leading: const Icon(Icons.public_outlined),
@@ -83,10 +83,9 @@ class GeneralTab extends StatelessWidget {
           ),
         ),
         const Divider(height: 32),
-        Text(getLocalText.s("Behavior"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Behavior")),
         const SizedBox(height: 8),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Auto-start on boot")),
           subtitle: Text(getLocalText.s("Start VPN when device turns on")),
           secondary: const Icon(Icons.power_settings_new),
@@ -96,7 +95,7 @@ class GeneralTab extends StatelessWidget {
         // §338 — автоприменение изменений конфига к живому туннелю. Настройка
         // не про подписки: источник изменения любой (узел, detour, DNS,
         // routing, per-app), поэтому живёт в Behavior, а не в Subscriptions.
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Auto-restart VPN on settings change")),
           subtitle: Text(getLocalText.s("Apply every config change to the running tunnel by itself, so no banner is left to tap. Each apply drops the tunnel for about 3 seconds and kills open connections.")),
           secondary: const Icon(Icons.restart_alt),
@@ -114,8 +113,7 @@ class GeneralTab extends StatelessWidget {
           ),
         ),
         const Divider(height: 32),
-        Text(getLocalText.s("Quick connect"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Quick connect")),
         const SizedBox(height: 8),
         ListTile(
           leading: const Icon(Icons.dashboard_customize_outlined),
@@ -132,10 +130,9 @@ class GeneralTab extends StatelessWidget {
           subtitle: Text(getLocalText.s("Long-press the L×Box icon on your home screen → choose \"Toggle VPN\".")),
         ),
         const Divider(height: 32),
-        Text(getLocalText.s("Updates"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Updates")),
         const SizedBox(height: 8),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Check for updates on launch")),
           subtitle: Text(getLocalText.s("Pings github.com once a day to check for new releases. \"View\" opens the release page in browser; install is manual.")),
           secondary: const Icon(Icons.system_update_alt),
@@ -144,17 +141,16 @@ class GeneralTab extends StatelessWidget {
         ),
         const UpdateStatusRow(),
         const Divider(height: 32),
-        Text(getLocalText.s("Feedback"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Feedback")),
         const SizedBox(height: 8),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Auto-ping after connect")),
           subtitle: Text(getLocalText.s("Ping nodes of active group 5s after VPN starts (once per connect)")),
           secondary: const Icon(Icons.network_ping),
           value: autoPing,
           onChanged: loaded ? onAutoPingChanged : null,
         ),
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Haptic feedback")),
           subtitle: Text(getLocalText.s("Vibrate on connect, disconnect and errors. Respects system \"Touch feedback\" setting")),
           secondary: const Icon(Icons.vibration),
@@ -162,8 +158,7 @@ class GeneralTab extends StatelessWidget {
           onChanged: loaded ? onHapticChanged : null,
         ),
         const Divider(height: 32),
-        Text(getLocalText.s("Backup & restore"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Backup & restore")),
         const SizedBox(height: 8),
         ListTile(
           leading: const Icon(Icons.import_export),

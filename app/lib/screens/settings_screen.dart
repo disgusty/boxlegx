@@ -16,6 +16,7 @@ import '../widgets/var_values_model.dart';
 import 'vpn_mode_tab.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// VPN Settings — System (`VpnService.Builder` toggles) + Core (sing-box
 /// engine vars, `chapter: 'core'`). Routing/DNS vars живут на своих экранах.
 /// SPEC 393 D3 — гасит подпись выключенной строки настроек.
@@ -377,9 +378,9 @@ class _SettingsScreenState extends State<SettingsScreen>
           title: Text(getLocalText.s("VPN Settings")),
           bottom: TabBar(
             tabs: [
-              Tab(text: getLocalText.s("System")),
-              Tab(text: getLocalText.s("Core")),
-              Tab(text: getLocalText.s("Mode")),
+              StyledTab(text: getLocalText.s("System")),
+              StyledTab(text: getLocalText.s("Core")),
+              StyledTab(text: getLocalText.s("Mode")),
             ],
           ),
         ),
@@ -405,7 +406,7 @@ class _SettingsScreenState extends State<SettingsScreen>
       children: [
         // §188 — «Allow VPN bypass» и «Keep VPN on exit» переехали в Mode-вкладку
         // (TUN-зависимы → видны только в vpn / vpn_proxy режимах).
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Interrupt connections on switch")),
           subtitle: Text(getLocalText.s("Drop active connections when you switch nodes, so traffic moves to the new node immediately")),
           secondary: const Icon(Icons.swap_horiz),
@@ -540,7 +541,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         ),
         // §542 — ленивая сборка WG/AWG (lx.wg.lazy_build, SPEC 097). Было
         // константой true (§536). onChanged: null → честный disabled без сна.
-        SwitchListTile(
+        StyledSwitchListTile(
           value: _wgLazyBuild,
           onChanged: !_wgLazyBuildEnabled
               ? null
@@ -604,7 +605,7 @@ class _SettingsScreenState extends State<SettingsScreen>
           description: 'Health checks, memory and VPN lifecycle',
         ),
         // §272 — passive health check (urltest.passive_check).
-        SwitchListTile(
+        StyledSwitchListTile(
           value: _passiveCheck,
           onChanged: (bool v) {
             if (!_vpnLoaded) return;

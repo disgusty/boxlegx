@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../main.dart';
 import '../../../services/l10n/locale_controller.dart';
+import '../../../theme/accent.dart';
 import '../../../theme/app_style.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §541 — Appearance tab для App Settings: всё про внешний вид (тема,
 /// компоновка — поворот и две колонки списка узлов, язык).
 ///
@@ -36,8 +38,7 @@ class AppearanceTab extends StatelessWidget {
     return ListView(
       padding: padding,
       children: [
-        Text(getLocalText.s("Appearance"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Appearance")),
         const SizedBox(height: 8),
         Column(
             children: ThemeMode.values.map((mode) {
@@ -63,8 +64,7 @@ class AppearanceTab extends StatelessWidget {
         const SizedBox(height: 8),
         // Стиль интерфейса: Material 3 (исходный) / Material 1 / Holo.
         // Применяется сразу — MaterialApp слушает appStyle.
-        Text(getLocalText.s("Interface style"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Interface style")),
         const SizedBox(height: 8),
         Column(
             children: UiStyle.values.map((style) {
@@ -96,7 +96,32 @@ class AppearanceTab extends StatelessWidget {
               );
             }).toList(),
           ),
-        SwitchListTile(
+        // Акцентный цвет — Material 3 (seed схемы) и Material 1 (панель и
+        // элементы). Фон и светлая/тёмная тема не меняются; у Holo своя
+        // палитра, поэтому для него выбор скрыт.
+        if (appStyle.style != UiStyle.holo) ...[
+          ListTile(
+            leading: const Icon(Icons.palette_outlined),
+            title: Text(getLocalText.s("Accent color")),
+            subtitle: Text(getLocalText.s("Color of the top bar and controls. The background stays the same.")),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(72, 0, 16, 8),
+            child: Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                for (final color in AccentPalette.colors)
+                  _AccentSwatch(
+                    color: color,
+                    selected: color == appStyle.accent,
+                    onTap: () => appStyle.setAccent(color),
+                  ),
+              ],
+            ),
+          ),
+        ],
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Simplified animations")),
           subtitle: Text(getLocalText.s("Instant screen transitions and fewer moving effects. Smoother on old and slow devices.")),
           secondary: const Icon(Icons.animation),
@@ -105,7 +130,7 @@ class AppearanceTab extends StatelessWidget {
         ),
         // Рендеринг: GPU (OpenGL ES) по умолчанию, CPU — запасной путь для
         // слабых или несовместимых GPU. Применяется после перезапуска.
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Render on CPU (software)")),
           subtitle: Text(getLocalText.s("Draw the interface on the processor instead of the graphics chip. Use it if the screen stays blank or glitches; slower. Applies after the app restarts.")),
           secondary: const Icon(Icons.memory),
@@ -114,12 +139,11 @@ class AppearanceTab extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         // §541 — компоновка: поворот и две колонки списка узлов в одном месте.
-        Text(getLocalText.s("Layout"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Layout")),
         const SizedBox(height: 8),
         // §220 — снятие портретной фиксации (планшетный фидбэк). Применяется
         // сразу, без рестарта; уважает системный auto-rotate.
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Allow rotation")),
           subtitle: Text(getLocalText.s("Rotate to landscape when the device turns — handy on tablets. Follows the system auto-rotate setting.")),
           secondary: const Icon(Icons.screen_rotation),
@@ -128,7 +152,7 @@ class AppearanceTab extends StatelessWidget {
         ),
         // §541 — гейт двухколоночной раскладки §537; применяется сразу через
         // SettingsStorage.nodeListTwoColumns.
-        SwitchListTile(
+        StyledSwitchListTile(
           title: Text(getLocalText.s("Two columns on wide screens")),
           subtitle: Text(getLocalText.s("Show the node list in two columns when the window is at least 600 dp wide (tablets, landscape, split-screen).")),
           secondary: const Icon(Icons.view_column_outlined),
@@ -138,8 +162,7 @@ class AppearanceTab extends StatelessWidget {
         const SizedBox(height: 8),
         // §279 — выбор языка приложения; смена применяется мгновенно через
         // LocaleController (полный пайплайн: ARB + template + rebuild).
-        Text(getLocalText.s("Language"),
-            style: Theme.of(context).textTheme.titleMedium),
+        SectionTitle(getLocalText.s("Language")),
         const SizedBox(height: 8),
         Column(
           children: [
@@ -164,4 +187,48 @@ class AppearanceTab extends StatelessWidget {
         title: Text(title),
         secondary: icon == null ? null : Icon(icon),
       );
+}
+
+/// Кружок цвета в выборе акцента; выбранный — с галочкой.
+class _AccentSwatch extends StatelessWidget {
+  const _AccentSwatch({
+    required this.color,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final MaterialColor color;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      selected: selected,
+      child: InkResponse(
+        onTap: onTap,
+        radius: 22,
+        child: Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: color.shade500,
+            shape: BoxShape.circle,
+            border: selected
+                ? Border.all(
+                    color: Theme.of(context).colorScheme.onSurface, width: 2)
+                : null,
+          ),
+          child: selected
+              ? Icon(Icons.check,
+                  size: 20,
+                  color: AccentPalette.needsDarkForeground(color)
+                      ? Colors.black87
+                      : Colors.white)
+              : null,
+        ),
+      ),
+    );
+  }
 }

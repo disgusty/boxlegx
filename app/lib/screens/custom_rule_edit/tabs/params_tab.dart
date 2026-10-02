@@ -15,6 +15,7 @@ import '../sections/wifi_section.dart';
 import 'preset_params_tab.dart';
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §053 Stage 3 — Params tab для inline/srs ветки.
 ///
 /// Подписывается на `CustomRuleEditController` через `CustomRuleEditScope`.
@@ -61,7 +62,7 @@ class ParamsTab extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            Switch(
+            StyledSwitch(
               value: c.enabled,
               // srs без кэша — нельзя включить, сначала Download.
               onChanged: canEnable ? c.setEnabled : null,

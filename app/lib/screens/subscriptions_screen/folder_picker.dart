@@ -5,6 +5,7 @@ import '../../models/server_list.dart';
 import '../../services/l10n/locale_controller.dart';
 import '../../widgets/app_bottom_sheet.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §234 — bottom-sheet выбора папки (для «Move to folder…»). Показывает все
 /// папки кроме [excludeId] + пункт «New folder…» (создаёт и сразу выбирает).
 /// Возвращает индекс выбранной папки в `controller.entries` или null (отмена).
@@ -31,8 +32,7 @@ Future<int?> showFolderPicker(
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Text(title ?? getLocalText.s("Move to folder"),
-                style: Theme.of(ctx).textTheme.titleMedium),
+            child: SectionTitle(title ?? getLocalText.s("Move to folder")),
           ),
           Flexible(
             child: ListView(
@@ -82,7 +82,7 @@ Future<String?> showFolderNameDialog(BuildContext context,
   final ctl = TextEditingController(text: initial);
   final name = await showDialog<String>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(title ?? getLocalText.s("New folder")),
       content: TextField(
         controller: ctl,
@@ -128,7 +128,7 @@ Future<String?> showDeleteFolderDialog(
       : getLocalText.s("Auto nodes are deleted with the folder: %s", groups.join(', '));
   return showDialog<String>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(getLocalText.s("Delete folder?")),
       content: Text(groupsNote == null ? summary : '$summary\n\n$groupsNote'),
       actions: [

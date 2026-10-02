@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/direction.dart';
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// §393 A3 — диалог создания Направления: тег + имя.
 ///
 /// Тег — системный id и цель правил; после создания он immutable, поэтому
@@ -84,7 +85,7 @@ class _NewDirectionDialogState extends State<_NewDirectionDialog> {
   @override
   Widget build(BuildContext context) {
     final error = _tagError();
-    return AlertDialog(
+    return StyledAlertDialog(
       title: Text(getLocalText.s("New direction")),
       content: Column(
         mainAxisSize: MainAxisSize.min,

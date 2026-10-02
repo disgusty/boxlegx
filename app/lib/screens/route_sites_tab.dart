@@ -28,6 +28,7 @@ import '../widgets/export_action_sheet.dart';
 import 'lazy_persist_mixin.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 class RouteSitesTab extends StatefulWidget {
   const RouteSitesTab({
     super.key,
@@ -106,7 +107,7 @@ class _RouteSitesTabState extends State<RouteSitesTab>
     final ctrl = TextEditingController();
     final text = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Add sites")),
         content: TextField(
           controller: ctrl,
@@ -147,7 +148,7 @@ class _RouteSitesTabState extends State<RouteSitesTab>
   void _clearAll() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Clear all sites?")),
         content: Text(getLocalText.s("Remove all %d sites from the list. The mode is kept.", _cfg.sites.length)),
         actions: [
@@ -193,7 +194,7 @@ class _RouteSitesTabState extends State<RouteSitesTab>
       if (_cfg.sites.isNotEmpty) {
         final choice = await showDialog<bool>(
           context: context,
-          builder: (ctx) => AlertDialog(
+          builder: (ctx) => StyledAlertDialog(
             title: Text(getLocalText.s("Import sites")),
             content: Text(getLocalText.s("Found %d sites in the file.", entries.length)),
             actions: [
@@ -270,7 +271,7 @@ class _RouteSitesTabState extends State<RouteSitesTab>
   void _showHelp() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Sites — split tunneling by address")),
         content: SingleChildScrollView(
           child: Text(getLocalText.s("Choose which websites go through the VPN.\n\n• Off — sites are routed by your normal rules (default)\n• Allow-list — ONLY listed sites go through VPN; everything else goes directly\n• Deny-list — listed sites go directly; everything else goes through VPN\n\nA domain also covers all of its subdomains (example.com matches www.example.com). IP addresses and subnets (10.0.0.0/8) are supported too.\n\nThe list works inside the core, so it also applies in Proxy mode. Changes apply after the core restarts or reloads from the home screen banner.\n\nImport and export use the Amnezia VPN site list format (JSON); plain text files with one site per line can be imported too.")),
@@ -308,7 +309,7 @@ class _RouteSitesTabState extends State<RouteSitesTab>
     final header = <Widget>[
       Row(
         children: [
-          Text(getLocalText.s("Mode"), style: tt.titleMedium),
+          SectionTitle(getLocalText.s("Mode")),
           const Spacer(),
           PopupMenuButton<String>(
             tooltip: getLocalText.s("More"),
@@ -368,10 +369,7 @@ class _RouteSitesTabState extends State<RouteSitesTab>
         Row(
           children: [
             Expanded(
-              child: Text(
-                getLocalText.s("Sites in this list (%d)", _cfg.sites.length),
-                style: tt.titleMedium,
-              ),
+              child: SectionTitle(getLocalText.s("Sites in this list (%d)", _cfg.sites.length)),
             ),
             FilledButton.tonalIcon(
               onPressed: _addDialog,

@@ -15,6 +15,7 @@ import 'oom_reports_screen.dart';
 import 'debug/profiling_tab.dart';
 import '../services/l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 class DebugScreen extends StatefulWidget {
   const DebugScreen({super.key, this.initialTab = 0});
 
@@ -113,10 +114,10 @@ class _DebugScreenState extends State<DebugScreen> with SnackHelper {
               // §318/§158 — четыре вкладки: `isScrollable` вместо равных
               // долей, иначе на узких экранах «Profiling» обрезается.
               bottom: TabBar(isScrollable: true, tabs: [
-                Tab(text: getLocalText.s("Log")),
-                Tab(text: getLocalText.s("Crashes")),
-                Tab(text: getLocalText.s("OOM")),
-                Tab(text: getLocalText.s("Profiling")),
+                StyledTab(text: getLocalText.s("Log")),
+                StyledTab(text: getLocalText.s("Crashes")),
+                StyledTab(text: getLocalText.s("OOM")),
+                StyledTab(text: getLocalText.s("Profiling")),
               ]),
             ),
             body: TabBarView(children: [

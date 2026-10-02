@@ -17,6 +17,7 @@ import '../../models/direction.dart';
 import '../../models/source_chain.dart';
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 class NewChainRequest {
   const NewChainRequest({required this.tag});
 
@@ -77,7 +78,7 @@ class _NewChainDialogState extends State<_NewChainDialog> {
   @override
   Widget build(BuildContext context) {
     final error = _tagError();
-    return AlertDialog(
+    return StyledAlertDialog(
       title: Text(getLocalText.s("New hop chain")),
       content: Column(
         mainAxisSize: MainAxisSize.min,

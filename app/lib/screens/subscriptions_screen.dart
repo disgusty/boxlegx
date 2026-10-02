@@ -40,6 +40,7 @@ import '../theme/app_style.dart';
 import '../legacy/legacy_platform.dart';
 import '../legacy/pop_scope.dart';
 
+import '../theme/styled_widgets.dart';
 class SubscriptionsScreen extends StatefulWidget {
   const SubscriptionsScreen({
     super.key,
@@ -517,7 +518,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     if (!mounted) return true;
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Discard input?")),
         content: Text(getLocalText.s("You have unsaved text in the input field. Leave and discard it?")),
         actions: [

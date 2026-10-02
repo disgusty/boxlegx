@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'l10n/locale_controller.dart';
 
+import '../theme/styled_widgets.dart';
 /// §219 — общий snackbar-хелпер для State'ов. До этого `_snack`/`_showSnack`
 /// дублировались приватно в backup/debug/warp_wizard/add_server_wizard экранах.
 ///
@@ -30,7 +31,7 @@ Future<bool?> showDeleteConfirmDialog(
 }) {
   return showDialog<bool>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Text(title),
       content: Text(message),
       actions: [
@@ -58,7 +59,7 @@ Future<String?> showUnsavedChangesDialog(BuildContext context) {
     context: context,
     builder: (ctx) {
       final cs = Theme.of(ctx).colorScheme;
-      return AlertDialog(
+      return StyledAlertDialog(
         title: Text(getLocalText.s("Unsaved changes")),
         content: Text(getLocalText.s("You have unsaved changes. Save before leaving?")),
         // §045 — все TextButton + короткие надписи вмещаются в строку.

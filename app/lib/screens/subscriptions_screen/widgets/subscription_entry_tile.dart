@@ -7,6 +7,7 @@ import '../../../widgets/reorder_grab_strip.dart';
 import '../entry_warnings.dart';
 import 'subscription_entry_subtitle.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// Одна строка списка подписок/серверов. §098 — слева grab-strip для
 /// drag-reorder (как в routing rules), снизу divider (раньше был
 /// `separatorBuilder` у `ListView.separated`).
@@ -65,7 +66,7 @@ class SubscriptionEntryTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: SizedBox(
         width: 40,
-        child: Switch(
+        child: StyledSwitch(
           value: enabled,
           onChanged: (_) {
             onToggle();

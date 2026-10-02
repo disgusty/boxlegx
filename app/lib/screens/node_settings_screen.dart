@@ -27,6 +27,7 @@ import '../services/l10n/locale_controller.dart';
 import 'node_settings/node_document.dart';
 import 'subscriptions_screen/entry_warnings.dart';
 
+import '../theme/styled_widgets.dart';
 /// Настройки одиночного сервера (UserServer) ИЛИ члена папки (§237).
 /// Вкладки: **Settings** (Protocol/Server/Tag + эмодзи-пикер + Detour),
 /// **Source** (§455 — `origin.raw` записи как есть, единственное место
@@ -442,7 +443,7 @@ class _NodeSettingsScreenState extends State<NodeSettingsScreen>
     }
     final ok = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Edit JSON?")),
         content: Text(getLocalText.s(
             "The source will be replaced by this JSON and the node will go to the core as is. The app stops checking such a node: only the core validates it on save, and a mistake can leave it unable to connect. There is no way back to a link. Edit the source instead when you can.")),
@@ -490,11 +491,11 @@ class _NodeSettingsScreenState extends State<NodeSettingsScreen>
             isScrollable: true,
             tabAlignment: TabAlignment.start,
             tabs: [
-              Tab(text: getLocalText.s("Settings")),
-              Tab(text: getLocalText.s("Source")),
+              StyledTab(text: getLocalText.s("Settings")),
+              StyledTab(text: getLocalText.s("Source")),
               // l10n-exempt: format name, locale-invariant
-              const Tab(text: 'JSON'),
-              if (_isTailscale) Tab(text: getLocalText.s("Network")),
+              const StyledTab(text: 'JSON'),
+              if (_isTailscale) StyledTab(text: getLocalText.s("Network")),
               NodeDiagnosticsTabLabel(warnings: _notifications),
             ],
           ),
@@ -617,7 +618,7 @@ class _NodeSettingsScreenState extends State<NodeSettingsScreen>
   List<Widget> _buildSkipPresetsBlock(ThemeData theme) {
     if (!_skipPresetsVisible) return const [];
     return [
-      SwitchListTile(
+      StyledSwitchListTile(
         key: const ValueKey('node-skip-presets'),
         secondary: const Icon(Icons.rule_folder_outlined, size: 20),
         title: Text(getLocalText.s("Skip presets")),

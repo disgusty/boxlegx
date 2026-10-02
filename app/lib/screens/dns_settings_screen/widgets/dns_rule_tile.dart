@@ -6,6 +6,7 @@ import '../dns_body_dialogs.dart';
 import '../dns_format.dart';
 import 'dns_badge.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §033: builds a tile for a single DNS rule entry ([DnsRuleRef]).
 ///
 /// Lookup maps
@@ -99,7 +100,7 @@ class DnsRuleTile extends StatelessWidget {
       child: ListTile(
         onTap: () => showRuleBodyDialog(
             context, displayTitle, kind, bodies ?? body),
-        leading: Switch(
+        leading: StyledSwitch(
           value: enabled,
           onChanged: (v) => onToggleEnabled(index, v),
         ),

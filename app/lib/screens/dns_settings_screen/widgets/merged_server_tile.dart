@@ -5,6 +5,7 @@ import '../resolved_server.dart';
 import 'dns_badge.dart';
 import '../../../services/l10n/locale_controller.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §044: единый builder через typed `ResolvedServer`. Никаких Map['_kind'] —
 /// classification через typed accessors на ResolvedServer.
 ///
@@ -76,7 +77,7 @@ class MergedServerTile extends StatelessWidget {
         onTap: () => onTap(entry.tag),
         leading: SizedBox(
           width: 40,
-          child: Switch(
+          child: StyledSwitch(
             // §117: locked-сервер build force-include'ит — показываем ON.
             value: entry.enabled || locked,
             onChanged: locked ? null : (v) => onToggleEnabled(entry.tag, v),

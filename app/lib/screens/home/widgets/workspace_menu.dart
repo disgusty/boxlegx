@@ -10,6 +10,7 @@ import '../../../services/workspaces/workspace_store.dart';
 import '../../../widgets/app_bottom_sheet.dart';
 import '../../../legacy/pop_scope.dart';
 
+import '../../../theme/styled_widgets.dart';
 /// §417 — кнопка справа от «L×Box»: имя текущего workspace и попап с двумя
 /// разделами — Load (слоты, у каждого меню «⋮»: переименовать / удалить) и
 /// Save (Save as…). Отдельного экрана управления нет.
@@ -84,7 +85,7 @@ class WorkspaceMenuButton extends StatelessWidget {
       barrierDismissible: false,
       builder: (_) => PopScope(
         canPop: false,
-        child: AlertDialog(
+        child: StyledAlertDialog(
           content: Row(
             children: [
               const SizedBox(
@@ -131,7 +132,7 @@ class WorkspaceMenuButton extends StatelessWidget {
     if (ws.slots.any((s) => s.name == name)) {
       final ok = await showDialog<bool>(
         context: context,
-        builder: (ctx) => AlertDialog(
+        builder: (ctx) => StyledAlertDialog(
           title: Text(getLocalText.s("Overwrite “%s”?", name)),
           content: Text(getLocalText.s(
               "A workspace with this name already exists. Its saved state will be replaced.")),
@@ -180,7 +181,7 @@ class WorkspaceMenuButton extends StatelessWidget {
     final messenger = ScaffoldMessenger.of(context);
     final ok = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s(
             "Delete workspace “%s”?", workspaceDisplayName(name))),
         content: Text(getLocalText.s(
@@ -321,8 +322,7 @@ class _WorkspaceSheet extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
-            child: Text(getLocalText.s("Workspaces"),
-                style: theme.textTheme.titleMedium),
+            child: SectionTitle(getLocalText.s("Workspaces")),
           ),
           section(getLocalText.s("Load")),
           if (!currentHasFolder) slotTile(name: ws.current),
@@ -377,7 +377,7 @@ class _WorkspaceNameDialogState extends State<WorkspaceNameDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return StyledAlertDialog(
       title: Text(widget.title ?? getLocalText.s("Save as…")),
       content: TextField(
         controller: _ctrl,

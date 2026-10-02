@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/l10n/locale_controller.dart';
 
+import '../../theme/styled_widgets.dart';
 /// Read-only dialog с полным JSON body правила. Юзер видит что внутри
 /// без необходимости лезть в исходник (особенно для kind=template/rule
 /// где body proxy'ится из шаблона/пресета).
@@ -31,7 +32,7 @@ void showRuleBodyDialog(
   };
   showDialog<void>(
     context: context,
-    builder: (ctx) => AlertDialog(
+    builder: (ctx) => StyledAlertDialog(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

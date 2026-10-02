@@ -4,6 +4,7 @@ import '../models/tunnel_status.dart';
 import '../services/l10n/locale_controller.dart';
 import '../vpn/box_vpn_client.dart';
 
+import '../theme/styled_widgets.dart';
 /// §296 — общий VPN-гейт для probe. Probe-сессия — временный CommandServer без
 /// tun; два CommandServer на процесс невозможны, поэтому тест недоступен, пока
 /// VPN активен. Раньше гейт жил в folder_detail_screen; вынесен, чтобы экраны
@@ -33,7 +34,7 @@ mixin ProbeGateMixin<T extends StatefulWidget> on State<T> {
   Future<bool> _showGateAndStop() async {
     final stop = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("VPN is running")),
         content: Text(getLocalText.s(
             "Servers can't be tested while the VPN is on — the test needs its own core session, which can't run alongside the active tunnel. Stop the VPN to test the servers.")),

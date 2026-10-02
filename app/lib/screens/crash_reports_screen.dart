@@ -10,6 +10,7 @@ import '../services/stderr_reader.dart';
 import '../services/ui_helpers.dart';
 import '../widgets/big_text_view.dart';
 
+import '../theme/styled_widgets.dart';
 /// §316 — вкладка «Crashes» на экране Debug: история Go-паник ядра.
 ///
 /// Показываем архив `crash_reports/` плюс текущий репорт, если он непуст
@@ -99,10 +100,7 @@ class _CrashReportsTabState extends State<CrashReportsTab>
               Icon(Icons.check_circle_outline,
                   size: 40, color: Theme.of(context).colorScheme.outline),
               const SizedBox(height: 12),
-              Text(
-                getLocalText.s("No crash reports"),
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+              SectionTitle(getLocalText.s("No crash reports")),
               const SizedBox(height: 8),
               Text(
                 getLocalText.s("The core has not panicked. Note that this channel only covers Go panics — native crashes and kills by the system are not recorded here."),
