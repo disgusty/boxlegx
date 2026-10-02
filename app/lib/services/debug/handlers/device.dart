@@ -46,7 +46,8 @@ Future<DebugResponse> deviceHandler(
   // Версия ядра (libbox / sing-box-lx) — что РЕАЛЬНО вкомпилировано в APK,
   // не пин в libbox.version. Пусто на timeout/ошибку → caller рендерит unknown.
   final coreVersion = await vpn.getCoreVersion().catchError((_) => '');
-  final connResults = await connectivity.checkConnectivity();
+  // lx-legacy: connectivity_plus 5 отдаёт один результат, не список.
+  final connResults = [await connectivity.checkConnectivity()];
   final networkType = _networkLabel(connResults);
 
   final uptime = ctx.now().difference(ctx.appStartedAt).inSeconds;

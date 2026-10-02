@@ -11,6 +11,7 @@ import '../services/safe_regex.dart';
 import '../services/ui_helpers.dart';
 import '../widgets/safe_bottom.dart';
 import '../widgets/urltest_idle_hint.dart';
+import '../legacy/pop_scope.dart';
 
 /// §322 — редактор узла автовыбора внутри папки.
 ///

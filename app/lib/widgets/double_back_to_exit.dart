@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../services/l10n/locale_controller.dart';
+import '../legacy/pop_scope.dart';
 
 /// Задача 583 — выход с главного экрана по двойному нажатию «назад».
 ///

@@ -103,6 +103,15 @@ class AppearanceTab extends StatelessWidget {
           value: appStyle.reduceMotion,
           onChanged: appStyle.setReduceMotion,
         ),
+        // Рендеринг: GPU (OpenGL ES) по умолчанию, CPU — запасной путь для
+        // слабых или несовместимых GPU. Применяется после перезапуска.
+        SwitchListTile(
+          title: Text(getLocalText.s("Render on CPU (software)")),
+          subtitle: Text(getLocalText.s("Draw the interface on the processor instead of the graphics chip. Use it if the screen stays blank or glitches; slower. Applies after the app restarts.")),
+          secondary: const Icon(Icons.memory),
+          value: appStyle.softwareRendering,
+          onChanged: appStyle.setSoftwareRendering,
+        ),
         const SizedBox(height: 8),
         // §541 — компоновка: поворот и две колонки списка узлов в одном месте.
         Text(getLocalText.s("Layout"),

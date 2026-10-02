@@ -1099,6 +1099,7 @@ DropdownMenuEntry<String> warpPresetEntry(
   return DropdownMenuEntry(
     value: value,
     label: value,
-    labelWidget: marked ? Text('$value $mark') : null,
+    // lx-legacy: labelWidget — Flutter 3.14+; пометка уходит в trailingIcon.
+    trailingIcon: marked ? Text(mark) : null,
   );
 }

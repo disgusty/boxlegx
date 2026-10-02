@@ -38,6 +38,7 @@ import '../services/l10n/locale_controller.dart';
 import '../services/file_import.dart';
 import '../theme/app_style.dart';
 import '../legacy/legacy_platform.dart';
+import '../legacy/pop_scope.dart';
 
 class SubscriptionsScreen extends StatefulWidget {
   const SubscriptionsScreen({

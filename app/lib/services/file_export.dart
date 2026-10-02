@@ -18,6 +18,7 @@
 // нельзя, поэтому наличие пикера проверяется ЗАРАНЕЕ, как в pickFileSafely.
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
@@ -88,7 +89,7 @@ Future<SaveOutcome> saveFileSafely({
   try {
     final uri = await FilePicker.platform.saveFile(
       fileName: fileName,
-      bytes: utf8.encode(content),
+      bytes: Uint8List.fromList(utf8.encode(content)),
     );
     if (uri == null) return const SaveCancelled();
     return SavedToFile(fileName);

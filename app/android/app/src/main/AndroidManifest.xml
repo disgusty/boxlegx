@@ -110,6 +110,21 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
             </intent-filter>
         </activity>
+        <!-- lx-legacy: запуск с программным рендерингом (Skia на CPU) — вход в
+             приложение, если GPU-драйвер старого устройства не рисует интерфейс.
+             Виден в лаунчере только до Android 5.0 (@bool/lx_cpu_launcher). -->
+        <activity-alias
+            android:name=".CpuRenderingAlias"
+            android:targetActivity=".MainActivity"
+            android:exported="true"
+            android:enabled="@bool/lx_cpu_launcher"
+            android:label="@string/label_cpu_rendering"
+            android:icon="@mipmap/ic_launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
 
         <service
             android:name=".vpn.BoxVpnService"

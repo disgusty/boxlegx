@@ -80,6 +80,18 @@ class MainActivity : FlutterActivity() {
             Log.d(TAG, "API ${Build.VERSION.SDK_INT} < 31 — disabling Impeller (Skia renderer)")
             args.add("--enable-impeller=false")
         }
+        // lx-legacy: программный рендеринг (Skia на CPU) — настройка «Рисовать
+        // на CPU» (Appearance; shared_preferences кладёт её в
+        // FlutterSharedPreferences с префиксом `flutter.`) или запуск через
+        // значок «L×Box (CPU)» (.CpuRenderingAlias) — вход, когда GPU-драйвер
+        // старого устройства не рисует интерфейс.
+        val viaCpuAlias = intent?.component?.className?.endsWith(".CpuRenderingAlias") == true
+        val softwarePref = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE)
+            .getBoolean("flutter.app_software_rendering", false)
+        if (viaCpuAlias || softwarePref) {
+            Log.d(TAG, "software rendering (alias=$viaCpuAlias, pref=$softwarePref)")
+            args.add("--enable-software-rendering")
+        }
         return args
     }
 

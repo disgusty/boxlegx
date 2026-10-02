@@ -39,6 +39,7 @@ import 'chain_edit/chain_form_validation.dart';
 import 'chain_edit/chain_hop_candidate.dart';
 import 'chain_edit/chain_hop_targets.dart';
 import '../widgets/app_bottom_sheet.dart';
+import '../legacy/pop_scope.dart';
 
 /// Результат редактора: saved (с обновлённой цепочкой) или deleted.
 class ChainEditResult {

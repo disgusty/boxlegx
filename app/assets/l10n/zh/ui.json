@@ -1743,6 +1743,9 @@
   "Downloaded \"%s\"": {
     "value": "已下载「%s」"
   },
+  "Draw the interface on the processor instead of the graphics chip. Use it if the screen stays blank or glitches; slower. Applies after the app restarts.": {
+    "value": "使用处理器而非图形芯片绘制界面。如果屏幕保持空白或出现异常，请启用；速度较慢。重启应用后生效。"
+  },
   "Drop active connections when you switch nodes, so traffic moves to the new node immediately": {
     "value": "切换节点时断开活动连接，使流量立即转到新节点"
   },
@@ -3009,6 +3012,9 @@
   },
   "Remove all %d sites from the list. The mode is kept.": {
     "value": "从列表中移除全部 %d 个网站。模式将保留。"
+  },
+  "Render on CPU (software)": {
+    "value": "使用 CPU 渲染（软件）"
   },
   "Replace list": {
     "value": "替换列表"

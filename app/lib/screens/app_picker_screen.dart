@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../models/app_info.dart';
 import '../services/app_info_cache.dart';
 import '../services/l10n/locale_controller.dart';
+import '../legacy/pop_scope.dart';
 
 /// Screen for selecting apps. Returns updated list of package names on pop.
 class AppPickerResult {

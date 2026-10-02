@@ -47,8 +47,9 @@ class MasqueKeys {
         _secureRandom(),
       ));
     final pair = gen.generateKeyPair();
-    final priv = pair.privateKey;
-    final pub = pair.publicKey;
+    // lx-legacy: pointycastle 3.x отдаёт пару без EC-типов.
+    final priv = pair.privateKey as ECPrivateKey;
+    final pub = pair.publicKey as ECPublicKey;
 
     final d = _bigIntToFixed(priv.d!, _coordLen);
     final x = _bigIntToFixed(pub.Q!.x!.toBigInteger()!, _coordLen);

@@ -15,6 +15,7 @@ import 'dns_server_edit/tabs/json_tab.dart';
 import 'dns_server_edit/tabs/params_tab.dart';
 import 'dns_settings_screen/resolved_server.dart';
 import '../services/l10n/locale_controller.dart';
+import '../legacy/pop_scope.dart';
 
 /// §117 задача 4 — полноэкранный редактор DNS-сервера (locked decision №8).
 /// Паттерн 1:1 с [CustomRuleEditScreen]: Scaffold-route,

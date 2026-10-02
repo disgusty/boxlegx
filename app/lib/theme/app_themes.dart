@@ -462,7 +462,6 @@ ThemeData _holo(Brightness brightness) {
       ),
       indicatorSize: TabBarIndicatorSize.tab,
       dividerColor: _holoBlue,
-      dividerHeight: 1,
       labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
       unselectedLabelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
       splashFactory: NoSplash.splashFactory,

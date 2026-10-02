@@ -309,7 +309,6 @@ class _VpnModeTabState extends State<VpnModeTab>
     return DropdownMenu<String>(
       initialSelection: current,
       label: Text(node.title),
-      expandedInsets: EdgeInsets.zero,
       dropdownMenuEntries: node.options
           .map((o) => DropdownMenuEntry(value: o.value, label: o.title))
           .toList(),
@@ -334,7 +333,6 @@ class _VpnModeTabState extends State<VpnModeTab>
         requestFocusOnTap: true,
         enableFilter: false,
         label: Text(_listenNode.title),
-        expandedInsets: EdgeInsets.zero,
         errorText: _listenError.isEmpty ? null : _listenError,
         dropdownMenuEntries: _listenNode.options
             .map((o) => DropdownMenuEntry(value: o.value, label: o.title))

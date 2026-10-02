@@ -15,7 +15,7 @@ version: 2.25.10+22510500
 # а не из этой строки — потому placeholder в git безвреден.
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -26,7 +26,8 @@ dependencies:
   cupertino_icons: any
   http: any
   cryptography: any # §025 — X25519 keygen; §130 — ECDSA P-256 keygen для MASQUE-WARP
-  asn1lib: any # §130 — SEC1/PKIX DER-сериализация ECDSA-ключей (контракт с ядром MASQUE)
+  asn1lib: ">=1.5.0 <1.6.0" # lx-legacy: 1.6+ требует Dart 3.2 (utf8.encode → Uint8List).
+  # §130 — SEC1/PKIX DER-сериализация ECDSA-ключей (контракт с ядром MASQUE)
   json5: any
   file_picker: any
   path_provider: any

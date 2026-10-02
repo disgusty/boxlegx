@@ -29,6 +29,9 @@ class AppStyle extends ChangeNotifier {
 
   static const _styleKey = 'app_ui_style';
   static const _motionKey = 'app_reduce_motion';
+  // Читает и MainActivity (FlutterSharedPreferences, ключ с префиксом
+  // `flutter.`) — до старта движка.
+  static const _softwareKey = 'app_software_rendering';
 
   UiStyle _style = UiStyle.material3;
   UiStyle get style => _style;
@@ -38,6 +41,12 @@ class AppStyle extends ChangeNotifier {
   /// индикаторов. По умолчанию ВКЛ — форк ориентирован на слабые устройства.
   bool _reduceMotion = true;
   bool get reduceMotion => _reduceMotion;
+
+  /// Программный рендеринг (Skia на CPU) вместо OpenGL ES. Для устройств,
+  /// чей GPU-драйвер не тянет Skia (пустой экран). Действует со следующего
+  /// запуска: флаг движка читается в MainActivity до его старта.
+  bool _softwareRendering = false;
+  bool get softwareRendering => _softwareRendering;
 
   Future<void> _load() async {
     try {
@@ -51,6 +60,7 @@ class AppStyle extends ChangeNotifier {
             : UiStyle.material3,
       );
       _reduceMotion = prefs.getBool(_motionKey) ?? true;
+      _softwareRendering = prefs.getBool(_softwareKey) ?? false;
       notifyListeners();
     } catch (_) {
       // Prefs недоступны — остаются дефолты.
@@ -71,6 +81,14 @@ class AppStyle extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_motionKey, value);
+  }
+
+  Future<void> setSoftwareRendering(bool value) async {
+    if (value == _softwareRendering) return;
+    _softwareRendering = value;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_softwareKey, value);
   }
 
   /// Длительность анимации с учётом [reduceMotion]: при упрощённых

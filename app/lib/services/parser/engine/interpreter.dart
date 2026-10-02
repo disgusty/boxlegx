@@ -1904,9 +1904,11 @@ final class _Run {
       params: {'field': field},
     );
     warnings.add(w);
-    if (_dropped != null) {
-      _dropped.explicit = true;
-      _dropped.reason = w;
+    // lx-legacy: продвижение приватных полей — Dart 3.2+.
+    final dropped = _dropped;
+    if (dropped != null) {
+      dropped.explicit = true;
+      dropped.reason = w;
     }
   }
 
@@ -2290,9 +2292,11 @@ final class _Run {
           _dropNode = true;
           // Отбраковка обязана быть НАЗВАННОЙ: имя кода и его `value` едут в
           // вердикт, иначе узел исчезает молча — тот же дефект, что правится.
-          if (w is RegistryWarning && _dropped != null) {
-            _dropped.explicit = true;
-            _dropped.reason = w;
+          // lx-legacy: продвижение приватных полей — Dart 3.2+.
+          final dropped = _dropped;
+          if (w is RegistryWarning && dropped != null) {
+            dropped.explicit = true;
+            dropped.reason = w;
           }
         }
         return;

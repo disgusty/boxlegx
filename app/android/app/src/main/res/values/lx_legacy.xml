@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- lx-legacy: значок «L×Box (CPU)» в лаунчере — только до Android 5.0. -->
+    <bool name="lx_cpu_launcher">true</bool>
+    <string name="label_cpu_rendering">L×Box (CPU)</string>
+</resources>

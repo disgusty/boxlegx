@@ -5,24 +5,27 @@ pluginManagement {
         def flutterSdkPath = properties.getProperty("flutter.sdk")
         assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
         return flutterSdkPath
-    }()
+    }
+    settings.ext.flutterSdkPath = flutterSdkPath()
 
-    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
 
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
-}
 
-// lx-legacy: Groovy-скрипты и AGP 8.2 / Kotlin 1.9 — версии, с которыми
-// работает Gradle-плагин Flutter 3.16 (последний Flutter с API 16–18);
-// инструмент flutter 3.16 не распознаёт проект на .kts-скриптах.
-plugins {
-    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
-    id "com.android.application" version "8.2.2" apply false
-    id "org.jetbrains.kotlin.android" version "1.9.22" apply false
+    // lx-legacy: Flutter 3.13 — последний Flutter, чей движок грузится на
+    // Android 4.2 (у 3.16 libflutter.so импортирует timerfd_* и getline из
+    // API 18/19). AGP 8.2 / Kotlin 1.9 — в buildscript корневого проекта
+    // (перекрывают AGP 7.x из buildscript старых плагинов); Gradle 8.5 —
+    // минимум для запуска на JDK 21.
+    plugins {
+        id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
+    }
 }
 
 include ":app"
+
+apply from: "${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle/app_plugin_loader.gradle"

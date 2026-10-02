@@ -44,11 +44,12 @@ android {
 
     defaultConfig {
         applicationId "com.leadaxe.lxbox"
-        // lx-legacy: Android 4.2 (API 17) minimum. Flutter 3.16 — последний
-        // Flutter с поддержкой API 16–18; ядро — libbox, собранный gomobile с
+        // lx-legacy: Android 4.2 (API 17) minimum. Flutter 3.13 — последний
+        // Flutter, чей движок грузится на API 17 (libflutter.so 3.16 импортирует
+        // timerfd_*/getline из API 18/19). Ядро — libbox, собранный gomobile с
         // -androidapi 17 и NDK r23c (libs/libbox-api17.aar). Функции новых API
         // деградируют за SDK_INT-гейтами.
-        // Через переменную: мигратор flutter 3.16 переписывает литералы
+        // Через переменную: мигратор flutter переписывает литералы
         // `minSdkVersion 16..18` на flutter.minSdkVersion (= 19).
         minSdkVersion lxLegacyMinSdk
         targetSdkVersion 35
@@ -56,11 +57,6 @@ android {
         versionName flutterVersionName
         // API < 21: без нативного multidex — MultiDexApplication.
         multiDexEnabled true
-        // Ядро собрано для armeabi-v7a и x86 (32-бит): 64-битные устройства
-        // запускают приложение в 32-битном режиме.
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
     }
 
     signingConfigs {
@@ -74,8 +70,16 @@ android {
         }
     }
 
+    // ABI: release — только armeabi-v7a (у Flutter нет release-движка для
+    // 32-битного x86; x86-устройства на Android 4.x запускают ARM-код через
+    // трансляцию, если в APK нет x86-библиотек). 64-битные устройства
+    // работают в 32-битном режиме. debug — ещё x86 для эмулятора.
     buildTypes {
+        debug {
+            ndk { abiFilters "armeabi-v7a", "x86" }
+        }
         release {
+            ndk { abiFilters "armeabi-v7a" }
             signingConfig signingConfigs.findByName("release") ?: signingConfigs.debug
         }
     }

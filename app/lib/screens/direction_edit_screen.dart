@@ -7,6 +7,7 @@ import '../models/source_replace.dart';
 import '../services/l10n/locale_controller.dart';
 import '../widgets/safe_bottom.dart';
 import '../widgets/urltest_idle_hint.dart';
+import '../legacy/pop_scope.dart';
 
 /// §125 — полноэкранный редактор Направления роутинга. Идиома проекта
 /// ([custom_rule_edit_screen.dart], [dns_server_edit_screen.dart]):

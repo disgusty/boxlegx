@@ -1971,6 +1971,9 @@
   "Downloaded \"%s\"": {
     "value": "Скачан «%s»"
   },
+  "Draw the interface on the processor instead of the graphics chip. Use it if the screen stays blank or glitches; slower. Applies after the app restarts.": {
+    "value": "Отрисовывать интерфейс процессором вместо графического чипа. Включите, если экран остаётся пустым или с артефактами; работает медленнее. Применяется после перезапуска приложения."
+  },
   "Drop active connections when you switch nodes, so traffic moves to the new node immediately": {
     "value": "Сбрасывать активные соединения при переключении узла, чтобы трафик сразу пошёл через новый узел"
   },
@@ -3252,6 +3255,9 @@
   },
   "Remove all %d sites from the list. The mode is kept.": {
     "value": "Удалить из списка все сайты (%d). Режим сохранится."
+  },
+  "Render on CPU (software)": {
+    "value": "Рисовать на CPU (программно)"
   },
   "Replace list": {
     "value": "Заменить список"
