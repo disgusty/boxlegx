@@ -633,14 +633,17 @@ class _HoloUpIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = IconTheme.of(context).color;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(drawer ? Icons.menu : Icons.chevron_left,
-            size: drawer ? 14 : 18, color: color),
-        const SizedBox(width: 2),
-        Image.asset('assets/icons/app_icon.png', width: 28, height: 28),
-      ],
+    // Ширина кнопки панели может быть меньше 48dp — ужимаем по месту.
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(drawer ? Icons.menu : Icons.chevron_left,
+              size: drawer ? 14 : 16, color: color),
+          Image.asset('assets/icons/app_icon.png', width: 24, height: 24),
+        ],
+      ),
     );
   }
 }
