@@ -1,0 +1,2451 @@
+{
+  "contract_version": "1.1.107",
+  "subscriptions": [
+    {
+      "id": "01-github-vless-universal",
+      "url": "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "vless": 95
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 5
+      },
+      "coverage": {
+        "vless|grpc|reality": 13,
+        "vless|none|reality": 50,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 13,
+        "vless|xhttp|tls": 15
+      },
+      "parse_ms": 986
+    },
+    {
+      "id": "02-github-vless-lite",
+      "url": "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "vless": 95
+      },
+      "dropped": {
+        "provider_banner_link": 4
+      },
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 5
+      },
+      "coverage": {
+        "vless|grpc|reality": 13,
+        "vless|none|reality": 50,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 13,
+        "vless|xhttp|tls": 15
+      },
+      "parse_ms": 260
+    },
+    {
+      "id": "03-github-vless",
+      "url": "https://raw.githubusercontent.com/zieng2/wl/main/vless.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 0,
+      "by_type": {},
+      "dropped": {
+        "provider_banner_link": 3
+      },
+      "warnings": {},
+      "coverage": {},
+      "parse_ms": 5,
+      "sample_drop_lines": [
+        "vless://***@***:1?type=tcp&security=reality&pbk=***&fp=chrome&sni=***&sid=***&spx=%2F&flow=xtls-rprx-visio…",
+        "vless://***@***:1?type=tcp&security=reality&pbk=***&fp=chrome&sni=***&sid=***&spx=%2F&flow=xtls-rprx-visio…",
+        "vless://***@***:1?type=tcp&security=reality&pbk=***&fp=chrome&sni=***&sid=***&spx=%2F&flow=xtls-rprx-visio…"
+      ]
+    },
+    {
+      "id": "04-github-vless-reality-white-lists-rus-mobile",
+      "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 25,
+      "by_type": {
+        "hysteria2": 7,
+        "vless": 18
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 7,
+        "reality_fp_random_pinned": 1,
+        "tls_not_applicable_quic": 1
+      },
+      "coverage": {
+        "hysteria2|none|tls": 7,
+        "vless|none|reality": 5,
+        "vless|ws|tls": 5,
+        "vless|xhttp|reality": 8
+      },
+      "parse_ms": 57
+    },
+    {
+      "id": "05-github-white-cidr-ru-checked",
+      "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 5,
+      "by_type": {
+        "vless": 5
+      },
+      "dropped": {},
+      "warnings": {},
+      "coverage": {
+        "vless|ws|tls": 5
+      },
+      "parse_ms": 6
+    },
+    {
+      "id": "06-github-black-vless-rus-mobile",
+      "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS_mobile.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 132,
+      "by_type": {
+        "hysteria2": 9,
+        "vless": 116,
+        "vmess": 7
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 10,
+        "reality_fp_not_chrome": 14,
+        "reality_fp_random_pinned": 4,
+        "tls_insecure": 5,
+        "tls_not_applicable_quic": 5,
+        "uri_param_unknown": 2
+      },
+      "coverage": {
+        "hysteria2|none|tls": 9,
+        "vless|grpc|none": 29,
+        "vless|grpc|reality": 2,
+        "vless|grpc|tls": 1,
+        "vless|httpupgrade|tls": 10,
+        "vless|none|reality": 40,
+        "vless|none|tls": 18,
+        "vless|ws|none": 1,
+        "vless|ws|tls": 15,
+        "vmess|ws|tls": 7
+      },
+      "parse_ms": 179
+    },
+    {
+      "id": "07-github-byewhitelists2",
+      "url": "https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 485,
+      "by_type": {
+        "vless": 485
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 134,
+        "reality_fp_not_chrome": 215,
+        "reality_fp_random_pinned": 50
+      },
+      "coverage": {
+        "vless|grpc|reality": 18,
+        "vless|none|reality": 424,
+        "vless|none|tls": 16,
+        "vless|ws|none": 3,
+        "vless|ws|tls": 2,
+        "vless|xhttp|reality": 22
+      },
+      "parse_ms": 707
+    },
+    {
+      "id": "08-github-whitelist",
+      "url": "https://raw.githubusercontent.com/hussaroff/lte-universal-checked/refs/heads/main/whitelist.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 24,
+      "by_type": {
+        "vless": 24
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 13,
+        "reality_fp_random_pinned": 1,
+        "tls_insecure": 1,
+        "uri_param_unknown": 1
+      },
+      "coverage": {
+        "vless|grpc|reality": 10,
+        "vless|none|reality": 9,
+        "vless|ws|tls": 3,
+        "vless|xhttp|none": 1,
+        "vless|xhttp|reality": 1
+      },
+      "parse_ms": 20
+    },
+    {
+      "id": "09-github-26",
+      "url": "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 4669,
+      "by_type": {
+        "hysteria2": 7,
+        "shadowsocks": 15,
+        "trojan": 6,
+        "vless": 4640,
+        "vmess": 1
+      },
+      "dropped": {
+        "field_missing": 95,
+        "provider_banner_link": 5,
+        "ss_method_invalid": 7,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "field_missing": 41,
+        "reality_fp_not_chrome": 485,
+        "reality_fp_random_pinned": 586,
+        "ss_method_legacy": 4,
+        "tls_alpn_item_invalid": 14,
+        "uri_param_unknown": 422,
+        "ws_early_data_converted": 5
+      },
+      "coverage": {
+        "hysteria2|none|tls": 7,
+        "shadowsocks|none|none": 15,
+        "trojan|none|tls": 6,
+        "vless|grpc|none": 2,
+        "vless|grpc|reality": 393,
+        "vless|grpc|tls": 7,
+        "vless|httpupgrade|tls": 1,
+        "vless|http|reality": 3,
+        "vless|none|none": 4,
+        "vless|none|reality": 3710,
+        "vless|none|tls": 100,
+        "vless|ws|none": 141,
+        "vless|ws|tls": 104,
+        "vless|xhttp|none": 2,
+        "vless|xhttp|reality": 160,
+        "vless|xhttp|tls": 13,
+        "vmess|none|none": 1
+      },
+      "parse_ms": 2054
+    },
+    {
+      "id": "10-github-whitelist",
+      "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/whitelist.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 56,
+      "by_type": {
+        "hysteria2": 11,
+        "vless": 45
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 7,
+        "reality_fp_random_pinned": 26,
+        "tls_insecure": 14,
+        "tls_not_applicable_quic": 2
+      },
+      "coverage": {
+        "hysteria2|none|tls": 11,
+        "vless|grpc|reality": 6,
+        "vless|none|reality": 17,
+        "vless|ws|tls": 15,
+        "vless|xhttp|reality": 3,
+        "vless|xhttp|tls": 4
+      },
+      "parse_ms": 31
+    },
+    {
+      "id": "11-github-blacklist",
+      "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/blacklist.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 2865,
+      "by_type": {
+        "hysteria2": 32,
+        "shadowsocks": 27,
+        "trojan": 4,
+        "vless": 2802
+      },
+      "dropped": {
+        "form_unrecognized": 12
+      },
+      "warnings": {
+        "duplicates_collapsed": 183,
+        "ech_ignored": 3,
+        "reality_fp_random_pinned": 119,
+        "tls_insecure": 27,
+        "tls_not_applicable_quic": 6
+      },
+      "coverage": {
+        "hysteria2|none|tls": 32,
+        "shadowsocks|none|none": 27,
+        "trojan|none|tls": 2,
+        "trojan|ws|tls": 2,
+        "vless|grpc|none": 30,
+        "vless|grpc|reality": 21,
+        "vless|none|none": 2,
+        "vless|none|reality": 88,
+        "vless|ws|none": 3,
+        "vless|ws|tls": 2643,
+        "vless|xhttp|none": 5,
+        "vless|xhttp|reality": 10
+      },
+      "parse_ms": 1136
+    },
+    {
+      "id": "12-github-kizyakbeta7",
+      "url": "https://raw.githubusercontent.com/Maskkost93/kizyak-vpn-4.0/refs/heads/main/kizyakbeta7.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 73,
+      "by_type": {
+        "hysteria2": 12,
+        "vless": 61
+      },
+      "dropped": {
+        "service_record_ignored": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 18,
+        "reality_fp_not_chrome": 8,
+        "tls_insecure": 5,
+        "utls_fp_unknown": 1
+      },
+      "coverage": {
+        "hysteria2|none|tls": 12,
+        "vless|grpc|reality": 11,
+        "vless|none|none": 3,
+        "vless|none|reality": 21,
+        "vless|ws|tls": 9,
+        "vless|xhttp|reality": 17
+      },
+      "parse_ms": 64
+    },
+    {
+      "id": "13-github-kizyakbeta6",
+      "url": "https://raw.githubusercontent.com/Maskkost93/kizyak-vpn-4.0/refs/heads/main/kizyakbeta6.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 30,
+      "by_type": {
+        "hysteria2": 6,
+        "vless": 24
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 1,
+        "reality_fp_not_chrome": 13,
+        "reality_fp_random_pinned": 3,
+        "tls_not_applicable_quic": 1
+      },
+      "coverage": {
+        "hysteria2|none|tls": 6,
+        "vless|grpc|reality": 15,
+        "vless|xhttp|reality": 9
+      },
+      "parse_ms": 31
+    },
+    {
+      "id": "14-github-kizyakbeta6bl",
+      "url": "https://raw.githubusercontent.com/Maskkost93/kizyak-vpn-4.0/refs/heads/main/kizyakbeta6BL.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 33,
+      "by_type": {
+        "hysteria2": 16,
+        "trojan": 10,
+        "vmess": 7
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 1,
+        "tls_insecure": 16,
+        "tls_not_applicable_quic": 5,
+        "uri_param_unknown": 2
+      },
+      "coverage": {
+        "hysteria2|none|tls": 16,
+        "trojan|none|tls": 10,
+        "vmess|ws|tls": 7
+      },
+      "parse_ms": 20
+    },
+    {
+      "id": "15-github-rkn-white-list",
+      "url": "https://raw.githubusercontent.com/AirLinkVPN1/AirLinkVPN/refs/heads/main/rkn_white_list",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 97,
+      "by_type": {
+        "vless": 97
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 4,
+        "reality_fp_not_chrome": 6,
+        "reality_fp_random_pinned": 1
+      },
+      "coverage": {
+        "vless|grpc|reality": 13,
+        "vless|none|reality": 52,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 13,
+        "vless|xhttp|tls": 15
+      },
+      "parse_ms": 59
+    },
+    {
+      "id": "16-github-aetrisvpn",
+      "url": "https://raw.githubusercontent.com/flaafix/AetrisVPN-white-list-lite/refs/heads/main/AetrisVPN.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 114,
+      "by_type": {
+        "shadowsocks": 19,
+        "vless": 91,
+        "vmess": 4
+      },
+      "dropped": {},
+      "warnings": {
+        "reality_fp_not_chrome": 3,
+        "reality_fp_random_pinned": 19,
+        "ss_method_legacy": 3,
+        "tls_insecure": 2
+      },
+      "coverage": {
+        "shadowsocks|none|none": 19,
+        "vless|grpc|reality": 15,
+        "vless|none|reality": 47,
+        "vless|ws|tls": 14,
+        "vless|xhttp|reality": 8,
+        "vless|xhttp|tls": 7,
+        "vmess|none|none": 4
+      },
+      "parse_ms": 42
+    },
+    {
+      "id": "17-github-configs",
+      "url": "https://raw.githubusercontent.com/flaafix/AetrisVPN-black-list/refs/heads/main/configs.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 206,
+      "by_type": {
+        "trojan": 3,
+        "vless": 198,
+        "vmess": 5
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 11,
+        "reality_fp_not_chrome": 6,
+        "reality_fp_random_pinned": 5,
+        "tls_insecure": 3,
+        "uri_param_unknown": 1,
+        "ws_early_data_converted": 1
+      },
+      "coverage": {
+        "trojan|none|tls": 3,
+        "vless|grpc|none": 1,
+        "vless|grpc|reality": 23,
+        "vless|httpupgrade|tls": 1,
+        "vless|none|reality": 86,
+        "vless|none|tls": 3,
+        "vless|ws|none": 7,
+        "vless|ws|tls": 64,
+        "vless|xhttp|none": 1,
+        "vless|xhttp|reality": 8,
+        "vless|xhttp|tls": 4,
+        "vmess|ws|none": 2,
+        "vmess|ws|tls": 3
+      },
+      "parse_ms": 81
+    },
+    {
+      "id": "18-github-whitelist-all",
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/refs/heads/main/vpn-lte/WHITELIST-ALL.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 188,
+      "by_type": {
+        "vless": 188
+      },
+      "dropped": {
+        "vless_encryption_invalid": 2
+      },
+      "warnings": {
+        "duplicates_collapsed": 47,
+        "reality_fp_not_chrome": 25,
+        "reality_fp_random_pinned": 22,
+        "tls_alpn_item_invalid": 4,
+        "uri_param_unknown": 1
+      },
+      "coverage": {
+        "vless|grpc|reality": 5,
+        "vless|none|reality": 183
+      },
+      "parse_ms": 116
+    },
+    {
+      "id": "19-github-bypass-all",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 621,
+      "by_type": {
+        "shadowsocks": 45,
+        "trojan": 49,
+        "vless": 507,
+        "vmess": 20
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 66,
+        "reality_fp_not_chrome": 42,
+        "reality_fp_random_pinned": 17,
+        "tls_insecure": 1,
+        "uri_param_unknown": 52,
+        "utls_fp_unknown": 71,
+        "ws_early_data_converted": 36
+      },
+      "coverage": {
+        "shadowsocks|none|none": 45,
+        "trojan|ws|tls": 49,
+        "vless|grpc|reality": 67,
+        "vless|grpc|tls": 1,
+        "vless|none|reality": 196,
+        "vless|none|tls": 5,
+        "vless|ws|reality": 1,
+        "vless|ws|tls": 237,
+        "vmess|none|none": 12,
+        "vmess|ws|none": 3,
+        "vmess|ws|tls": 5
+      },
+      "parse_ms": 251
+    },
+    {
+      "id": "20-github-bypass-1",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-1.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 286,
+      "by_type": {
+        "shadowsocks": 1,
+        "trojan": 27,
+        "vless": 254,
+        "vmess": 4
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 13,
+        "reality_fp_not_chrome": 10,
+        "reality_fp_random_pinned": 6,
+        "uri_param_unknown": 9,
+        "utls_fp_unknown": 29,
+        "ws_early_data_converted": 20
+      },
+      "coverage": {
+        "shadowsocks|none|none": 1,
+        "trojan|ws|tls": 27,
+        "vless|grpc|reality": 25,
+        "vless|none|reality": 64,
+        "vless|none|tls": 3,
+        "vless|ws|tls": 162,
+        "vmess|none|none": 1,
+        "vmess|ws|tls": 3
+      },
+      "parse_ms": 89
+    },
+    {
+      "id": "21-github-bypass-2",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-2.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 262,
+      "by_type": {
+        "shadowsocks": 40,
+        "trojan": 15,
+        "vless": 191,
+        "vmess": 16
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 32,
+        "reality_fp_not_chrome": 28,
+        "reality_fp_random_pinned": 10,
+        "tls_insecure": 1,
+        "uri_param_unknown": 13,
+        "utls_fp_unknown": 2,
+        "ws_early_data_converted": 10
+      },
+      "coverage": {
+        "shadowsocks|none|none": 40,
+        "trojan|ws|tls": 15,
+        "vless|grpc|reality": 39,
+        "vless|none|reality": 107,
+        "vless|none|tls": 1,
+        "vless|ws|reality": 1,
+        "vless|ws|tls": 43,
+        "vmess|none|none": 11,
+        "vmess|ws|none": 3,
+        "vmess|ws|tls": 2
+      },
+      "parse_ms": 93
+    },
+    {
+      "id": "22-github-bypass-3",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-3.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 277,
+      "by_type": {
+        "shadowsocks": 11,
+        "trojan": 17,
+        "vless": 243,
+        "vmess": 6
+      },
+      "dropped": {
+        "form_unrecognized": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 19,
+        "reality_fp_not_chrome": 31,
+        "reality_fp_random_pinned": 6,
+        "uri_param_unknown": 40,
+        "utls_fp_unknown": 50,
+        "ws_early_data_converted": 29
+      },
+      "coverage": {
+        "shadowsocks|none|none": 11,
+        "trojan|ws|tls": 17,
+        "vless|grpc|reality": 28,
+        "vless|none|reality": 92,
+        "vless|ws|reality": 1,
+        "vless|ws|tls": 122,
+        "vmess|none|none": 4,
+        "vmess|ws|none": 2
+      },
+      "parse_ms": 105
+    },
+    {
+      "id": "23-github-bypass-4",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-4.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 281,
+      "by_type": {
+        "shadowsocks": 6,
+        "trojan": 16,
+        "vless": 256,
+        "vmess": 3
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 19,
+        "reality_fp_not_chrome": 14,
+        "reality_fp_random_pinned": 5,
+        "tls_insecure": 1,
+        "uri_param_unknown": 34,
+        "utls_fp_unknown": 50,
+        "ws_early_data_converted": 30
+      },
+      "coverage": {
+        "shadowsocks|none|none": 6,
+        "trojan|ws|tls": 16,
+        "vless|grpc|reality": 25,
+        "vless|grpc|tls": 3,
+        "vless|none|reality": 128,
+        "vless|ws|tls": 100,
+        "vmess|none|none": 1,
+        "vmess|ws|tls": 2
+      },
+      "parse_ms": 111
+    },
+    {
+      "id": "24-github-bypass-5",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-5.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 25,
+      "by_type": {
+        "trojan": 1,
+        "vless": 24
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 10,
+        "reality_fp_not_chrome": 6,
+        "uri_param_unknown": 23
+      },
+      "coverage": {
+        "trojan|none|tls": 1,
+        "vless|grpc|reality": 11,
+        "vless|none|reality": 9,
+        "vless|ws|reality": 1,
+        "vless|ws|tls": 3
+      },
+      "parse_ms": 122
+    },
+    {
+      "id": "25-github-bypass-6",
+      "url": "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-6.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 279,
+      "by_type": {
+        "shadowsocks": 90,
+        "trojan": 14,
+        "vless": 159,
+        "vmess": 16
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 13,
+        "reality_fp_not_chrome": 30,
+        "reality_fp_random_pinned": 6,
+        "tls_insecure": 4,
+        "uri_param_unknown": 10,
+        "utls_fp_unknown": 1
+      },
+      "coverage": {
+        "shadowsocks|none|none": 90,
+        "trojan|none|tls": 12,
+        "trojan|ws|tls": 2,
+        "vless|grpc|reality": 20,
+        "vless|grpc|tls": 3,
+        "vless|none|reality": 101,
+        "vless|none|tls": 1,
+        "vless|ws|tls": 34,
+        "vmess|none|none": 8,
+        "vmess|none|tls": 1,
+        "vmess|ws|none": 3,
+        "vmess|ws|tls": 4
+      },
+      "parse_ms": 100
+    },
+    {
+      "id": "26-github-russia-whitelist",
+      "url": "https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 2107,
+      "by_type": {
+        "hysteria2": 8,
+        "shadowsocks": 4,
+        "trojan": 16,
+        "vless": 2079
+      },
+      "dropped": {
+        "transport_header_unsupported": 79
+      },
+      "warnings": {
+        "ech_ignored": 14,
+        "field_missing": 10,
+        "reality_fp_not_chrome": 86,
+        "reality_fp_random_pinned": 78,
+        "tls_alpn_item_invalid": 1,
+        "tls_insecure": 40,
+        "uri_param_unknown": 314,
+        "utls_fp_unknown": 2,
+        "ws_early_data_converted": 50
+      },
+      "coverage": {
+        "hysteria2|none|tls": 8,
+        "shadowsocks|none|none": 4,
+        "trojan|none|tls": 14,
+        "trojan|ws|tls": 2,
+        "vless|grpc|none": 2,
+        "vless|grpc|reality": 79,
+        "vless|grpc|tls": 10,
+        "vless|httpupgrade|none": 18,
+        "vless|httpupgrade|tls": 1,
+        "vless|http|reality": 1,
+        "vless|none|none": 125,
+        "vless|none|reality": 1107,
+        "vless|none|tls": 79,
+        "vless|ws|none": 134,
+        "vless|ws|tls": 424,
+        "vless|xhttp|none": 12,
+        "vless|xhttp|reality": 36,
+        "vless|xhttp|tls": 51
+      },
+      "parse_ms": 889
+    },
+    {
+      "id": "27-github-ru-white-all-white",
+      "url": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_WHITE.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 4025,
+      "by_type": {
+        "hysteria2": 22,
+        "shadowsocks": 260,
+        "trojan": 93,
+        "vless": 3650
+      },
+      "dropped": {
+        "field_missing": 2,
+        "ss_method_invalid": 1,
+        "transport_header_unsupported": 56,
+        "vless_encryption_invalid": 2
+      },
+      "warnings": {
+        "duplicates_collapsed": 1007,
+        "field_missing": 22,
+        "reality_fp_not_chrome": 399,
+        "reality_fp_random_pinned": 219,
+        "ss_method_legacy": 14,
+        "tls_alpn_item_invalid": 2,
+        "tls_insecure": 118,
+        "uri_param_unknown": 248,
+        "utls_fp_unknown": 1,
+        "ws_early_data_converted": 13,
+        "xhttp_param_reset": 1
+      },
+      "coverage": {
+        "hysteria2|none|tls": 22,
+        "shadowsocks|none|none": 260,
+        "trojan|grpc|tls": 1,
+        "trojan|httpupgrade|tls": 4,
+        "trojan|none|none": 1,
+        "trojan|none|tls": 74,
+        "trojan|ws|tls": 11,
+        "trojan|xhttp|tls": 2,
+        "vless|grpc|none": 25,
+        "vless|grpc|reality": 245,
+        "vless|grpc|tls": 36,
+        "vless|httpupgrade|none": 46,
+        "vless|httpupgrade|tls": 14,
+        "vless|http|none": 48,
+        "vless|http|reality": 124,
+        "vless|http|tls": 192,
+        "vless|none|none": 46,
+        "vless|none|reality": 2412,
+        "vless|none|tls": 150,
+        "vless|ws|none": 154,
+        "vless|ws|reality": 1,
+        "vless|ws|tls": 156,
+        "vless|xhttp|tls": 1
+      },
+      "parse_ms": 3009
+    },
+    {
+      "id": "28-github-whitelist",
+      "url": "https://raw.githubusercontent.com/LimeHi/LimeVPN/refs/heads/main/whitelist.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 191,
+      "by_type": {
+        "shadowsocks": 5,
+        "vless": 185,
+        "vmess": 1
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 76,
+        "reality_fp_not_chrome": 18,
+        "reality_fp_random_pinned": 15,
+        "uri_param_unknown": 1
+      },
+      "coverage": {
+        "shadowsocks|none|none": 5,
+        "vless|grpc|reality": 50,
+        "vless|none|reality": 132,
+        "vless|xhttp|reality": 3,
+        "vmess|none|none": 1
+      },
+      "parse_ms": 279
+    },
+    {
+      "id": "29-github-blacklist",
+      "url": "https://raw.githubusercontent.com/LimeHi/LimeVPN/refs/heads/main/blacklist.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 106,
+      "by_type": {
+        "vless": 106
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 3
+      },
+      "coverage": {
+        "vless|grpc|reality": 21,
+        "vless|none|reality": 82,
+        "vless|xhttp|reality": 3
+      },
+      "parse_ms": 50
+    },
+    {
+      "id": "30-github-non-ru",
+      "url": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/non_ru.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 45,
+      "by_type": {
+        "vless": 45
+      },
+      "dropped": {},
+      "warnings": {
+        "reality_fp_random_pinned": 4
+      },
+      "coverage": {
+        "vless|none|reality": 40,
+        "vless|none|tls": 1,
+        "vless|xhttp|reality": 4
+      },
+      "parse_ms": 18
+    },
+    {
+      "id": "31-github-ping-tested",
+      "url": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/ping_tested.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 117,
+      "by_type": {
+        "vless": 117
+      },
+      "dropped": {},
+      "warnings": {
+        "reality_fp_not_chrome": 3,
+        "reality_fp_random_pinned": 10
+      },
+      "coverage": {
+        "vless|none|none": 3,
+        "vless|none|reality": 99,
+        "vless|none|tls": 7,
+        "vless|xhttp|reality": 5,
+        "vless|xhttp|tls": 3
+      },
+      "parse_ms": 48
+    },
+    {
+      "id": "32-github-top-600",
+      "url": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/top_600.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 49,
+      "by_type": {
+        "vless": 49
+      },
+      "dropped": {},
+      "warnings": {
+        "reality_fp_random_pinned": 4
+      },
+      "coverage": {
+        "vless|none|reality": 43,
+        "vless|none|tls": 1,
+        "vless|xhttp|reality": 5
+      },
+      "parse_ms": 42
+    },
+    {
+      "id": "33-github-229",
+      "url": "https://raw.githubusercontent.com/ANT1VEN0M/PODVAL-KOTA-VPN-/refs/heads/main/%D0%91%D0%B5%D0%BB%D1%8B%D0%B5_%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8229.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 70,
+      "by_type": {
+        "hysteria2": 2,
+        "shadowsocks": 19,
+        "vless": 45,
+        "vmess": 4
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 42,
+        "reality_fp_not_chrome": 11,
+        "ss_method_legacy": 3
+      },
+      "coverage": {
+        "hysteria2|none|tls": 2,
+        "shadowsocks|none|none": 19,
+        "vless|grpc|reality": 3,
+        "vless|none|reality": 3,
+        "vless|ws|tls": 2,
+        "vless|xhttp|reality": 22,
+        "vless|xhttp|tls": 15,
+        "vmess|none|none": 4
+      },
+      "parse_ms": 158
+    },
+    {
+      "id": "34-github-antinet",
+      "url": "https://raw.githubusercontent.com/ANT1VEN0M/PODVAL-KOTA-VPN-/refs/heads/main/antinet_%D0%A7%D0%B5%D1%80%D0%BD%D1%8B%D0%B5_%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 642,
+      "by_type": {
+        "anytls": 2,
+        "hysteria2": 28,
+        "shadowsocks": 26,
+        "socks": 1,
+        "trojan": 157,
+        "vless": 379,
+        "vmess": 48,
+        "wireguard": 1
+      },
+      "dropped": {
+        "form_unrecognized": 7,
+        "scheme_unsupported": 14,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "awg_mtu_clamped": 1,
+        "duplicates_collapsed": 225,
+        "reality_fp_not_chrome": 38,
+        "reality_fp_random_pinned": 9,
+        "ss_method_legacy": 2,
+        "tls_insecure": 14,
+        "wgconf_dns_ignored": 1,
+        "ws_early_data_converted": 46
+      },
+      "coverage": {
+        "anytls|none|tls": 2,
+        "hysteria2|none|tls": 28,
+        "shadowsocks|none|none": 26,
+        "socks|none|none": 1,
+        "trojan|none|tls": 153,
+        "trojan|ws|tls": 4,
+        "vless|grpc|reality": 44,
+        "vless|none|none": 2,
+        "vless|none|reality": 125,
+        "vless|none|tls": 31,
+        "vless|ws|none": 3,
+        "vless|ws|tls": 57,
+        "vless|xhttp|reality": 59,
+        "vless|xhttp|tls": 58,
+        "vmess|none|none": 4,
+        "vmess|ws|none": 2,
+        "vmess|ws|tls": 42,
+        "wireguard|none|none": 1
+      },
+      "parse_ms": 739
+    },
+    {
+      "id": "35-github-premium",
+      "url": "https://raw.githubusercontent.com/btsk161/Freeinternet_byMygalaru.github.io/refs/heads/main/premium.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 153,
+      "by_type": {
+        "hysteria2": 6,
+        "shadowsocks": 31,
+        "trojan": 1,
+        "vless": 115
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 28,
+        "reality_fp_not_chrome": 14,
+        "reality_fp_random_pinned": 11,
+        "ss_method_legacy": 3,
+        "tls_alpn_item_invalid": 3,
+        "tls_insecure": 6,
+        "uri_param_unknown": 2
+      },
+      "coverage": {
+        "hysteria2|none|tls": 6,
+        "shadowsocks|none|none": 31,
+        "trojan|none|tls": 1,
+        "vless|grpc|reality": 7,
+        "vless|none|none": 1,
+        "vless|none|reality": 103,
+        "vless|ws|tls": 2,
+        "vless|xhttp|reality": 1,
+        "vless|xhttp|tls": 1
+      },
+      "parse_ms": 76
+    },
+    {
+      "id": "36-github-alive-full",
+      "url": "https://raw.githubusercontent.com/Diversan313/apex-parser/main/subs/main/alive_full.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 595,
+      "by_type": {
+        "shadowsocks": 27,
+        "trojan": 3,
+        "vless": 552,
+        "vmess": 13
+      },
+      "dropped": {
+        "transport_header_unsupported": 9
+      },
+      "warnings": {
+        "duplicates_collapsed": 118,
+        "field_missing": 3,
+        "reality_fp_not_chrome": 35,
+        "reality_fp_random_pinned": 53,
+        "reality_short_id_invalid": 2,
+        "tls_insecure": 4,
+        "uri_param_unknown": 25
+      },
+      "coverage": {
+        "shadowsocks|none|none": 27,
+        "trojan|none|tls": 3,
+        "vless|none|none": 6,
+        "vless|none|reality": 520,
+        "vless|none|tls": 26,
+        "vmess|none|none": 13
+      },
+      "parse_ms": 456
+    },
+    {
+      "id": "37-github-sub",
+      "url": "https://raw.githubusercontent.com/histeenn/VLESS-PO-GRIBI/main/deploy/sub.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 2891,
+      "by_type": {
+        "shadowsocks": 577,
+        "vless": 2201,
+        "vmess": 113
+      },
+      "dropped": {
+        "field_missing": 103,
+        "form_unrecognized": 2,
+        "provider_banner_link": 2,
+        "ss_method_invalid": 18,
+        "transport_header_unsupported": 59
+      },
+      "warnings": {
+        "duplicates_collapsed": 575,
+        "ech_ignored": 10,
+        "field_missing": 59,
+        "reality_fp_not_chrome": 144,
+        "reality_fp_random_pinned": 70,
+        "ss_method_legacy": 13,
+        "tls_alpn_item_invalid": 1,
+        "tls_insecure": 59,
+        "uri_param_unknown": 1801,
+        "utls_fp_unknown": 48,
+        "ws_early_data_converted": 67
+      },
+      "coverage": {
+        "shadowsocks|none|none": 577,
+        "vless|grpc|none": 28,
+        "vless|grpc|reality": 105,
+        "vless|grpc|tls": 29,
+        "vless|httpupgrade|none": 9,
+        "vless|httpupgrade|tls": 2,
+        "vless|none|none": 118,
+        "vless|none|reality": 683,
+        "vless|none|tls": 329,
+        "vless|ws|none": 273,
+        "vless|ws|tls": 536,
+        "vless|xhttp|none": 6,
+        "vless|xhttp|reality": 53,
+        "vless|xhttp|tls": 30,
+        "vmess|httpupgrade|tls": 1,
+        "vmess|none|none": 54,
+        "vmess|ws|none": 16,
+        "vmess|ws|tls": 41,
+        "vmess|xhttp|tls": 1
+      },
+      "parse_ms": 1688
+    },
+    {
+      "id": "38-codeberg-vless-universal",
+      "url": "https://codeberg.org/zieng2/wl/raw/branch/main/vless_universal.txt",
+      "source": "codeberg",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "vless": 95
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 5
+      },
+      "coverage": {
+        "vless|grpc|reality": 13,
+        "vless|none|reality": 50,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 13,
+        "vless|xhttp|tls": 15
+      },
+      "parse_ms": 59
+    },
+    {
+      "id": "39-moshub-list-universal",
+      "url": "https://hub.mos.ru/zieng2/wl/raw/main/list_universal.txt",
+      "source": "moshub",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "vless": 95
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 5
+      },
+      "coverage": {
+        "vless|grpc|reality": 13,
+        "vless|none|reality": 50,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 13,
+        "vless|xhttp|tls": 15
+      },
+      "parse_ms": 72
+    },
+    {
+      "id": "40-gitverse-list-universal",
+      "url": "https://gitverse.ru/api/repos/zieng2/wl/raw/branch/master/list_universal.txt",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "vless": 95
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 5
+      },
+      "coverage": {
+        "vless|grpc|reality": 13,
+        "vless|none|reality": 50,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 13,
+        "vless|xhttp|tls": 15
+      },
+      "parse_ms": 62
+    },
+    {
+      "id": "41-gitlab-vless-reality-white-lists-rus-mobile",
+      "url": "https://gitlab.com/igareck/vpn-configs-for-russia/-/raw/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
+      "source": "gitlab",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 25,
+      "by_type": {
+        "hysteria2": 7,
+        "vless": 18
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 7,
+        "reality_fp_random_pinned": 1,
+        "tls_not_applicable_quic": 1
+      },
+      "coverage": {
+        "hysteria2|none|tls": 7,
+        "vless|none|reality": 5,
+        "vless|ws|tls": 5,
+        "vless|xhttp|reality": 8
+      },
+      "parse_ms": 15
+    },
+    {
+      "id": "42-bitbucket-vless-reality-white-lists-rus-mobile",
+      "url": "https://bitbucket.org/igareck/vpn-configs-for-russia/raw/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
+      "source": "bitbucket",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 25,
+      "by_type": {
+        "hysteria2": 7,
+        "vless": 18
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 2,
+        "reality_fp_not_chrome": 7,
+        "reality_fp_random_pinned": 1,
+        "tls_not_applicable_quic": 1
+      },
+      "coverage": {
+        "hysteria2|none|tls": 7,
+        "vless|none|reality": 5,
+        "vless|ws|tls": 5,
+        "vless|xhttp|reality": 8
+      },
+      "parse_ms": 10
+    },
+    {
+      "id": "47-domain-whitelist",
+      "url": "https://etoneya.best/whitelist",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "hysteria2": 11,
+        "shadowsocks": 1,
+        "vless": 83
+      },
+      "dropped": {
+        "provider_banner_link": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 31,
+        "reality_fp_not_chrome": 4,
+        "reality_fp_random_pinned": 1,
+        "tls_insecure": 3
+      },
+      "coverage": {
+        "hysteria2|none|tls": 11,
+        "shadowsocks|none|none": 1,
+        "vless|grpc|reality": 1,
+        "vless|httpupgrade|tls": 1,
+        "vless|none|reality": 73,
+        "vless|ws|tls": 8
+      },
+      "parse_ms": 60
+    },
+    {
+      "id": "48-domain-1",
+      "url": "https://etoneya.best/1",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3678,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 196,
+        "shadowsocks": 314,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2900
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 623,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 71,
+        "reality_fp_random_pinned": 32,
+        "ss_method_legacy": 91,
+        "tls_insecure": 112,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 196,
+        "shadowsocks|none|none": 314,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 201,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 3,
+        "vless|http|tls": 9,
+        "vless|none|reality": 910,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1191
+      },
+      "parse_ms": 2144
+    },
+    {
+      "id": "49-domain-2",
+      "url": "https://etoneya.best/2",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3678,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 196,
+        "shadowsocks": 314,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2900
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 623,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 71,
+        "reality_fp_random_pinned": 32,
+        "ss_method_legacy": 91,
+        "tls_insecure": 112,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 196,
+        "shadowsocks|none|none": 314,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 201,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 3,
+        "vless|http|tls": 9,
+        "vless|none|reality": 910,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1191
+      },
+      "parse_ms": 1696
+    },
+    {
+      "id": "50-domain-whitelist",
+      "url": "https://alley.serv00.net/whitelist",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "hysteria2": 11,
+        "shadowsocks": 1,
+        "vless": 83
+      },
+      "dropped": {
+        "provider_banner_link": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 31,
+        "reality_fp_not_chrome": 4,
+        "reality_fp_random_pinned": 1,
+        "tls_insecure": 3
+      },
+      "coverage": {
+        "hysteria2|none|tls": 11,
+        "shadowsocks|none|none": 1,
+        "vless|grpc|reality": 1,
+        "vless|httpupgrade|tls": 1,
+        "vless|none|reality": 73,
+        "vless|ws|tls": 8
+      },
+      "parse_ms": 48
+    },
+    {
+      "id": "51-domain-other",
+      "url": "https://alley.serv00.net/other",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3583,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 185,
+        "shadowsocks": 313,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2817
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 592,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 67,
+        "reality_fp_random_pinned": 31,
+        "ss_method_legacy": 91,
+        "tls_insecure": 109,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 185,
+        "shadowsocks|none|none": 313,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 200,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 2,
+        "vless|http|tls": 9,
+        "vless|none|reality": 837,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1183
+      },
+      "parse_ms": 2727
+    },
+    {
+      "id": "52-domain-1",
+      "url": "https://alley.serv00.net/1",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3678,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 196,
+        "shadowsocks": 314,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2900
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 623,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 71,
+        "reality_fp_random_pinned": 32,
+        "ss_method_legacy": 91,
+        "tls_insecure": 112,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 196,
+        "shadowsocks|none|none": 314,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 201,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 3,
+        "vless|http|tls": 9,
+        "vless|none|reality": 910,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1191
+      },
+      "parse_ms": 2160
+    },
+    {
+      "id": "53-domain-2",
+      "url": "https://alley.serv00.net/2",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3678,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 196,
+        "shadowsocks": 314,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2900
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 623,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 71,
+        "reality_fp_random_pinned": 32,
+        "ss_method_legacy": 91,
+        "tls_insecure": 112,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 196,
+        "shadowsocks|none|none": 314,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 201,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 3,
+        "vless|http|tls": 9,
+        "vless|none|reality": 910,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1191
+      },
+      "parse_ms": 1899
+    },
+    {
+      "id": "54-gitverse-whitelist",
+      "url": "https://gitverse.ru/api/repos/nloverx/EtoNeYa_Subs/raw/branch/master/whitelist",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 112,
+      "by_type": {
+        "vless": 112
+      },
+      "dropped": {
+        "provider_banner_link": 1,
+        "transport_header_unsupported": 7
+      },
+      "warnings": {
+        "duplicates_collapsed": 10,
+        "reality_fp_not_chrome": 15,
+        "reality_fp_random_pinned": 10,
+        "uri_param_unknown": 1
+      },
+      "coverage": {
+        "vless|grpc|reality": 3,
+        "vless|none|reality": 109
+      },
+      "parse_ms": 124
+    },
+    {
+      "id": "55-gitverse-other",
+      "url": "https://gitverse.ru/api/repos/nloverx/EtoNeYa_Subs/raw/branch/master/other",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 818,
+      "by_type": {
+        "shadowsocks": 347,
+        "trojan": 32,
+        "vless": 439
+      },
+      "dropped": {
+        "provider_banner_link": 1,
+        "transport_header_unsupported": 13
+      },
+      "warnings": {
+        "duplicates_collapsed": 201,
+        "field_missing": 12,
+        "reality_fp_not_chrome": 21,
+        "reality_fp_random_pinned": 58,
+        "ss_method_legacy": 1,
+        "tls_insecure": 16,
+        "uri_param_unknown": 46
+      },
+      "coverage": {
+        "shadowsocks|none|none": 347,
+        "trojan|none|tls": 27,
+        "trojan|ws|tls": 3,
+        "trojan|xhttp|tls": 2,
+        "vless|grpc|reality": 25,
+        "vless|none|none": 1,
+        "vless|none|reality": 379,
+        "vless|none|tls": 32,
+        "vless|xhttp|tls": 2
+      },
+      "parse_ms": 1404
+    },
+    {
+      "id": "56-gitverse-1",
+      "url": "https://gitverse.ru/api/repos/nloverx/EtoNeYa_Subs/raw/branch/master/1",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 922,
+      "by_type": {
+        "shadowsocks": 347,
+        "trojan": 32,
+        "vless": 543
+      },
+      "dropped": {
+        "provider_banner_link": 1,
+        "transport_header_unsupported": 20
+      },
+      "warnings": {
+        "duplicates_collapsed": 208,
+        "field_missing": 12,
+        "reality_fp_not_chrome": 36,
+        "reality_fp_random_pinned": 67,
+        "ss_method_legacy": 1,
+        "tls_insecure": 16,
+        "uri_param_unknown": 47
+      },
+      "coverage": {
+        "shadowsocks|none|none": 347,
+        "trojan|none|tls": 27,
+        "trojan|ws|tls": 3,
+        "trojan|xhttp|tls": 2,
+        "vless|grpc|reality": 28,
+        "vless|none|none": 1,
+        "vless|none|reality": 480,
+        "vless|none|tls": 32,
+        "vless|xhttp|tls": 2
+      },
+      "parse_ms": 737
+    },
+    {
+      "id": "57-gitverse-2",
+      "url": "https://gitverse.ru/api/repos/nloverx/EtoNeYa_Subs/raw/branch/master/2",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 922,
+      "by_type": {
+        "shadowsocks": 347,
+        "trojan": 32,
+        "vless": 543
+      },
+      "dropped": {
+        "provider_banner_link": 1,
+        "transport_header_unsupported": 20
+      },
+      "warnings": {
+        "duplicates_collapsed": 208,
+        "field_missing": 12,
+        "reality_fp_not_chrome": 36,
+        "reality_fp_random_pinned": 67,
+        "ss_method_legacy": 1,
+        "tls_insecure": 16,
+        "uri_param_unknown": 47
+      },
+      "coverage": {
+        "shadowsocks|none|none": 347,
+        "trojan|none|tls": 27,
+        "trojan|ws|tls": 3,
+        "trojan|xhttp|tls": 2,
+        "vless|grpc|reality": 28,
+        "vless|none|none": 1,
+        "vless|none|reality": 480,
+        "vless|none|tls": 32,
+        "vless|xhttp|tls": 2
+      },
+      "parse_ms": 923
+    },
+    {
+      "id": "58-domain-whitelist",
+      "url": "https://internet-tenshi.kangel.tech/whitelist",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "hysteria2": 11,
+        "shadowsocks": 1,
+        "vless": 83
+      },
+      "dropped": {
+        "provider_banner_link": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 31,
+        "reality_fp_not_chrome": 4,
+        "reality_fp_random_pinned": 1,
+        "tls_insecure": 3
+      },
+      "coverage": {
+        "hysteria2|none|tls": 11,
+        "shadowsocks|none|none": 1,
+        "vless|grpc|reality": 1,
+        "vless|httpupgrade|tls": 1,
+        "vless|none|reality": 73,
+        "vless|ws|tls": 8
+      },
+      "parse_ms": 51
+    },
+    {
+      "id": "59-domain-other",
+      "url": "https://internet-tenshi.kangel.tech/other",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3583,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 185,
+        "shadowsocks": 313,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2817
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 592,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 67,
+        "reality_fp_random_pinned": 31,
+        "ss_method_legacy": 91,
+        "tls_insecure": 109,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 185,
+        "shadowsocks|none|none": 313,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 200,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 2,
+        "vless|http|tls": 9,
+        "vless|none|reality": 837,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1183
+      },
+      "parse_ms": 1609
+    },
+    {
+      "id": "60-domain-1",
+      "url": "https://internet-tenshi.kangel.tech/1",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3678,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 196,
+        "shadowsocks": 314,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2900
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 623,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 71,
+        "reality_fp_random_pinned": 32,
+        "ss_method_legacy": 91,
+        "tls_insecure": 112,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 196,
+        "shadowsocks|none|none": 314,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 201,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 3,
+        "vless|http|tls": 9,
+        "vless|none|reality": 910,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1191
+      },
+      "parse_ms": 1276
+    },
+    {
+      "id": "61-domain-2",
+      "url": "https://internet-tenshi.kangel.tech/2",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 3678,
+      "by_type": {
+        "anytls": 5,
+        "hysteria2": 196,
+        "shadowsocks": 314,
+        "trojan": 258,
+        "tuic": 5,
+        "vless": 2900
+      },
+      "dropped": {
+        "form_unrecognized": 431,
+        "provider_banner_link": 2,
+        "scheme_unsupported": 1,
+        "transport_header_unsupported": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 623,
+        "ech_ignored": 5,
+        "reality_fp_not_chrome": 71,
+        "reality_fp_random_pinned": 32,
+        "ss_method_legacy": 91,
+        "tls_insecure": 112,
+        "tls_not_applicable_quic": 7,
+        "tuic_udp_relay_mode_invalid": 2,
+        "uri_param_unknown": 20,
+        "utls_fp_unknown": 13
+      },
+      "coverage": {
+        "anytls|none|tls": 5,
+        "hysteria2|none|tls": 196,
+        "shadowsocks|none|none": 314,
+        "trojan|httpupgrade|tls": 1,
+        "trojan|none|tls": 7,
+        "trojan|ws|tls": 250,
+        "tuic|none|tls": 5,
+        "vless|grpc|reality": 201,
+        "vless|grpc|tls": 58,
+        "vless|httpupgrade|tls": 3,
+        "vless|http|tls": 9,
+        "vless|none|reality": 910,
+        "vless|none|tls": 51,
+        "vless|ws|none": 477,
+        "vless|ws|tls": 1191
+      },
+      "parse_ms": 1407
+    },
+    {
+      "id": "62-domain-whitelist-etoneya-baby",
+      "url": "https://whitelist.etoneya.baby",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "hysteria2": 11,
+        "shadowsocks": 1,
+        "vless": 83
+      },
+      "dropped": {
+        "provider_banner_link": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 31,
+        "reality_fp_not_chrome": 4,
+        "reality_fp_random_pinned": 1,
+        "tls_insecure": 3
+      },
+      "coverage": {
+        "hysteria2|none|tls": 11,
+        "shadowsocks|none|none": 1,
+        "vless|grpc|reality": 1,
+        "vless|httpupgrade|tls": 1,
+        "vless|none|reality": 73,
+        "vless|ws|tls": 8
+      },
+      "parse_ms": 40
+    },
+    {
+      "id": "63-domain-whitelist",
+      "url": "https://xn--e1apcp8cq.xn--p1ai/whitelist",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 95,
+      "by_type": {
+        "hysteria2": 11,
+        "shadowsocks": 1,
+        "vless": 83
+      },
+      "dropped": {
+        "provider_banner_link": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 31,
+        "reality_fp_not_chrome": 4,
+        "reality_fp_random_pinned": 1,
+        "tls_insecure": 3
+      },
+      "coverage": {
+        "hysteria2|none|tls": 11,
+        "shadowsocks|none|none": 1,
+        "vless|grpc|reality": 1,
+        "vless|httpupgrade|tls": 1,
+        "vless|none|reality": 73,
+        "vless|ws|tls": 8
+      },
+      "parse_ms": 38
+    },
+    {
+      "id": "64-domain-gen",
+      "url": "https://subrostunnel.vercel.app/gen.txt",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 193,
+      "by_type": {
+        "hysteria2": 6,
+        "shadowsocks": 2,
+        "vless": 185
+      },
+      "dropped": {
+        "provider_banner_link": 1
+      },
+      "warnings": {
+        "duplicates_collapsed": 46,
+        "reality_fp_not_chrome": 17,
+        "reality_fp_random_pinned": 16,
+        "tls_insecure": 1,
+        "tls_not_applicable_quic": 4
+      },
+      "coverage": {
+        "hysteria2|none|tls": 6,
+        "shadowsocks|none|none": 2,
+        "vless|grpc|none": 6,
+        "vless|grpc|reality": 31,
+        "vless|none|reality": 135,
+        "vless|ws|tls": 4,
+        "vless|xhttp|reality": 6,
+        "vless|xhttp|tls": 3
+      },
+      "parse_ms": 110
+    },
+    {
+      "id": "65-codeberg-sub",
+      "url": "https://codeberg.org/kfwl/sub/raw/branch/main/sub.txt",
+      "source": "codeberg",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 28,
+      "by_type": {
+        "hysteria2": 1,
+        "vless": 27
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 15,
+        "reality_fp_not_chrome": 7
+      },
+      "coverage": {
+        "hysteria2|none|tls": 1,
+        "vless|grpc|reality": 2,
+        "vless|none|reality": 1,
+        "vless|xhttp|reality": 19,
+        "vless|xhttp|tls": 5
+      },
+      "parse_ms": 20
+    },
+    {
+      "id": "66-gitverse-wl",
+      "url": "https://gitverse.ru/api/repos/bywarm/rser/raw/branch/master/wl.txt",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 1588,
+      "by_type": {
+        "hysteria2": 1,
+        "shadowsocks": 15,
+        "trojan": 2,
+        "vless": 1569,
+        "vmess": 1
+      },
+      "dropped": {
+        "field_missing": 9,
+        "ss_method_invalid": 2
+      },
+      "warnings": {
+        "duplicates_collapsed": 71,
+        "field_missing": 12,
+        "reality_fp_not_chrome": 274,
+        "reality_fp_random_pinned": 370,
+        "ss_method_legacy": 4,
+        "tls_insecure": 7,
+        "uri_param_unknown": 9,
+        "ws_early_data_converted": 2
+      },
+      "coverage": {
+        "hysteria2|none|tls": 1,
+        "shadowsocks|none|none": 15,
+        "trojan|none|tls": 2,
+        "vless|grpc|none": 2,
+        "vless|grpc|reality": 94,
+        "vless|none|none": 4,
+        "vless|none|reality": 1266,
+        "vless|none|tls": 32,
+        "vless|ws|none": 1,
+        "vless|ws|tls": 31,
+        "vless|xhttp|none": 2,
+        "vless|xhttp|reality": 123,
+        "vless|xhttp|tls": 14,
+        "vmess|none|none": 1
+      },
+      "parse_ms": 652
+    },
+    {
+      "id": "67-domain-working-configs",
+      "url": "https://sub.vlessfo.ru/vlessforu/working_configs.txt",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 132,
+      "by_type": {
+        "trojan": 2,
+        "vless": 124,
+        "vmess": 6
+      },
+      "dropped": {
+        "service_record_ignored": 1
+      },
+      "warnings": {
+        "field_missing": 2,
+        "reality_fp_not_chrome": 7,
+        "reality_fp_random_pinned": 3,
+        "tls_insecure": 2,
+        "uri_param_unknown": 7
+      },
+      "coverage": {
+        "trojan|none|tls": 2,
+        "vless|grpc|none": 4,
+        "vless|grpc|reality": 8,
+        "vless|grpc|tls": 4,
+        "vless|none|reality": 80,
+        "vless|none|tls": 2,
+        "vless|ws|tls": 2,
+        "vless|xhttp|reality": 3,
+        "vless|xhttp|tls": 21,
+        "vmess|ws|tls": 6
+      },
+      "parse_ms": 60
+    },
+    {
+      "id": "68-gitverse-outlinevpn-outlinevpn",
+      "url": "https://gitverse.ru/api/repos/ru-wbl/wl/raw/branch/master/OutlineVPN%2FOutlineVPN.txt",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 165,
+      "by_type": {
+        "trojan": 13,
+        "vless": 152
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 60,
+        "ech_ignored": 2,
+        "reality_fp_not_chrome": 17,
+        "reality_fp_random_pinned": 2,
+        "tls_alpn_item_invalid": 1,
+        "tls_insecure": 1,
+        "uri_param_unknown": 2,
+        "ws_early_data_converted": 9
+      },
+      "coverage": {
+        "trojan|none|tls": 13,
+        "vless|grpc|reality": 19,
+        "vless|grpc|tls": 1,
+        "vless|none|reality": 75,
+        "vless|none|tls": 23,
+        "vless|ws|tls": 29,
+        "vless|xhttp|reality": 5
+      },
+      "parse_ms": 76
+    },
+    {
+      "id": "69-domain-api-php",
+      "url": "http://stabratni4.temp.swtest.ru/api.php?type=normal",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 0,
+      "by_type": {},
+      "dropped": {},
+      "warnings": {},
+      "coverage": {},
+      "parse_ms": 0,
+      "sample_drop_lines": [
+        "♡＼(￣▽￣)／♡   ♡＼(￣▽￣)／♡   ♡＼(￣▽￣)／♡"
+      ]
+    },
+    {
+      "id": "70-gitverse-flux-bypass-all-782661",
+      "url": "https://gitverse.ru/api/repos/RUVIPIEN/russian-white-bolt_fix/raw/branch/master/VPNMIRRORS/nekobox/Flux_bypass_all_782661.txt",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 1302,
+      "by_type": {
+        "shadowsocks": 2,
+        "trojan": 32,
+        "vless": 1268
+      },
+      "dropped": {
+        "field_missing": 67,
+        "provider_banner_link": 1,
+        "ss_method_invalid": 15
+      },
+      "warnings": {
+        "field_missing": 59,
+        "reality_fp_not_chrome": 72,
+        "reality_fp_random_pinned": 89,
+        "type_invalid": 2,
+        "uri_param_unknown": 746
+      },
+      "coverage": {
+        "shadowsocks|none|none": 2,
+        "trojan|none|tls": 32,
+        "vless|grpc|reality": 35,
+        "vless|grpc|tls": 4,
+        "vless|none|reality": 922,
+        "vless|none|tls": 106,
+        "vless|ws|none": 4,
+        "vless|ws|tls": 86,
+        "vless|xhttp|reality": 87,
+        "vless|xhttp|tls": 24
+      },
+      "parse_ms": 501
+    },
+    {
+      "id": "71-domain-bypass-all",
+      "url": "http://fsub.flux.2bd.net/githubmirror/bypass/bypass-all.txt",
+      "source": "domain",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 1302,
+      "by_type": {
+        "shadowsocks": 2,
+        "trojan": 32,
+        "vless": 1268
+      },
+      "dropped": {
+        "field_missing": 67,
+        "provider_banner_link": 1,
+        "ss_method_invalid": 15
+      },
+      "warnings": {
+        "field_missing": 59,
+        "reality_fp_not_chrome": 72,
+        "reality_fp_random_pinned": 89,
+        "type_invalid": 2,
+        "uri_param_unknown": 746
+      },
+      "coverage": {
+        "shadowsocks|none|none": 2,
+        "trojan|none|tls": 32,
+        "vless|grpc|reality": 35,
+        "vless|grpc|tls": 4,
+        "vless|none|reality": 922,
+        "vless|none|tls": 106,
+        "vless|ws|none": 4,
+        "vless|ws|tls": 86,
+        "vless|xhttp|reality": 87,
+        "vless|xhttp|tls": 24
+      },
+      "parse_ms": 400
+    },
+    {
+      "id": "72-gitverse-alive-full",
+      "url": "https://gitverse.ru/api/repos/bikinitw22/apelsintel/raw/branch/main/alive_full.txt",
+      "source": "gitverse",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 595,
+      "by_type": {
+        "shadowsocks": 27,
+        "trojan": 3,
+        "vless": 552,
+        "vmess": 13
+      },
+      "dropped": {
+        "transport_header_unsupported": 9
+      },
+      "warnings": {
+        "duplicates_collapsed": 118,
+        "field_missing": 3,
+        "reality_fp_not_chrome": 35,
+        "reality_fp_random_pinned": 53,
+        "reality_short_id_invalid": 2,
+        "tls_insecure": 4,
+        "uri_param_unknown": 25
+      },
+      "coverage": {
+        "shadowsocks|none|none": 27,
+        "trojan|none|tls": 3,
+        "vless|none|none": 6,
+        "vless|none|reality": 520,
+        "vless|none|tls": 26,
+        "vmess|none|none": 13
+      },
+      "parse_ms": 284
+    },
+    {
+      "id": "73-github-full",
+      "url": "https://raw.githubusercontent.com/OVI-vpn/bs/refs/heads/main/full.txt",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 251,
+      "by_type": {
+        "shadowsocks": 17,
+        "vless": 232,
+        "vmess": 2
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 23,
+        "reality_fp_not_chrome": 12,
+        "reality_fp_random_pinned": 46,
+        "ss_method_legacy": 2,
+        "tls_insecure": 10,
+        "uri_param_unknown": 3
+      },
+      "coverage": {
+        "shadowsocks|none|none": 17,
+        "vless|grpc|reality": 25,
+        "vless|grpc|tls": 12,
+        "vless|none|reality": 124,
+        "vless|ws|tls": 35,
+        "vless|xhttp|reality": 17,
+        "vless|xhttp|tls": 19,
+        "vmess|none|none": 2
+      },
+      "parse_ms": 85
+    },
+    {
+      "id": "74-github-sub-html",
+      "url": "https://raw.githubusercontent.com/arshiacomplus/v2rayExtractor/refs/heads/main/mix/sub.html",
+      "source": "github",
+      "decoded_kind": "uri_lines",
+      "nodes_total": 331,
+      "by_type": {
+        "hysteria2": 73,
+        "shadowsocks": 64,
+        "trojan": 5,
+        "vless": 177,
+        "vmess": 12
+      },
+      "dropped": {},
+      "warnings": {
+        "duplicates_collapsed": 1,
+        "ech_ignored": 1,
+        "reality_fp_not_chrome": 2,
+        "reality_fp_random_pinned": 28,
+        "tls_insecure": 61,
+        "uri_param_unknown": 12,
+        "utls_fp_unknown": 1,
+        "ws_early_data_converted": 5
+      },
+      "coverage": {
+        "hysteria2|none|tls": 73,
+        "shadowsocks|none|none": 64,
+        "trojan|ws|tls": 5,
+        "vless|grpc|reality": 5,
+        "vless|grpc|tls": 4,
+        "vless|none|none": 5,
+        "vless|none|reality": 46,
+        "vless|none|tls": 8,
+        "vless|ws|none": 63,
+        "vless|ws|tls": 39,
+        "vless|xhttp|reality": 3,
+        "vless|xhttp|tls": 4,
+        "vmess|none|none": 8,
+        "vmess|none|tls": 2,
+        "vmess|ws|none": 1,
+        "vmess|ws|tls": 1
+      },
+      "parse_ms": 66
+    }
+  ],
+  "summary": {
+    "subscriptions": 70,
+    "nodes_total": 60919,
+    "zero_node_subscriptions": [
+      {
+        "id": "03-github-vless",
+        "decoded_kind": "uri_lines",
+        "dropped": {
+          "provider_banner_link": 3
+        },
+        "sample": [
+          "vless://***@***:1?type=tcp&security=reality&pbk=***&fp=chrome&sni=***&sid=***&spx=%2F&flow=xtls-rprx-visio…",
+          "vless://***@***:1?type=tcp&security=reality&pbk=***&fp=chrome&sni=***&sid=***&spx=%2F&flow=xtls-rprx-visio…",
+          "vless://***@***:1?type=tcp&security=reality&pbk=***&fp=chrome&sni=***&sid=***&spx=%2F&flow=xtls-rprx-visio…"
+        ]
+      },
+      {
+        "id": "69-domain-api-php",
+        "decoded_kind": "uri_lines",
+        "dropped": {},
+        "sample": [
+          "♡＼(￣▽￣)／♡   ♡＼(￣▽￣)／♡   ♡＼(￣▽￣)／♡"
+        ]
+      }
+    ],
+    "decoded_kinds": {
+      "uri_lines": 70
+    },
+    "dropped_codes": {
+      "form_unrecognized": 3470,
+      "field_missing": 343,
+      "transport_header_unsupported": 282,
+      "ss_method_invalid": 58,
+      "provider_banner_link": 42,
+      "scheme_unsupported": 22,
+      "vless_encryption_invalid": 4,
+      "service_record_ignored": 2
+    },
+    "warning_codes": {
+      "duplicates_collapsed": 8729,
+      "uri_param_unknown": 4852,
+      "reality_fp_not_chrome": 2933,
+      "reality_fp_random_pinned": 2519,
+      "tls_insecure": 1360,
+      "ss_method_legacy": 779,
+      "utls_fp_unknown": 360,
+      "ws_early_data_converted": 323,
+      "field_missing": 306,
+      "tls_not_applicable_quic": 82,
+      "ech_ignored": 70,
+      "tls_alpn_item_invalid": 26,
+      "tuic_udp_relay_mode_invalid": 16,
+      "reality_short_id_invalid": 4,
+      "type_invalid": 4,
+      "awg_mtu_clamped": 1,
+      "wgconf_dns_ignored": 1,
+      "xhttp_param_reset": 1
+    },
+    "node_types": {
+      "vless": 51102,
+      "shadowsocks": 4888,
+      "trojan": 2681,
+      "hysteria2": 1862,
+      "vmess": 302,
+      "anytls": 42,
+      "tuic": 40,
+      "socks": 1,
+      "wireguard": 1
+    },
+    "coverage": {
+      "vless|none|reality": 24026,
+      "vless|ws|tls": 14655,
+      "shadowsocks|none|none": 4888,
+      "vless|ws|none": 4607,
+      "vless|grpc|reality": 3315,
+      "trojan|ws|tls": 2159,
+      "hysteria2|none|tls": 1862,
+      "vless|none|tls": 1578,
+      "vless|xhttp|reality": 881,
+      "vless|grpc|tls": 583,
+      "trojan|none|tls": 500,
+      "vless|xhttp|tls": 397,
+      "vless|none|none": 328,
+      "vless|http|tls": 264,
+      "vmess|none|none": 142,
+      "vless|grpc|none": 129,
+      "vless|http|reality": 128,
+      "vmess|ws|tls": 123,
+      "vless|httpupgrade|none": 73,
+      "vless|httpupgrade|tls": 56,
+      "vless|http|none": 48,
+      "anytls|none|tls": 42,
+      "tuic|none|tls": 40,
+      "vmess|ws|none": 32,
+      "vless|xhttp|none": 29,
+      "trojan|httpupgrade|tls": 12,
+      "trojan|xhttp|tls": 8,
+      "vless|ws|reality": 5,
+      "vmess|none|tls": 3,
+      "socks|none|none": 1,
+      "trojan|grpc|tls": 1,
+      "trojan|none|none": 1,
+      "vmess|httpupgrade|tls": 1,
+      "vmess|xhttp|tls": 1,
+      "wireguard|none|none": 1
+    }
+  }
+}
