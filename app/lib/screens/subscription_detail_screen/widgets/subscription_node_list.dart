@@ -120,7 +120,7 @@ class SubscriptionNodeList extends StatelessWidget {
         if (actionableCount > 0)
           Container(
             width: double.infinity,
-            color: warnColor.withValues(alpha: 0.15),
+            color: warnColor.withOpacity(0.15),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               children: [
@@ -142,7 +142,7 @@ class SubscriptionNodeList extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(
           12, 0, 12, MediaQuery.of(context).padding.bottom + 24),
       itemCount: nodes.length,
-      separatorBuilder: (_, _) => const Divider(height: 1),
+      separatorBuilder: (_, __) => const Divider(height: 1),
       itemBuilder: (context, i) {
         final node = nodes[i];
         // §283 — per-node toggle (только top-level ноды подписки).

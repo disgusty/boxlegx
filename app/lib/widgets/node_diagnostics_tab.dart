@@ -235,7 +235,7 @@ class _NodeDiagnosticsTabState extends State<NodeDiagnosticsTab> {
           description: getLocalText.s("Request is sent through this node"),
         ),
         DropdownButtonFormField<String>(
-          initialValue: _check.id,
+          value: _check.id,
           isExpanded: true,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),

@@ -134,34 +134,34 @@ Future<ImportDialogResult?> showImportPreview(
                   getLocalText.s("Mode:"),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
-                RadioGroup<bool>(
-                  groupValue: merge,
-                  onChanged: (v) => set(() => merge = v ?? true),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RadioListTile<bool>(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        value: true,
-                        title: Text(getLocalText.s("Merge with existing (recommended)")),
-                        subtitle: Text(
-                          getLocalText.s("Adds new items, keeps existing."),
-                          style: const TextStyle(fontSize: 11),
-                        ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RadioListTile<bool>(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      groupValue: merge,
+                      onChanged: (v) => set(() => merge = v ?? true),
+                      value: true,
+                      title: Text(getLocalText.s("Merge with existing (recommended)")),
+                      subtitle: Text(
+                        getLocalText.s("Adds new items, keeps existing."),
+                        style: const TextStyle(fontSize: 11),
                       ),
-                      RadioListTile<bool>(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        value: false,
-                        title: Text(getLocalText.s("Replace all (destructive)")),
-                        subtitle: Text(
-                          getLocalText.s("Wipes existing data in selected categories."),
-                          style: const TextStyle(fontSize: 11),
-                        ),
+                    ),
+                    RadioListTile<bool>(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      groupValue: merge,
+                      onChanged: (v) => set(() => merge = v ?? true),
+                      value: false,
+                      title: Text(getLocalText.s("Replace all (destructive)")),
+                      subtitle: Text(
+                        getLocalText.s("Wipes existing data in selected categories."),
+                        style: const TextStyle(fontSize: 11),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

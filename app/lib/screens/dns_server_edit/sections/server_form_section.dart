@@ -38,7 +38,7 @@ class ServerFormSection extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: cs.surfaceContainerHighest,
+          color: cs.surfaceVariant,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -72,7 +72,7 @@ class ServerFormSection extends StatelessWidget {
             if (constraints.maxWidth < 520) {
               return DropdownButtonFormField<String>(
                 key: ValueKey('dns-mode-$mode'),
-                initialValue: mode,
+                value: mode,
                 isExpanded: true,
                 decoration: InputDecoration(
                   labelText: getLocalText.s("Server type"),
@@ -306,7 +306,7 @@ class _GroupSection extends StatelessWidget {
         const SizedBox(height: 12),
         DropdownButtonFormField<String>(
           key: ValueKey('dns-group-mode-${c.groupMode}'),
-          initialValue: c.groupMode,
+          value: c.groupMode,
           isExpanded: true,
           decoration: InputDecoration(
             labelText: getLocalText.s("Selection mode"),
@@ -416,7 +416,7 @@ class _TailscaleSection extends StatelessWidget {
             // endpoint меняется и из JSON-вкладки — key пересоздаёт FormField
             // с новым initialValue.
             key: ValueKey('dns-ts-endpoint-$current'),
-            initialValue: current.isEmpty ? null : current,
+            value: current.isEmpty ? null : current,
             isExpanded: true,
             decoration: InputDecoration(
               labelText: getLocalText.s("Tailscale node"),
@@ -479,7 +479,7 @@ class _DomainResolverPicker extends StatelessWidget {
       // domain_resolver может смениться программно (авто-дефолт при вводе
       // hostname) — key пересоздаёт FormField с новым initialValue.
       key: ValueKey('dns-domres-$current'),
-      initialValue: tags.contains(current) ? current : null,
+      value: tags.contains(current) ? current : null,
       isExpanded: true,
       decoration: InputDecoration(
         labelText: getLocalText.s("Domain resolver"),

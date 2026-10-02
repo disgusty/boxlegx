@@ -324,8 +324,8 @@ class HomeNodeList extends StatelessWidget {
                       ? null
                       : [
                           protoLabel(protoType),
-                          ?node?.transportLabel,
-                          ?node?.securityLabel,
+                          if (node?.transportLabel != null) node!.transportLabel,
+                          if (node?.securityLabel != null) node!.securityLabel,
                         ].join('·'),
                   tailnetState: tailnetRowState(
                     tunnelUp: state.tunnelUp,
@@ -396,7 +396,8 @@ class HomeNodeList extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 56).withSafeBottom(context),
       buildDefaultDragHandles: false,
       itemCount: displayList.length,
-      onReorderItem: (oldIndex, newIndex) {
+      onReorder: (oldIndex, newIndex) {
+        if (newIndex > oldIndex) newIndex -= 1; // legacy onReorder: newIndex с учётом удаляемого
         // onReorderItem отдаёт newIndex уже без перетаскиваемого элемента —
         // сдвиг «-1 при move-down» делать не надо.
         if (oldIndex < pinnedCount) return; // pinned ряды не двигаются
@@ -630,8 +631,8 @@ class HomeNodeList extends StatelessWidget {
               ? null
               : [
                   protoLabel(protoType),
-                  ?transport,
-                  ?security,
+                  if (transport != null) transport,
+                  if (security != null) security,
                   if (exitName != null) getLocalText.s("via %s", exitName),
                 ].join('·'),
           tailnetNote: tailnetRowNote(

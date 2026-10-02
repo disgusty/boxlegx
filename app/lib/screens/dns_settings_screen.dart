@@ -688,7 +688,10 @@ class _DnsSettingsScreenState extends State<DnsSettingsScreen>
               physics: const NeverScrollableScrollPhysics(),
               buildDefaultDragHandles: false,
               itemCount: rows.length,
-              onReorderItem: _onReorderRules,
+              // Flutter 3.16: onReorder отдаёт newIndex до удаления элемента —
+              // приводим к семантике onReorderItem (индекс после удаления).
+              onReorder: (oldIndex, newIndex) => _onReorderRules(
+                  oldIndex, newIndex > oldIndex ? newIndex - 1 : newIndex),
               itemBuilder: (ctx, i) {
                 final row = rows[i];
                 if (row == -1) {

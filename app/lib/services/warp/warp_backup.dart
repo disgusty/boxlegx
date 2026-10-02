@@ -93,7 +93,7 @@ WarpAccount? warpAccountFromBackup(Map<String, dynamic> j) {
     'created_at': j['created_at'],
     'license': j['license'],
     'warp_plus': j['warp_plus'],
-    'awg': ?_awgFrom(j['awg']),
+    if (_awgFrom(j['awg']) case final v?) 'awg': v,
   });
 }
 

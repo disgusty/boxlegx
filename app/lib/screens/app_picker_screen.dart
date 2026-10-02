@@ -75,7 +75,7 @@ class _AppPickerScreenState extends State<AppPickerScreen> {
       width: 36,
       height: 36,
       child: CircleAvatar(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+        backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
         child: Text(letter,
             style: TextStyle(
               fontSize: 14,
@@ -152,7 +152,7 @@ class _AppPickerScreenState extends State<AppPickerScreen> {
       // стрелка в AppBar. С пустым handler'ом (canPop=true по умолчанию)
       // роут попался с result=null — caller (`_pickApps`) молча выкидывал
       // селекцию.
-      onPopInvokedWithResult: (didPop, _) {
+      onPopInvoked: (didPop) {
         if (didPop) return;
         _safePop();
       },
@@ -256,7 +256,7 @@ class _AppPickerScreenState extends State<AppPickerScreen> {
                         return ListTile(
                           leading: AnimatedBuilder(
                             animation: AppInfoCache.revision,
-                            builder: (_, _) => _iconFor(app),
+                            builder: (_, __) => _iconFor(app),
                           ),
                           trailing: Checkbox(
                             value: checked,

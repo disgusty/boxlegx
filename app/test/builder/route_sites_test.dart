@@ -10,7 +10,7 @@ Map<String, dynamic> _config({String? routeFinal = 'vpn-1'}) => {
           {'protocol': 'dns', 'action': 'hijack-dns'},
           {'domain_suffix': ['ads.example'], 'action': 'reject'},
         ],
-        'final': ?routeFinal,
+        if (routeFinal != null) 'final': routeFinal,
       },
     };
 

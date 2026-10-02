@@ -153,10 +153,10 @@ class _BackupScreenState extends State<BackupScreen> with SnackHelper {
           final tmpDir = await getTemporaryDirectory();
           final path = '${tmpDir.path}/$filename';
           await File(path).writeAsString(json);
-          await SharePlus.instance.share(ShareParams(
-            files: [XFile(path, mimeType: 'application/json', name: filename)],
+          await Share.shareXFiles(
+            [XFile(path, mimeType: 'application/json', name: filename)],
             subject: 'LxBox backup',
-          ));
+          );
           if (!mounted) return;
           showSnack(getLocalText.s("Backup exported (%d bytes)", bytes));
           return;
@@ -360,10 +360,10 @@ class _BackupScreenState extends State<BackupScreen> with SnackHelper {
           final tmpDir = await getTemporaryDirectory();
           final path = '${tmpDir.path}/$filename';
           await File(path).writeAsString(json);
-          await SharePlus.instance.share(ShareParams(
-            files: [XFile(path, mimeType: 'application/json', name: filename)],
+          await Share.shareXFiles(
+            [XFile(path, mimeType: 'application/json', name: filename)],
             subject: 'LX Backup',
-          ));
+          );
           if (!mounted) return;
           showSnack(getLocalText.s("Backup exported (%d bytes)", bytes));
           _showExportLosses(exportWarnings);

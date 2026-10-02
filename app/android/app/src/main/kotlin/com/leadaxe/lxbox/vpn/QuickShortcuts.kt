@@ -7,6 +7,7 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.leadaxe.lxbox.MainActivity
 import com.leadaxe.lxbox.R
 
@@ -40,6 +41,7 @@ object QuickShortcuts {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N_MR1)
     private fun doRefresh(ctx: Context) {
         val sm = ctx.getSystemService(ShortcutManager::class.java) ?: return
 
@@ -61,12 +63,14 @@ object QuickShortcuts {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N_MR1)
     private fun buildConnect(ctx: Context): ShortcutInfo = build(
         ctx, ID_CONNECT,
         L10n.str(ctx, R.string.qc_connect_label),
         MainActivity.ACTION_CONNECT,
     )
 
+    @RequiresApi(Build.VERSION_CODES.N_MR1)
     private fun buildDisconnect(ctx: Context): ShortcutInfo = build(
         ctx, ID_DISCONNECT,
         L10n.str(ctx, R.string.qc_disconnect_label),
@@ -110,6 +114,7 @@ object QuickShortcuts {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N_MR1)
     private fun build(ctx: Context, id: String, label: String, action: String): ShortcutInfo {
         // §032 polish: разные цветные adaptive-иконки на Connect / Disconnect
         // (зелёный ▶ / красный ■). Launcher не тонирует bitmap-фронт adaptive-

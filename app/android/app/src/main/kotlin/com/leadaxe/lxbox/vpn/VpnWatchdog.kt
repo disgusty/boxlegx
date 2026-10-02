@@ -57,7 +57,7 @@ object VpnWatchdog {
         PendingIntent.getBroadcast(
             ctx, REQUEST_CODE,
             Intent(ctx, VpnWatchdogReceiver::class.java),
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            PendingIntent.FLAG_UPDATE_CURRENT or PI_FLAG_IMMUTABLE,
         )
 
     /// Переставить alarm на now+INTERVAL (идемпотентно: тот же PendingIntent

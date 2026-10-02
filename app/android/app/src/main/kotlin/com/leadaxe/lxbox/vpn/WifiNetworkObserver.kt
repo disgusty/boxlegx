@@ -5,9 +5,11 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.annotation.RequiresApi
 import io.flutter.plugin.common.MethodChannel
 
 /**
@@ -39,7 +41,15 @@ class WifiNetworkObserver(private val ctx: Context) {
     private var pendingTimer: Runnable? = null
     private var registered = false
 
-    private val callback = object : ConnectivityManager.NetworkCallback() {
+    /// lx-legacy: колбэк создаётся только на API 21+ — класс-наследник
+    /// NetworkCallback на 4.x не грузится (NoClassDefFoundError в конструкторе).
+    private var callback: ConnectivityManager.NetworkCallback? = null
+
+    /// lx-legacy — API < 21: вместо колбэка слушаем CONNECTIVITY_ACTION.
+    private var legacyReceiver: LegacyNetwork.ConnectivityReceiver? = null
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun newCallback() = object : ConnectivityManager.NetworkCallback() {
         override fun onCapabilitiesChanged(
             net: Network,
             caps: NetworkCapabilities,
@@ -60,9 +70,32 @@ class WifiNetworkObserver(private val ctx: Context) {
         }
     }
 
+    /// lx-legacy — аналог колбэка на CONNECTIVITY_ACTION: активная сеть —
+    /// подключённый Wi-Fi → evaluate pending; иначе Wi-Fi «не достоял».
+    @Suppress("DEPRECATION") // NetworkInfo / TYPE_WIFI — штатный API до 21
+    private fun onLegacyConnectivityChange() {
+        val info = cm.activeNetworkInfo
+        if (info == null || !info.isConnected || info.type != ConnectivityManager.TYPE_WIFI) {
+            cancelPending()
+            return
+        }
+        val state = readWifi() ?: return
+        if (state.first.isEmpty()) return
+        handlePending(state.first, state.second)
+    }
+
     @Synchronized
     fun start() {
         if (registered) return
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            val r = LegacyNetwork.ConnectivityReceiver { onLegacyConnectivityChange() }
+            if (r.register(ctx)) {
+                legacyReceiver = r
+                registered = true
+                Log.d(TAG, "started (legacy CONNECTIVITY_ACTION)")
+            }
+            return
+        }
         // На API 33+ проверяем NEARBY_WIFI_DEVICES, на 29-32 BACKGROUND_LOCATION.
         // Без них readWifi всё равно вернёт null, observer бесполезен — но
         // регистрируем callback чтобы как только permission'ы появятся,
@@ -71,7 +104,9 @@ class WifiNetworkObserver(private val ctx: Context) {
             val req = NetworkRequest.Builder()
                 .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
                 .build()
-            cm.registerNetworkCallback(req, callback)
+            val cb = newCallback()
+            cm.registerNetworkCallback(req, cb)
+            callback = cb
             registered = true
             Log.d(TAG, "started")
         } catch (e: SecurityException) {
@@ -85,8 +120,14 @@ class WifiNetworkObserver(private val ctx: Context) {
     fun stop() {
         cancelPending()
         if (!registered) return
-        runCatching { cm.unregisterNetworkCallback(callback) }
-            .onFailure { Log.w(TAG, "unregister failed: ${it.message}") }
+        legacyReceiver?.unregister(ctx)
+        legacyReceiver = null
+        val cb = callback
+        if (cb != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            runCatching { cm.unregisterNetworkCallback(cb) }
+                .onFailure { Log.w(TAG, "unregister failed: ${it.message}") }
+        }
+        callback = null
         registered = false
         Log.d(TAG, "stopped")
     }

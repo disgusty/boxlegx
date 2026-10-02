@@ -28,16 +28,21 @@ class WorkspaceMenuButton extends StatelessWidget {
     final ws = WorkspaceController.I;
     return AnimatedBuilder(
       animation: ws,
-      builder: (context, _) => TextButton.icon(
+      builder: (context, _) => TextButton(
         onPressed: ws.busy ? null : () => _openSheet(context),
-        icon: const Icon(Icons.expand_more, size: 18),
-        iconAlignment: IconAlignment.end,
-        label: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 140),
-          child: Text(
-            workspaceDisplayName(ws.current),
-            overflow: TextOverflow.ellipsis,
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 140),
+              child: Text(
+                workspaceDisplayName(ws.current),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Icon(Icons.expand_more, size: 18),
+          ],
         ),
       ),
     );

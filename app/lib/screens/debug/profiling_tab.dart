@@ -54,8 +54,8 @@ class _ProfilingTabState extends State<ProfilingTab>
       }
       final path = await ProfileDumpWriter.writeProfile(p, bytes);
       final name = path.split('/').last;
-      await SharePlus.instance.share(ShareParams(
-        files: [
+      await Share.shareXFiles(
+        [
           XFile(path,
               name: name,
               mimeType: p.isText ? 'text/plain' : 'application/octet-stream')
@@ -64,7 +64,7 @@ class _ProfilingTabState extends State<ProfilingTab>
             ? 'L×Box ${p.label}'
             : 'L×Box ${p.label} — analyze with: go tool pprof $name',
         subject: name,
-      ));
+      );
     } catch (e) {
       showSnack(
           getLocalText.s("Capture failed: %s", formatUserError(e).render()));

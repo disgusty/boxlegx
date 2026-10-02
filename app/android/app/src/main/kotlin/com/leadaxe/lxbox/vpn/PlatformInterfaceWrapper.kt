@@ -1,5 +1,6 @@
 package com.leadaxe.lxbox.vpn
 
+import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Process
@@ -32,12 +33,17 @@ interface PlatformInterfaceWrapper : PlatformInterface {
 
     override fun useProcFS(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     override fun findConnectionOwner(
         ipProtocol: Int,
         sourceAddress: String, sourcePort: Int,
         destinationAddress: String, destinationPort: Int
     ): ConnectionOwner {
+        // lx-legacy: на API < 29 ядро ищет владельца само по /proc/net/{tcp,udp}[6]
+        // (`useProcFS() = true`) и сюда не приходит. Guard — страховка: без него
+        // getConnectionOwnerUid на старом API = NoSuchMethodError через JNI.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            return ConnectionOwner().apply { userId = -1 }  // = Process.INVALID_UID (константа API 29)
+        }
         // §128 (F12.3 generalization): этот callback зовётся Go на КАЖДОЕ
         // соединение (`find_process: true` — глобальный дефолт template). На
         // Android 10 без root `getConnectionOwnerUid` для недоступного владельца
@@ -95,13 +101,73 @@ interface PlatformInterfaceWrapper : PlatformInterface {
         // SocketException. Без try/catch → JNI Runtime::Abort (см. §050 F12.3).
         // Fail-safe: вернуть пустой итератор — sing-box деградирует к
         // auto-detect интерфейса без явного списка.
-        return runCatching { buildInterfaces() }
+        return runCatching {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) buildLegacyInterfaces()
+            else buildInterfaces()
+        }
             .getOrElse {
                 android.util.Log.w("PIW", "getInterfaces failed, returning empty: ${it.message}")
                 emptyInterfaceIterator()
             }
     }
 
+    /// lx-legacy (API < 21): ни `Network`, ни `LinkProperties` нет — список
+    /// строится из `java.net.NetworkInterface` (поднятые, без loopback и tun).
+    /// Тип дефолтного интерфейса — по `activeNetworkInfo`, остальных — по
+    /// префиксу имени. DNS-серверы недоступны (только скрытый SystemProperties)
+    /// — пустой список: DNS ядро резолвит через `LocalResolver`.
+    @Suppress("DEPRECATION") // NetworkInfo / TYPE_* — штатный API до 21
+    private fun buildLegacyInterfaces(): NetworkInterfaceIterator {
+        val defaultName = LegacyNetwork.defaultInterface()?.name
+        val active = BoxApplication.connectivity.activeNetworkInfo
+        val result = mutableListOf<LibboxNetworkInterface>()
+        for (ni in NetworkInterface.getNetworkInterfaces()?.toList().orEmpty()) {
+            if (!ni.isUp || ni.isLoopback || LegacyNetwork.isTun(ni.name)) continue
+            val index = LegacyNetwork.indexOf(ni)
+            if (index <= 0) continue
+            val isDefault = ni.name == defaultName
+            val box = LibboxNetworkInterface().apply {
+                name = ni.name
+                dnsServer = StringArray(emptyList<String>().iterator())
+                type = if (isDefault && active != null) {
+                    when (active.type) {
+                        ConnectivityManager.TYPE_WIFI -> Libbox.InterfaceTypeWIFI
+                        ConnectivityManager.TYPE_ETHERNET -> Libbox.InterfaceTypeEthernet
+                        ConnectivityManager.TYPE_MOBILE -> Libbox.InterfaceTypeCellular
+                        else -> Libbox.InterfaceTypeOther
+                    }
+                } else {
+                    legacyTypeByName(ni.name)
+                }
+                this.index = index
+                runCatching { mtu = ni.mtu }
+                addresses = StringArray(ni.interfaceAddresses.map { it.toPrefix() }.iterator())
+                var flags = LegacyNetwork.IFF_UP or LegacyNetwork.IFF_RUNNING
+                if (ni.isPointToPoint) flags = flags or LegacyNetwork.IFF_POINTOPOINT
+                if (ni.supportsMulticast()) flags = flags or LegacyNetwork.IFF_MULTICAST
+                this.flags = flags
+                metered = if (isDefault) BoxApplication.connectivity.isActiveNetworkMetered
+                else type == Libbox.InterfaceTypeCellular
+            }
+            result.add(box)
+        }
+        return object : NetworkInterfaceIterator {
+            val iter = result.iterator()
+            override fun hasNext() = iter.hasNext()
+            override fun next() = iter.next()
+        }
+    }
+
+    /// lx-legacy — тип не-дефолтного интерфейса по имени (типичные имена 4.x).
+    private fun legacyTypeByName(name: String): Int = when {
+        name.startsWith("wlan") -> Libbox.InterfaceTypeWIFI
+        name.startsWith("eth") -> Libbox.InterfaceTypeEthernet
+        name.startsWith("rmnet") || name.startsWith("ccmni") ||
+            name.startsWith("pdp") || name.startsWith("ppp") -> Libbox.InterfaceTypeCellular
+        else -> Libbox.InterfaceTypeOther
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun buildInterfaces(): NetworkInterfaceIterator {
         val networks = BoxApplication.connectivity.allNetworks
         val sysInterfaces = NetworkInterface.getNetworkInterfaces().toList()

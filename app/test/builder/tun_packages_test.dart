@@ -132,4 +132,48 @@ void main() {
       expect(const TunAppsConfig(mode: 'deny', packages: []).isDeny, true);
     });
   });
+
+  group('applyTunPackages viaRules (lx-legacy, Android < 5.0)', () {
+    Map<String, dynamic> cfg() => {
+          'inbounds': [
+            {'type': 'tun', 'tag': 'tun-in'},
+          ],
+          'route': {
+            'rules': [
+              {'action': 'sniff'},
+            ],
+            'final': 'vpn-2',
+          },
+        };
+
+    test('deny → package_name rule to direct-out, tun untouched', () {
+      final c = cfg();
+      applyTunPackages(
+        c,
+        const TunAppsConfig(mode: 'deny', packages: ['com.bank']),
+        viaRules: true,
+      );
+      final tun = (c['inbounds'] as List).first as Map<String, dynamic>;
+      expect(tun.containsKey('exclude_package'), false);
+      final rules = c['route']['rules'] as List;
+      expect(rules[1], {
+        'package_name': ['com.bank'],
+        'action': 'route',
+        'outbound': 'direct-out',
+      });
+      expect(c['route']['final'], 'vpn-2');
+    });
+
+    test('allow → listed apps to previous final, final = direct-out', () {
+      final c = cfg();
+      applyTunPackages(
+        c,
+        const TunAppsConfig(mode: 'allow', packages: ['org.browser']),
+        viaRules: true,
+      );
+      final rules = c['route']['rules'] as List;
+      expect(rules[1]['outbound'], 'vpn-2');
+      expect(c['route']['final'], 'direct-out');
+    });
+  });
 }

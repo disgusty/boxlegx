@@ -285,7 +285,7 @@ class _SubscriptionFiltersTabState extends State<SubscriptionFiltersTab> {
         // задним числом. Подсказываем, что нужно обновить.
         Container(
           width: double.infinity,
-          color: theme.colorScheme.surfaceContainerHighest,
+          color: theme.colorScheme.surfaceVariant,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
             children: [
@@ -322,7 +322,7 @@ class _SubscriptionFiltersTabState extends State<SubscriptionFiltersTab> {
                   // закреплённую панель под списком.
                   padding: EdgeInsets.zero, // bottom-inset: handled — ниже bottom bar с SafeArea
                   itemCount: rules.length,
-                  onReorderItem: _reorder,
+                  onReorder: (o, n) => _reorder(o, n > o ? n - 1 : n),
                   itemBuilder: (context, i) =>
                       _ruleTile(context, rules[i], i, key: ValueKey('rule-$i')),
                 ),
@@ -370,7 +370,7 @@ class _SubscriptionFiltersTabState extends State<SubscriptionFiltersTab> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
-              color: badgeColor.withValues(alpha: 0.15),
+              color: badgeColor.withOpacity(0.15),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
@@ -796,7 +796,7 @@ class _RuleEditorScreenState extends State<_RuleEditorScreen> {
                 Expanded(
                   flex: 4,
                   child: DropdownButtonFormField<ImportRuleOperator>(
-                    initialValue: c.op,
+                    value: c.op,
                     isDense: true,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -925,7 +925,7 @@ class _RuleEditorScreenState extends State<_RuleEditorScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          color: theme.colorScheme.surfaceContainerHighest,
+          color: theme.colorScheme.surfaceVariant,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Row(
             children: [
@@ -967,7 +967,7 @@ class _RuleEditorScreenState extends State<_RuleEditorScreen> {
                 )
               : ListView.separated(
                   itemCount: hits.length,
-                  separatorBuilder: (_, _) => const Divider(height: 1),
+                  separatorBuilder: (_, __) => const Divider(height: 1),
                   itemBuilder: (context, i) {
                     final (node, outcome) = hits[i];
                     final title =

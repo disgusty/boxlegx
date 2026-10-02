@@ -353,7 +353,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen>
     final nodes = ProbeController.probeNodesOf(widget.entry.list);
     final keys = _nodeProbeKeys(nodes);
     return {
-      for (var i = 0; i < keys.length; i++) i: ?_probe[keys[i]],
+      for (var i = 0; i < keys.length; i++) if (_probe[keys[i]] case final v?) i: v,
     };
   }
 

@@ -129,6 +129,14 @@ class BuildSettings {
   /// Маршрутизация сайтов (Routing → Sites). `null` / mode=off — no-op.
   final RouteSitesConfig? routeSites;
 
+  /// lx-legacy: Android < 5.0 — список «Приложения в туннеле» через правила
+  /// ядра `package_name`, а не через per-app API VpnService (его нет).
+  final bool tunAppsViaRules;
+
+  /// lx-legacy: `certificate.store` ядра (`mozilla` — встроенный набор
+  /// корней на Android < 7.1.1, где нет ISRG Root X1). Пусто — не задаём.
+  final String certificateStore;
+
   /// §119: VPN-mode (proxy/vpn/vpn_proxy). `null` = mode=vpn (текущее
   /// поведение, post-step no-op).
   final VpnModeConfig? vpnMode;
@@ -189,6 +197,8 @@ class BuildSettings {
     this.coreBuildTags = kCoreBuildTags,
     this.tunApps,
     this.routeSites,
+    this.tunAppsViaRules = false,
+    this.certificateStore = '',
     this.vpnMode,
     this.idleSuspend = '',
     this.idleSuspendReachable = '',
@@ -891,7 +901,16 @@ Future<BuildResult> _buildConfig({
   // §046: OS-level split-tunneling. Должен быть **последним** post-step'ом —
   // финальный transform tun-inbound, после всего остального.
   if (settings.tunApps != null) {
-    applyTunPackages(config, settings.tunApps!);
+    applyTunPackages(config, settings.tunApps!,
+        viaRules: settings.tunAppsViaRules);
+  }
+
+  // lx-legacy: хранилище корневых сертификатов ядра.
+  if (settings.certificateStore.isNotEmpty) {
+    config['certificate'] = <String, dynamic>{
+      ...?(config['certificate'] as Map<String, dynamic>?),
+      'store': settings.certificateStore,
+    };
   }
 
   // §103 C7 — миграция ссылок на теги пресетов. ДО деградаций ниже: они

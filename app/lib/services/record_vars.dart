@@ -141,7 +141,9 @@ Map<String, List<RecordVarDecl>> dnsServerVarDecls(
 List<RecordVarDecl> _declsOf(Object? raw) => [
       if (raw is List)
         for (final d in raw)
-          if (d is Map) ?_declOf(d),
+          if (d is Map)
+            for (final decl in [_declOf(d)])
+              if (decl != null) decl,
     ];
 
 RecordVarDecl? _declOf(Map d) {

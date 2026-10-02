@@ -13,6 +13,10 @@ import androidx.annotation.RequiresApi
 import com.leadaxe.lxbox.MainActivity
 import com.leadaxe.lxbox.R
 
+/// lx-legacy: TileService — API 24. Компонент в манифесте ниже API 24 система
+/// не биндит; из кода класс (и его companion) трогаем только под гейтом N+ —
+/// иначе загрузка наследника отсутствующего класса = NoClassDefFoundError.
+@RequiresApi(Build.VERSION_CODES.N)
 class LxBoxTileService : TileService() {
 
     companion object {

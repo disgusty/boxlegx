@@ -248,10 +248,10 @@ class _RouteSitesTabState extends State<RouteSitesTab>
           final tmpDir = await getTemporaryDirectory();
           final path = '${tmpDir.path}/$filename';
           await File(path).writeAsString(json);
-          await SharePlus.instance.share(ShareParams(
-            files: [XFile(path, mimeType: 'application/json', name: filename)],
+          await Share.shareXFiles(
+            [XFile(path, mimeType: 'application/json', name: filename)],
             subject: 'LxBox sites',
-          ));
+          );
           return;
       }
       final problem = saveProblemText(outcome);

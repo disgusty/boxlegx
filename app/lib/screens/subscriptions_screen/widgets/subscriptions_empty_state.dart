@@ -27,7 +27,7 @@ class SubscriptionsEmptyState extends StatelessWidget {
       children: [
         Card(
           elevation: 0,
-          color: cs.surfaceContainerHighest,
+          color: cs.surfaceVariant,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(

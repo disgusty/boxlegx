@@ -521,7 +521,8 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
   Map<int, ProbeResult> _probeByIndex() {
     final keys = _memberProbeKeys();
     return {
-      for (var i = 0; i < keys.length; i++) i: ?_probe[keys[i]],
+      for (var i = 0; i < keys.length; i++)
+        if (_probe[keys[i]] != null) i: _probe[keys[i]]!,
     };
   }
 
@@ -1214,7 +1215,8 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
             12, 4, 12, MediaQuery.of(context).padding.bottom + 24),
         buildDefaultDragHandles: false,
         itemCount: members.length,
-        onReorderItem: (oldIndex, newIndex) {
+        onReorder: (oldIndex, rawNewIndex) {
+          final newIndex = rawNewIndex > oldIndex ? rawNewIndex - 1 : rawNewIndex;
           // onReorderItem уже приводит newIndex к списку БЕЗ перетаскиваемого
           // элемента — ручной сдвиг «-1 при move вниз» здесь не нужен.
           final idx = _index;
@@ -1251,7 +1253,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
         duration: appStyle.motion(const Duration(milliseconds: 200)),
         decoration: highlighted
             ? BoxDecoration(
-                color: cs.primaryContainer.withValues(alpha: 0.5),
+                color: cs.primaryContainer.withOpacity(0.5),
                 border: Border(
                     left: BorderSide(color: cs.primary, width: 3)),
               )
@@ -1481,7 +1483,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
     }.toList()
       ..sort();
     return Container(
-      color: theme.colorScheme.surfaceContainerLow,
+      color: theme.colorScheme.surface,
       padding: const EdgeInsets.fromLTRB(12, 4, 12, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

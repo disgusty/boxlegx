@@ -140,7 +140,7 @@ class _AppMultiPickerState extends State<AppMultiPicker> {
                     final checked = widget.selected.contains(a.packageName);
                     return AnimatedBuilder(
                       animation: AppInfoCache.revision,
-                      builder: (_, _) {
+                      builder: (_, __) {
                         final info = AppInfoCache.of(a.packageName);
                         Widget leading;
                         if (info?.icon != null) {
@@ -154,7 +154,7 @@ class _AppMultiPickerState extends State<AppMultiPicker> {
                             width: 28,
                             height: 28,
                             child: CircleAvatar(
-                              backgroundColor: cs.surfaceContainerHighest,
+                              backgroundColor: cs.surfaceVariant,
                               child: Text(
                                 a.appName.isEmpty
                                     ? '?'

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../legacy/legacy_platform.dart';
+
 /// Стиль интерфейса (App Settings → Appearance).
 enum UiStyle {
   /// Material Design 3 — исходный вид приложения (по умолчанию).
@@ -43,7 +45,10 @@ class AppStyle extends ChangeNotifier {
       final stored = prefs.getString(_styleKey);
       _style = UiStyle.values.firstWhere(
         (s) => s.name == stored,
-        orElse: () => UiStyle.material3,
+        // lx-legacy: на Android 4.x по умолчанию — родной для них Holo.
+        orElse: () => LegacyPlatform.isPreLollipop
+            ? UiStyle.holo
+            : UiStyle.material3,
       );
       _reduceMotion = prefs.getBool(_motionKey) ?? true;
       notifyListeners();

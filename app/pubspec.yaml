@@ -15,7 +15,7 @@ version: 2.25.10+22510500
 # а не из этой строки — потому placeholder в git безвреден.
 
 environment:
-  sdk: ^3.11.4
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -23,32 +23,32 @@ dependencies:
   flutter_localizations: # §285 — Global*Localizations (Flutter chrome строки)
     sdk: flutter
   intl: any # §279 — версию пинит flutter_localizations
-  cupertino_icons: ^1.0.8
-  http: ^1.2.2
-  cryptography: ^2.7.0 # §025 — X25519 keygen; §130 — ECDSA P-256 keygen для MASQUE-WARP
-  asn1lib: ^1.5.0 # §130 — SEC1/PKIX DER-сериализация ECDSA-ключей (контракт с ядром MASQUE)
-  json5: ^0.8.2
-  file_picker: ^12.3.0
-  path_provider: ^2.1.5
-  shared_preferences: ^2.3.4
-  share_plus: ^13.3.0
-  device_info_plus: ^13.2.0
-  package_info_plus: ^10.2.1
-  connectivity_plus: ^7.3.1
-  collection: ^1.18.0
-  crypto: ^3.0.3 # §283 — sha256 для identity-хеша ноды подписки
-  pointycastle: ^4.0.0 # §130 — ECDSA P-256 keygen (pure-Dart, работает на Android; cryptography P-256 keygen не реализует)
-  re_editor: ^0.10.0
-  re_highlight: ^0.0.3 # §554 — подсветка синтаксиса JSON в LxCodeEditor (langJson + темы atom-one)
-  flutter_zxing: ^3.0.1 # §382 — QR-сканер (ZXing-C++ через FFI; §380 FOSS); §432 — zxing-cpp 3.1.1
-  camera: ^0.12.0 # §382 — типы CameraController/CameraException в исходе сканера
+  cupertino_icons: any
+  http: any
+  cryptography: any # §025 — X25519 keygen; §130 — ECDSA P-256 keygen для MASQUE-WARP
+  asn1lib: any # §130 — SEC1/PKIX DER-сериализация ECDSA-ключей (контракт с ядром MASQUE)
+  json5: any
+  file_picker: any
+  path_provider: any
+  shared_preferences: any
+  share_plus: any
+  device_info_plus: any
+  package_info_plus: any
+  connectivity_plus: any
+  collection: any
+  crypto: any # §283 — sha256 для identity-хеша ноды подписки
+  pointycastle: any # §130 — ECDSA P-256 keygen (pure-Dart, работает на Android; cryptography P-256 keygen не реализует)
+  re_editor: any
+  re_highlight: any # §554 — подсветка синтаксиса JSON в LxCodeEditor (langJson + темы atom-one)
+  flutter_zxing: any # §382 — QR-сканер (ZXing-C++ через FFI; §380 FOSS); §432 — zxing-cpp 3.1.1
+  camera: any # §382 — типы CameraController/CameraException в исходе сканера
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
-  analyzer: ^7.7.1 # §279 — AST-checkers tool/l10n. §431 — пин: раньше 7.x держал build_runner; на 14.x чекеры не собираются (другой AST-API) — миграция отдельной таской
-  flutter_launcher_icons: ^0.14.4
+  flutter_lints: any
+  analyzer: any # §279 — AST-checkers tool/l10n. §431 — пин: раньше 7.x держал build_runner; на 14.x чекеры не собираются (другой AST-API) — миграция отдельной таской
+  flutter_launcher_icons: any
 
 flutter:
   uses-material-design: true
@@ -77,6 +77,7 @@ flutter:
     # отличие (дефолтный порт пира) сняла ветка `endpoint.on_no_match`.
     # §480 W6 — реестр ВИДОВ ИСТОЧНИКА приехал нормой (контракт 1.1.41,
     # `assets/contract/registry/source_kinds.json`), черновик снят.
+    - assets/certs/cacert.pem # lx-legacy: корни Mozilla для Android < 7.1.1 (нет ISRG Root X1)
     - assets/icons/app_icon.png
     - assets/icons/cloudflare.png # §025 — официальный логотип Cloudflare (Simple Icons, CC0)
 

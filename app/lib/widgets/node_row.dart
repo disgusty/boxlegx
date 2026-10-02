@@ -194,7 +194,7 @@ class NodeRow extends StatelessWidget {
     }
     // §325 — чужой замер приглушаем: цветовая шкала остаётся читаемой (видно,
     // что «зелёный»), но бейдж не спорит за внимание со своими, актуальными.
-    return item.delayIsForeign ? base.withValues(alpha: 0.55) : base;
+    return item.delayIsForeign ? base.withOpacity(0.55) : base;
   }
 
   /// `[ACTIVE] [protocol]              [50MS]` — left part flex, ping right-aligned.
@@ -231,7 +231,7 @@ class NodeRow extends StatelessWidget {
         ? Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
-              color: Colors.green.withValues(alpha: 0.18),
+              color: Colors.green.withOpacity(0.18),
               borderRadius: BorderRadius.circular(3),
             ),
             child: Text(

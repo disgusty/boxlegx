@@ -250,7 +250,7 @@ class _StatsScreenState extends State<StatsScreen> {
                   icon: const Icon(Icons.podcasts),
                   child: AnimatedBuilder(
                     animation: TrafficProfiler.I,
-                    builder: (_, _) => Row(
+                    builder: (_, __) => Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

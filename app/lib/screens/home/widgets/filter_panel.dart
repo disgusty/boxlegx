@@ -326,7 +326,7 @@ class _FilterPanelState extends State<FilterPanel>
     final summary = _summaryChips();
     return Container(
       decoration: BoxDecoration(
-        color: cs.surfaceContainerLow,
+        color: cs.surface,
         border: Border(bottom: BorderSide(color: cs.outlineVariant.withAlpha(128))),
       ),
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
@@ -383,7 +383,7 @@ class _FilterPanelState extends State<FilterPanel>
           // Рендерим только активный таб → авто-высота (не TabBarView).
           AnimatedBuilder(
             animation: _tab,
-            builder: (_, _) => _tabContent(_tab.index),
+            builder: (_, __) => _tabContent(_tab.index),
           ),
         ],
       ),

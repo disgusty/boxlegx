@@ -31,10 +31,10 @@ Future<bool> shareCrashReport(CrashReportFile report) async {
       files.add(XFile(report.path,
           name: report.name, mimeType: 'text/plain'));
     }
-    await SharePlus.instance.share(ShareParams(
-      files: files,
+    await Share.shareXFiles(
+      files,
       subject: 'L×Box core crash — ${report.mtime.toIso8601String()}',
-    ));
+    );
     return true;
   } catch (_) {
     return false;

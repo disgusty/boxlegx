@@ -443,7 +443,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: DropdownButtonFormField<String>(
-            initialValue: _idleSuspend,
+            value: _idleSuspend,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               isDense: true,
@@ -504,7 +504,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: DropdownButtonFormField<String>(
-            initialValue: _idleSuspendReachable,
+            value: _idleSuspendReachable,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               isDense: true,
@@ -576,7 +576,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: DropdownButtonFormField<int>(
-            initialValue: const [0, 3, 5, 8, 12].contains(_wgBuildMax)
+            value: const [0, 3, 5, 8, 12].contains(_wgBuildMax)
                 ? _wgBuildMax
                 : null,
             decoration: InputDecoration(
@@ -636,7 +636,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: DropdownButtonFormField<String>(
-            initialValue: _memoryLimit,
+            value: _memoryLimit,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               isDense: true,
@@ -682,32 +682,40 @@ class _SettingsScreenState extends State<SettingsScreen>
             ],
           ),
         ),
-        RadioGroup<BackgroundMode>(
-          groupValue: _backgroundMode,
-          onChanged: (BackgroundMode? m) {
-            if (!_vpnLoaded) return;
-            unawaited(_applyBackgroundMode(m));
-          },
-          child: Column(
+        Column(
             children: [
               RadioListTile<BackgroundMode>(
                 value: BackgroundMode.never,
+                groupValue: _backgroundMode,
+                onChanged: (BackgroundMode? m) {
+                  if (!_vpnLoaded) return;
+                  unawaited(_applyBackgroundMode(m));
+                },
                 title: Text(getLocalText.s("Never sleep (recommended)")),
                 subtitle: Text(getLocalText.s("Tunnel is always active. Best reliability — pushes and long-lived sockets survive. Higher battery use.")),
               ),
               RadioListTile<BackgroundMode>(
                 value: BackgroundMode.lazy,
+                groupValue: _backgroundMode,
+                onChanged: (BackgroundMode? m) {
+                  if (!_vpnLoaded) return;
+                  unawaited(_applyBackgroundMode(m));
+                },
                 title: Text(getLocalText.s("Lazy sleep")),
                 subtitle: Text(getLocalText.s("Pause only in deep Doze (screen off for a long time + no motion). Balanced.")),
               ),
               RadioListTile<BackgroundMode>(
                 value: BackgroundMode.always,
+                groupValue: _backgroundMode,
+                onChanged: (BackgroundMode? m) {
+                  if (!_vpnLoaded) return;
+                  unawaited(_applyBackgroundMode(m));
+                },
                 title: Text(getLocalText.s("Aggressive battery saving")),
                 subtitle: Text(getLocalText.s("Pause tunnel whenever screen turns off. Max battery savings, but pushes, incoming calls and background sync stop until unlock.")),
               ),
             ],
           ),
-        ),
       ],
     );
   }

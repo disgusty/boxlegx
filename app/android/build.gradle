@@ -1,0 +1,35 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+// §380 — build-id нативных .so отключён ради воспроизводимости
+// (полное обоснование — android/build.gradle.kts в ветке main).
+subprojects {
+    plugins.withId("com.android.library") {
+        android {
+            defaultConfig {
+                externalNativeBuild {
+                    cmake {
+                        arguments "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,--build-id=none"
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

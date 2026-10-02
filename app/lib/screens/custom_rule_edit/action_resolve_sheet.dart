@@ -214,13 +214,12 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
           const SizedBox(height: 16),
 
           // ─── Режим: Route to outbound ────────────────────────────────
-          RadioGroup<bool>(
-            groupValue: _resolveOnly,
-            onChanged: (v) => setState(() => _resolveOnly = v ?? false),
-            child: Column(
+          Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RadioListTile<bool>(
+                  groupValue: _resolveOnly,
+                  onChanged: (v) => setState(() => _resolveOnly = v ?? false),
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   value: false,
@@ -257,6 +256,8 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
 
                 // ─── Режим: Resolve only ─────────────────────────────────
                 RadioListTile<bool>(
+                  groupValue: _resolveOnly,
+                  onChanged: (v) => setState(() => _resolveOnly = v ?? false),
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   value: true,
@@ -269,10 +270,10 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.orange.withValues(alpha: 0.12),
+                        color: Colors.orange.withOpacity(0.12),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                            color: Colors.orange.withValues(alpha: 0.6)),
+                            color: Colors.orange.withOpacity(0.6)),
                       ),
                       child: Row(
                         children: [
@@ -291,7 +292,6 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
                   ),
               ],
             ),
-          ),
 
           // ─── Единая панель Resolve options ───────────────────────────
           if (_resolveActive) ...[
@@ -300,7 +300,7 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
                 style: theme.textTheme.titleSmall),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
-              initialValue: _strategies.contains(_strategy) ? _strategy : '',
+              value: _strategies.contains(_strategy) ? _strategy : '',
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: getLocalText.s("Strategy"),
@@ -326,7 +326,7 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
-              initialValue: _serverTag,
+              value: _serverTag,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: getLocalText.s("DNS server"),
@@ -420,7 +420,7 @@ class _ActionResolveSheetState extends State<_ActionResolveSheet> {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: cs.surfaceContainerHighest,
+              color: cs.surfaceVariant,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(

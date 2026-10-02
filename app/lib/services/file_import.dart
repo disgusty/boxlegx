@@ -118,18 +118,17 @@ Future<PickOutcome> pickFileSafely({
     );
   }
   try {
-    // allowMultiple deprecated в пользу pickFile(); один вход с параметром
-    // проще двух веток.
-    final picked = await FilePicker.pickFiles(
+    // Один вход с параметром проще двух веток; байты отдаёт плагин (withData).
+    final picked = await FilePicker.platform.pickFiles(
       type: type,
       allowedExtensions: allowedExtensions,
-      // ignore: deprecated_member_use
       allowMultiple: allowMultiple,
+      withData: true,
     );
-    if (picked.isEmpty) return const PickCancelled();
+    if (picked == null || picked.files.isEmpty) return const PickCancelled();
     final files = <PickedFile>[];
-    for (final f in picked) {
-      files.add(PickedFile(name: f.name, bytes: await f.readAsBytes()));
+    for (final f in picked.files) {
+      files.add(PickedFile(name: f.name, bytes: f.bytes ?? Uint8List(0)));
     }
     return PickedFiles(files);
   } on PlatformException catch (e) {

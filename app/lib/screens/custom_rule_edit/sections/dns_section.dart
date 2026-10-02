@@ -82,7 +82,7 @@ class DnsSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 12, top: 4),
             child: DropdownButtonFormField<String>(
-              initialValue: tags.contains(serverTag) ? serverTag : null,
+              value: tags.contains(serverTag) ? serverTag : null,
               isExpanded: true,
               decoration: InputDecoration(
                 labelText: getLocalText.s("DNS server"),

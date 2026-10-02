@@ -468,7 +468,10 @@ class BoxVpnService : VpnService(), PlatformInterfaceWrapper {
 
         // §049 F15: allowBypass opt-in toggle.
         // §069: snapshot runtime applied value для UI warning + Debug API.
-        val allowBypass = BootReceiver.isAllowBypass(this)
+        // lx-legacy: Builder.allowBypass — API 21; ниже не применяется, и
+        // snapshot честно показывает false.
+        val allowBypass = BootReceiver.isAllowBypass(this) &&
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
         currentSessionAllowBypass = allowBypass
         if (allowBypass) {
             builder.allowBypass()
@@ -519,7 +522,15 @@ class BoxVpnService : VpnService(), PlatformInterfaceWrapper {
             val missing = if (perAppDebug) mutableListOf<String>() else null
             var perAppMode: String? = null
             val incl = options.includePackage
-            if (incl.hasNext()) {
+            val excl = options.excludePackage
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                // lx-legacy: add{Allowed,Disallowed}Application — API 21. На 4.x
+                // per-app на уровне ОС нет: туннель общий для всех приложений
+                // (наш собственный трафик ядра идёт мимо через protect()).
+                if (incl.hasNext() || excl.hasNext()) {
+                    Log.w(TAG, "per-app routing unsupported on API ${Build.VERSION.SDK_INT} — ignored, tunnel applies to all apps")
+                }
+            } else if (incl.hasNext()) {
                 perAppMode = "allow"
                 while (incl.hasNext()) {
                     val pkg = incl.next()
@@ -527,8 +538,7 @@ class BoxVpnService : VpnService(), PlatformInterfaceWrapper {
                     catch (_: NameNotFoundException) { missing?.add(pkg) }
                 }
             }
-            val excl = options.excludePackage
-            if (excl.hasNext()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && excl.hasNext()) {
                 perAppMode = if (perAppMode == null) "deny" else "allow+deny"
                 while (excl.hasNext()) {
                     val pkg = excl.next()

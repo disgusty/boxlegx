@@ -2992,6 +2992,9 @@
   "Nothing imported": {
     "value": "未导入任何内容"
   },
+  "On Android 4.x the list is applied by the core's routing rules: excluded apps still pass through the tunnel, but go directly, bypassing the VPN server.": {
+    "value": "在 Android 4.x 上，该列表通过核心的路由规则生效：被排除的应用仍会经过隧道，但会直连，不经过 VPN 服务器。"
+  },
   "Only listed sites go through VPN. Everything else goes directly.": {
     "value": "仅列表中的网站通过 VPN，其余直连。"
   },

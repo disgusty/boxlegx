@@ -52,7 +52,7 @@ class JsonSection extends StatelessWidget {
             hintStyle: TextStyle(
               fontFamily: 'monospace',
               fontSize: 13,
-              color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              color: theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
             ),
             errorText: errorText,
             // §447 — длинная причина (массив вместо объекта) переносится.

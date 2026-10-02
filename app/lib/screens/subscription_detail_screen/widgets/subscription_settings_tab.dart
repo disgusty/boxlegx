@@ -243,12 +243,11 @@ class SubscriptionSettingsTab extends StatelessWidget {
           // register'ы (sub-options для mode=use) хранятся независимо, не
           // обнуляются при переключении mode'а — юзер вернётся в use, флаги
           // на месте.
-          RadioGroup<DetourMode>(
-            groupValue: detourMode,
-            onChanged: (m) => onSetDetourMode(m!),
-            child: Column(children: [
+          Column(children: [
               RadioListTile<DetourMode>(
                 value: DetourMode.use,
+                groupValue: detourMode,
+                onChanged: (m) => onSetDetourMode(m!),
                 title: Text(folderMode
                     ? getLocalText.s("Use servers' own detours")
                     : getLocalText.s("Use subscription detour servers")),
@@ -260,6 +259,8 @@ class SubscriptionSettingsTab extends StatelessWidget {
               if (detourMode == DetourMode.use) _registerToggles(context),
               RadioListTile<DetourMode>(
                 value: DetourMode.override,
+                groupValue: detourMode,
+                onChanged: (m) => onSetDetourMode(m!),
                 title: Text(getLocalText.s("Add detour")),
                 subtitle: Text(entry.overrideDetour.isEmpty
                     ? getLocalText.s("Append an outbound to the end of the chain")
@@ -286,12 +287,11 @@ class SubscriptionSettingsTab extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 24),
-                  child: RadioGroup<bool>(
-                    groupValue: entry.replaceDetourChain,
-                    onChanged: (v) => onReplaceDetourChainChanged(v!),
-                    child: Column(children: [
+                  child: Column(children: [
                       RadioListTile<bool>(
                         value: true,
+                        groupValue: entry.replaceDetourChain,
+                        onChanged: (v) => onReplaceDetourChainChanged(v!),
                         title: Text(getLocalText.s("Replace all")),
                         subtitle: Text(folderMode
                             ? getLocalText.s("Drop existing detours — every member connects through this outbound")
@@ -299,13 +299,14 @@ class SubscriptionSettingsTab extends StatelessWidget {
                       ),
                       RadioListTile<bool>(
                         value: false,
+                        groupValue: entry.replaceDetourChain,
+                        onChanged: (v) => onReplaceDetourChainChanged(v!),
                         title: Text(getLocalText.s("Fill missing")),
                         subtitle: Text(folderMode
                             ? getLocalText.s("Members with their own detour keep it; this outbound is set only where none is defined")
                             : getLocalText.s("Nodes with their own detour keep it; this outbound is set only where none is defined")),
                       ),
                     ]),
-                  ),
                 ),
                 // §096 — в режиме Fill missing (append) нативные детуры
                 // подписки сохраняются в цепочке → register-тоглы
@@ -314,11 +315,12 @@ class SubscriptionSettingsTab extends StatelessWidget {
               ],
               RadioListTile<DetourMode>(
                 value: DetourMode.none,
+                groupValue: detourMode,
+                onChanged: (m) => onSetDetourMode(m!),
                 title: Text(getLocalText.s("Don't use detour servers")),
                 subtitle: Text(getLocalText.s("Nodes connect directly, detour skipped")),
               ),
             ]),
-          ),
         ] else ...[
           // §111 — у подписки нет родных detour-цепочек: полный radio
           // (Use/Add/None) вырождается — Use≡None, register-тоглы и Replace
@@ -482,7 +484,7 @@ class SubscriptionSettingsTab extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ?extra,
+          if (extra != null) extra,
           IconButton(
             icon: const Icon(Icons.edit_outlined, size: 20),
             tooltip: getLocalText.s("Edit"),

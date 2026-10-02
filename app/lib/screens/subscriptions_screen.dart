@@ -37,6 +37,7 @@ import 'subscriptions_screen/widgets/subscriptions_empty_state.dart';
 import '../services/l10n/locale_controller.dart';
 import '../services/file_import.dart';
 import '../theme/app_style.dart';
+import '../legacy/legacy_platform.dart';
 
 class SubscriptionsScreen extends StatefulWidget {
   const SubscriptionsScreen({
@@ -893,7 +894,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             .addPostFrameCallback((_) => _drainLinkNotices());
         return PopScope(
           canPop: false,
-          onPopInvokedWithResult: (didPop, _) async {
+          onPopInvoked: (didPop) async {
             if (didPop) return;
             if (await _onWillPop()) {
               if (context.mounted) Navigator.of(context).pop();
@@ -952,7 +953,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                     // §375 — на устройстве без камеры (Android TV) пункта нет:
                     // альтернативы у сканирования не существует, и пункт,
                     // который всегда отвечает «нельзя», — мусор в меню.
-                    if (_hasCamera ?? true)
+                    // lx-legacy: плагин камеры работает с Android 5.0.
+                    if ((_hasCamera ?? true) && !LegacyPlatform.isPreLollipop)
                       PopupMenuItem(value: 'qr', child: Text(getLocalText.s("Scan QR code"))),
                     PopupMenuItem(value: 'file', child: Text(getLocalText.s("Import from file…"))),
                     const PopupMenuDivider(),
@@ -1134,10 +1136,11 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
           MediaQuery.of(context).padding.bottom + 24 + _snackBarClearance),
       buildDefaultDragHandles: false,
       itemCount: rows.length,
-      onReorderItem: (oldIndex, newIndex) {
+      onReorder: (oldIndex, newIndex) {
         _onUserInteractionDismissHighlight();
         // onReorderItem уже нормализует newIndex под удалённый элемент.
-        unawaited(_reorderRows(ctrl, oldIndex, newIndex));
+        unawaited(_reorderRows(
+            ctrl, oldIndex, newIndex > oldIndex ? newIndex - 1 : newIndex));
       },
       itemBuilder: (context, i) {
         final row = rows[i];
@@ -1170,7 +1173,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             decoration: highlighted
                 ? BoxDecoration(
                     color: cs.primaryContainer
-                        .withValues(alpha: 0.5 * _highlightOpacity),
+                        .withOpacity(0.5 * _highlightOpacity),
                     border: _highlightMode == _HighlightMode.focus
                         ? Border(
                             left: BorderSide(color: cs.primary, width: 3))

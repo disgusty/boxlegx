@@ -149,7 +149,7 @@ class _NodeInspectScreenState extends State<NodeInspectScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          color: theme.colorScheme.surfaceContainerHighest,
+          color: theme.colorScheme.surfaceVariant,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           child: Row(
             children: [

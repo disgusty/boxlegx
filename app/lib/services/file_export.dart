@@ -86,7 +86,7 @@ Future<SaveOutcome> saveFileSafely({
     return const SaveNoTarget();
   }
   try {
-    final uri = await FilePicker.saveFile(
+    final uri = await FilePicker.platform.saveFile(
       fileName: fileName,
       bytes: utf8.encode(content),
     );

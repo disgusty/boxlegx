@@ -69,11 +69,11 @@ class _DebugScreenState extends State<DebugScreen> with SnackHelper {
     try {
       final path = await DumpBuilder.build();
       final name = path.split('/').last;
-      await SharePlus.instance.share(ShareParams(
-        files: [XFile(path, name: name, mimeType: 'application/json')],
+      await Share.shareXFiles(
+        [XFile(path, name: name, mimeType: 'application/json')],
         text: 'LxBox diagnostic dump',
         subject: name,
-      ));
+      );
     } catch (e) {
       if (!mounted) return;
       showSnack(getLocalText.s("Share failed: %s", formatUserError(e).render()));
@@ -246,7 +246,7 @@ class _DebugScreenState extends State<DebugScreen> with SnackHelper {
               return FilterChip(
                 label: Text(l.name),
                 selected: on,
-                selectedColor: _levelColor(l).withValues(alpha: 0.2),
+                selectedColor: _levelColor(l).withOpacity(0.2),
                 onSelected: (v) => setState(() {
                   if (v) {
                     _levels.add(l);
@@ -288,7 +288,7 @@ class _DebugScreenState extends State<DebugScreen> with SnackHelper {
                         : getLocalText.s("No events yet")))
                 : ListView.separated(
                     itemCount: filtered.length,
-                    separatorBuilder: (_, _) => const Divider(height: 1),
+                    separatorBuilder: (_, __) => const Divider(height: 1),
                     itemBuilder: (context, i) {
                       final entry = filtered[i];
                       final src = entry.source == DebugSource.core

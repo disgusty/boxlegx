@@ -19,7 +19,7 @@ class UrlLauncher {
     try {
       await _channel.invokeMethod('openUrl', {
         'url': url,
-        'fallbackUrl': ?fallbackUrl,
+        if (fallbackUrl != null) 'fallbackUrl': fallbackUrl,
       });
       return true;
     } catch (_) {

@@ -65,6 +65,7 @@ import '../services/warp/scan/scan_node_builder.dart';
 import '../services/warp/scan/scan_pool.dart';
 import '../services/workspaces/workspace_controller.dart';
 import '../services/workspaces/workspace_store.dart';
+import '../legacy/legacy_platform.dart';
 
 // Та же библиотека (`part`), поэтому library-private доступ
 // (`_replaceList`, `_formatAgo`) к/между основным файлом и part'ом доступен.
@@ -874,7 +875,7 @@ class SubscriptionController extends ChangeNotifier {
     List<NodeWarning>? dropped,
   }) {
     final all = <NodeWarning>[
-      ?verdict,
+      if (verdict != null) verdict,
       ...?dropped,
     ];
     final sorted = maskSecretDropWarnings(sortedDropWarnings(all));
@@ -1975,7 +1976,7 @@ class SubscriptionController extends ChangeNotifier {
     // пачки: уникализация тёзок считается по соседям, и подмножество дало бы
     // другие номера.
     final identities = sourceNodeIdentities(list.nodes);
-    final hashes = {for (final n in nodes) ?identities[n]};
+    final hashes = {for (final n in nodes) if (identities[n] case final v?) v};
     if (hashes.isEmpty) return;
     final Map<String, DateTime> next;
     if (enabled) {
@@ -2107,7 +2108,7 @@ class SubscriptionController extends ChangeNotifier {
     entry._replaceList(folder.copyWith(members: members));
     entry.nodeCount = entry.list.nodes.length;
     // §439 (D-113) — переименование группы переписывает ссылки на неё.
-    await _relink(before, renamed: {?previous: group});
+    await _relink(before, renamed: {if (previous != null) previous: group});
     await _persist();
     notifyListeners();
     return null;
@@ -2392,7 +2393,7 @@ class SubscriptionController extends ChangeNotifier {
     // пара. Член разбирает свой текст заново, узел сопоставляется по месту.
     await _relink(before, renamed: {
       for (var k = 0; k < server.nodes.length && k < added.length; k++)
-        server.nodes[k]: ?added[k].node,
+        if (added[k].node case final v?) server.nodes[k]: v,
     });
     await _persist();
     notifyListeners();
@@ -2967,6 +2968,9 @@ class SubscriptionController extends ChangeNotifier {
           await CoreVersionCache.ensure(BoxVpnClient().getCoreVersion),
       tunApps: await SettingsStorage.getTunApps(),
       routeSites: await SettingsStorage.getRouteSites(),
+      // lx-legacy: обходы ограничений Android 4.x (см. LegacyPlatform).
+      tunAppsViaRules: LegacyPlatform.isPreLollipop,
+      certificateStore: LegacyPlatform.needsBundledRoots ? 'mozilla' : '',
       vpnMode: await SettingsStorage.getVpnMode(),
       idleSuspend: await SettingsStorage.getIdleSuspend(), // §215
       idleSuspendReachable:

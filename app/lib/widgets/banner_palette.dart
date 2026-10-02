@@ -45,14 +45,14 @@ BannerColors bannerColors(BuildContext context, BannerSeverity severity) {
     case BannerSeverity.info:
       return BannerColors(
         background: cs.primaryContainer,
-        border: cs.onPrimaryContainer.withValues(alpha: 0.35),
+        border: cs.onPrimaryContainer.withOpacity(0.35),
         foreground: cs.onPrimaryContainer,
         action: cs.onPrimaryContainer,
       );
     case BannerSeverity.error:
       return BannerColors(
         background: cs.errorContainer,
-        border: cs.onErrorContainer.withValues(alpha: 0.35),
+        border: cs.onErrorContainer.withOpacity(0.35),
         foreground: cs.onErrorContainer,
         action: cs.onErrorContainer,
       );
@@ -63,7 +63,7 @@ BannerColors bannerColors(BuildContext context, BannerSeverity severity) {
       // brown даёт настоящий тёмный контраст, сохраняя тёплый тон.
       return BannerColors(
         background: isDark
-            ? Colors.amber.shade900.withValues(alpha: 0.18)
+            ? Colors.amber.shade900.withOpacity(0.18)
             : Colors.amber.shade100,
         border: isDark ? Colors.amber.shade700 : Colors.amber.shade400,
         foreground: isDark ? Colors.amber.shade100 : Colors.brown.shade800,
@@ -72,7 +72,7 @@ BannerColors bannerColors(BuildContext context, BannerSeverity severity) {
     case BannerSeverity.success:
       return BannerColors(
         background: isDark
-            ? Colors.green.shade900.withValues(alpha: 0.18)
+            ? Colors.green.shade900.withOpacity(0.18)
             : Colors.green.shade100,
         border: isDark ? Colors.green.shade700 : Colors.green.shade400,
         foreground: isDark ? Colors.green.shade100 : Colors.green.shade900,

@@ -512,7 +512,7 @@ class FolderDetourPlan {
     }
 
     _chainLinks = {
-      for (final v in _edge) ?v,
+      for (final v in _edge) if (v != null) v,
     };
 
     // Папочный override в своего члена → exempt-закрытие.

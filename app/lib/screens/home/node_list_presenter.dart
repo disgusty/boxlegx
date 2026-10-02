@@ -189,8 +189,8 @@ class NodeListPresenter {
     }
     if (n == null) return const <String>{};
     return {
-      ?n.transportLabel,
-      ?n.securityLabel,
+      if (n.transportLabel case final v?) v,
+      if (n.securityLabel case final v?) v,
     };
   }
 

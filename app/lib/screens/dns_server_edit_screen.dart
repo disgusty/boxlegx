@@ -243,7 +243,7 @@ class _DnsServerEditScreenState extends State<DnsServerEditScreen> {
       notifier: _ctrl,
       child: PopScope(
         canPop: false,
-        onPopInvokedWithResult: (didPop, _) {
+        onPopInvoked: (didPop) {
           if (didPop) return;
           unawaited(_handleBack());
         },

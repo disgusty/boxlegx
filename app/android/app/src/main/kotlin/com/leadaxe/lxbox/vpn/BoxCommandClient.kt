@@ -176,7 +176,13 @@ class BoxCommandClient {
 
     fun disconnectScreen() {
         // decrementAndGet с полом 0 (defensive против лишних disconnect).
-        val n = screenRefs.updateAndGet { if (it > 0) it - 1 else 0 }
+        // lx-legacy: AtomicInteger.updateAndGet — API 24; тот же CAS-цикл вручную.
+        var n: Int
+        while (true) {
+            val cur = screenRefs.get()
+            n = if (cur > 0) cur - 1 else 0
+            if (screenRefs.compareAndSet(cur, n)) break
+        }
         if (n == 0) disconnectClient(screenClient, "disconnectScreen")
     }
 

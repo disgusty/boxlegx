@@ -399,8 +399,11 @@ class BoxService(
         }
         if (BoxVpnService.currentStatus != VpnStatus.Stopped) {
             BoxVpnService.setCurrentStatus(VpnStatus.Stopped)
-            runCatching { LxBoxTileService.refreshTile(service.applicationContext) }
-                .onFailure { Log.w(TAG, "refreshTile in onDestroy failed: ${it.message}") }
+            // lx-legacy: класс плитки (TileService, API 24) на старых API не грузим.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                runCatching { LxBoxTileService.refreshTile(service.applicationContext) }
+                    .onFailure { Log.w(TAG, "refreshTile in onDestroy failed: ${it.message}") }
+            }
         }
     }
 
@@ -580,7 +583,8 @@ class BoxService(
                 needed += "android.permission.NEARBY_WIFI_DEVICES"
             }
             val missing = needed.filter {
-                service.checkSelfPermission(it) !=
+                // lx-legacy: ContextCompat — Context.checkSelfPermission с API 23.
+                ContextCompat.checkSelfPermission(service, it) !=
                     android.content.pm.PackageManager.PERMISSION_GRANTED
             }
             if (missing.isNotEmpty()) {
@@ -871,8 +875,11 @@ class BoxService(
                 }
             }
         )
-        runCatching { LxBoxTileService.refreshTile(service.applicationContext) }
-            .onFailure { Log.w(TAG, "refreshTile failed: ${it.message}") }
+        // lx-legacy: класс плитки (TileService, API 24) на старых API не грузим.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            runCatching { LxBoxTileService.refreshTile(service.applicationContext) }
+                .onFailure { Log.w(TAG, "refreshTile failed: ${it.message}") }
+        }
         runCatching { QuickShortcuts.refresh(service.applicationContext) }
             .onFailure { Log.w(TAG, "QuickShortcuts.refresh failed: ${it.message}") }
     }
@@ -1139,7 +1146,7 @@ class BoxService(
                     context,
                     notification.typeID,
                     intent,
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+                    PI_FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
                 )
             }.getOrNull()
         } else null

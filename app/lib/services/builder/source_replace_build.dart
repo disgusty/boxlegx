@@ -219,7 +219,7 @@ ReplaceBuild materializeReplaceGroups(
     if (r.hasSelector) {
       // `both`: двойник первой опцией и умолчанием, только если он написан.
       final options = [
-        ?autoTag,
+        if (autoTag != null) autoTag,
         for (final t in selectorMembers)
           if (t != autoTag) t,
       ];
@@ -228,7 +228,7 @@ ReplaceBuild materializeReplaceGroups(
           'tag': tag,
           'type': GroupGenus.manual,
           'outbounds': options,
-          'default': ?autoTag,
+          if (autoTag != null) 'default': autoTag,
           'interrupt_exist_connections': true,
         });
         out.emitted.add(tag);

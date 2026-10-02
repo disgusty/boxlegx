@@ -63,13 +63,19 @@ Map<String, dynamic>? dnsToBackup({
   final sink = warnings ?? <LxBackupWarning>[];
   final outServers = [
     for (final s in normalizeDnsServersVars(servers, recordVars))
-      ?exportBackupRecord(BackupRecord.dnsServer, dnsServerToRecord(s),
-          'dns: ${_serverLabel(s)}', sink),
+      for (final rec in [
+        exportBackupRecord(BackupRecord.dnsServer, dnsServerToRecord(s),
+            'dns: ${_serverLabel(s)}', sink)
+      ])
+        if (rec != null) rec,
   ];
   final outRules = [
     for (final r in rules)
-      ?exportBackupRecord(BackupRecord.dnsRule, dnsRuleToRecord(r),
-          'dns: ${_ruleLabel(r)}', sink),
+      for (final rec in [
+        exportBackupRecord(BackupRecord.dnsRule, dnsRuleToRecord(r),
+            'dns: ${_ruleLabel(r)}', sink)
+      ])
+        if (rec != null) rec,
   ];
   final out = <String, dynamic>{
     if (strategy.isNotEmpty) 'strategy': strategy,

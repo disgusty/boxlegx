@@ -20,7 +20,7 @@ class AddIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Material(
-      color: busy ? cs.surfaceContainerHighest : cs.primary,
+      color: busy ? cs.surfaceVariant : cs.primary,
       shape: const CircleBorder(),
       child: InkWell(
         customBorder: const CircleBorder(),

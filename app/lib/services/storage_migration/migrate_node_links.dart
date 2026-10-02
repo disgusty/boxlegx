@@ -74,7 +74,8 @@ List<Map<String, dynamic>> migrateNodeLinks(
   final dirs = <Direction>[
     if (directions is List)
       for (final d in directions)
-        if (d is Map) ?_direction(d.cast<String, dynamic>()),
+        if (d is Map && _direction(d.cast<String, dynamic>()) != null)
+          _direction(d.cast<String, dynamic>())!,
   ];
   final pool = computeNodeLinkPool(lists, directions: dirs);
   final disabledPools = computeDisabledNodeLinkPools(lists, directions: dirs);

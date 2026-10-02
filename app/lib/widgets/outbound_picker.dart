@@ -89,7 +89,7 @@ class OutboundPicker extends StatelessWidget {
 
     if (!dense) {
       return DropdownButtonFormField<String>(
-        initialValue: effectiveValue,
+        value: effectiveValue,
         isExpanded: true,
         decoration: InputDecoration(
           labelText: label,

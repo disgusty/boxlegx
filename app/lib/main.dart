@@ -29,11 +29,15 @@ import 'services/version_info.dart';
 import 'services/workspaces/workspace_controller.dart';
 import 'services/workspaces/workspace_store.dart';
 import 'services/wifi_history_listener.dart';
+import 'legacy/legacy_platform.dart';
 import 'theme/app_style.dart';
 import 'theme/app_themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // lx-legacy: SDK_INT и встроенные корневые сертификаты — до любых
+  // сетевых запросов и до чтения стиля (на Android 4.x по умолчанию Holo).
+  await LegacyPlatform.init();
 
   // §141 P1.9b — error boundary ставим ПЕРВЫМ делом, до init-await'ов. Раньше
   // он стоял после 4 await (VersionInfo/Identity/AppLog/...): брось любой из

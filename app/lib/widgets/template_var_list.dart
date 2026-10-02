@@ -171,7 +171,7 @@ class _TemplateVarListViewState extends State<TemplateVarListView> {
   /// через on_change).
   Widget _buildVarWidget(WizardVar v) => ValueListenableBuilder<String>(
         valueListenable: widget.model.notifier(v.name),
-        builder: (_, value, _) => _buildControl(v, value),
+        builder: (_, value, __) => _buildControl(v, value),
       );
 
   Widget _buildControl(WizardVar v, String value) {

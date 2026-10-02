@@ -56,7 +56,7 @@ class _DoubleBackToExitState extends State<DoubleBackToExit> {
     setState(() => _drawerOpen = open);
   }
 
-  void _onBack(bool didPop, Object? _) {
+  void _onBack(bool didPop) {
     // didPop — закрылось меню (запись истории маршрута): сообщения нет.
     if (didPop || _drawerOpen) return;
     _disarm?.cancel();
@@ -76,9 +76,9 @@ class _DoubleBackToExitState extends State<DoubleBackToExit> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope<Object?>(
+    return PopScope(
       canPop: _drawerOpen || _armed,
-      onPopInvokedWithResult: _onBack,
+      onPopInvoked: _onBack,
       child: widget.builder(context, _onDrawerChanged),
     );
   }

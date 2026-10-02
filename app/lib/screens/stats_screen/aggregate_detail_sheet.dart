@@ -95,7 +95,7 @@ class _AggregateDetailSheet extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: cs.onSurfaceVariant.withValues(alpha: 0.4),
+              color: cs.onSurfaceVariant.withOpacity(0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -108,7 +108,7 @@ class _AggregateDetailSheet extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
-                    color: cs.secondary.withValues(alpha: 0.18),
+                    color: cs.secondary.withOpacity(0.18),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
@@ -334,7 +334,7 @@ class _AggregateDetailSheet extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
-        color: cs.surfaceContainerLow,
+        color: cs.surface,
         border: Border(top: BorderSide(color: cs.outlineVariant)),
       ),
       padding: EdgeInsets.fromLTRB(

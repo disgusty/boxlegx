@@ -1,6 +1,6 @@
 package com.leadaxe.lxbox.vpn
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import android.app.NotificationManager
 import android.content.Context
 import android.net.ConnectivityManager
@@ -25,7 +25,8 @@ import kotlinx.coroutines.launch
  * устанавливает context при загрузке `.so`; явный вызов делает
  * двойной-set ломающий `Seq$RefTracker` state.
  */
-class BoxApplication : Application() {
+// lx-legacy: API < 21 не грузит вторичные dex сам — MultiDexApplication.
+class BoxApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

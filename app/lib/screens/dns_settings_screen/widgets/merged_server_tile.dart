@@ -57,7 +57,7 @@ class MergedServerTile extends StatelessWidget {
         entry.isOverridden
             ? (
                 getLocalText.s("Overridden"),
-                theme.colorScheme.error.withValues(alpha: 0.9),
+                theme.colorScheme.error.withOpacity(0.9),
               )
             : (getLocalText.s("User"), theme.colorScheme.secondary),
     };

@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- lx-legacy: плагины с minSdk выше 17. Их вызовы закрыты гейтами
+         SDK_INT в коде (QR-сканер — только Android 5.0+). -->
+    <uses-sdk tools:overrideLibrary="io.flutter.plugins.camera,com.markosyan.flutter_zxing,dev.fluttercommunity.plus.connectivity,dev.fluttercommunity.plus.device_info,io.flutter.plugins.flutter_plugin_android_lifecycle,io.flutter.plugins.imagepicker,dev.fluttercommunity.plus.packageinfo,io.flutter.plugins.pathprovider,dev.fluttercommunity.plus.share,io.flutter.plugins.sharedpreferences" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />

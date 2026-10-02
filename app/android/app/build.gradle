@@ -1,0 +1,101 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { localProperties.load(it) }
+}
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode") ?: "1"
+def flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.0"
+
+// lx-legacy: Android 4.2.
+def lxLegacyMinSdk = 17
+
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+}
+
+android {
+    namespace "com.leadaxe.lxbox"
+    compileSdk 35
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    // §380 — без блока DEPENDENCY METADATA (F-Droid).
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = true
+    }
+
+    defaultConfig {
+        applicationId "com.leadaxe.lxbox"
+        // lx-legacy: Android 4.2 (API 17) minimum. Flutter 3.16 — последний
+        // Flutter с поддержкой API 16–18; ядро — libbox, собранный gomobile с
+        // -androidapi 17 и NDK r23c (libs/libbox-api17.aar). Функции новых API
+        // деградируют за SDK_INT-гейтами.
+        // Через переменную: мигратор flutter 3.16 переписывает литералы
+        // `minSdkVersion 16..18` на flutter.minSdkVersion (= 19).
+        minSdkVersion lxLegacyMinSdk
+        targetSdkVersion 35
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        // API < 21: без нативного multidex — MultiDexApplication.
+        multiDexEnabled true
+        // Ядро собрано для armeabi-v7a и x86 (32-бит): 64-битные устройства
+        // запускают приложение в 32-битном режиме.
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+
+    signingConfigs {
+        if (keystorePropertiesFile.exists() && keystoreProperties.getProperty("storeFile")) {
+            release {
+                keyAlias keystoreProperties.getProperty("keyAlias")
+                keyPassword keystoreProperties.getProperty("keyPassword")
+                storePassword keystoreProperties.getProperty("storePassword")
+                storeFile rootProject.file(keystoreProperties.getProperty("storeFile"))
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.findByName("release") ?: signingConfigs.debug
+        }
+    }
+
+    packagingOptions {
+        jniLibs { useLegacyPackaging true }
+    }
+}
+
+dependencies {
+    // §104 — ядро sing-box-lx; lx-legacy — сборка под API 17 с патчами
+    // старых ядер Linux (ветка lx-legacy форка ядра).
+    implementation files("libs/libbox-api17.aar")
+    implementation "androidx.core:core-ktx:1.10.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+}
+
+flutter {
+    source "../.."
+}
+

@@ -8,6 +8,7 @@ import android.net.NetworkRequest
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import androidx.annotation.RequiresApi
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,10 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.runBlocking
 
+/// lx-legacy: NetworkCallback/NetworkRequest — API 21, а `request` строится
+/// в <clinit> объекта. На API < 21 объект не трогаем вовсе — дефолтный
+/// интерфейс там ведёт `LegacyNetwork` (см. DefaultNetworkMonitor).
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 object DefaultNetworkListener {
     private sealed class Msg {
         class Start(val key: Any, val listener: (Network?) -> Unit) : Msg()

@@ -82,7 +82,7 @@ class _ConnectionDetailSheet extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: cs.onSurfaceVariant.withValues(alpha: 0.4),
+              color: cs.onSurfaceVariant.withOpacity(0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -108,7 +108,7 @@ class _ConnectionDetailSheet extends StatelessWidget {
                         horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
                       color: Color.alphaBlend(
-                          Colors.pink.withValues(alpha: 0.22), cs.surface),
+                          Colors.pink.withOpacity(0.22), cs.surface),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(getLocalText.s("One-way"),
@@ -120,7 +120,7 @@ class _ConnectionDetailSheet extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: cs.surfaceContainerHighest,
+                      color: cs.surfaceVariant,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(getLocalText.s("closed"),
@@ -242,7 +242,7 @@ class _ConnectionDetailSheet extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Color.alphaBlend(
-            Colors.pink.withValues(alpha: 0.14), cs.surface),
+            Colors.pink.withOpacity(0.14), cs.surface),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -333,7 +333,7 @@ class _ConnectionDetailSheet extends StatelessWidget {
     final canClose = !closed && id.isNotEmpty;
     return Container(
       decoration: BoxDecoration(
-        color: cs.surfaceContainerLow,
+        color: cs.surface,
         border: Border(top: BorderSide(color: cs.outlineVariant)),
       ),
       padding: EdgeInsets.fromLTRB(

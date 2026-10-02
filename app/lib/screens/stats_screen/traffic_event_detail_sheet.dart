@@ -66,7 +66,7 @@ class _TrafficEventDetailSheet extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: cs.onSurfaceVariant.withValues(alpha: 0.4),
+              color: cs.onSurfaceVariant.withOpacity(0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -228,7 +228,7 @@ class _TrafficEventDetailSheet extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.18),
+        color: color.withOpacity(0.18),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(label,
@@ -440,7 +440,7 @@ class _TrafficEventDetailSheet extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
-        color: cs.surfaceContainerLow,
+        color: cs.surface,
         border: Border(top: BorderSide(color: cs.outlineVariant)),
       ),
       padding: EdgeInsets.fromLTRB(

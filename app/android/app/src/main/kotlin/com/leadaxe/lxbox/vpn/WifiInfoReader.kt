@@ -205,10 +205,15 @@ object WifiInfoReader {
     /// §567 — системный тумблер геолокации. API 28+ — `LocationManager`,
     /// ниже — `Settings.Secure.LOCATION_MODE`. При любом исключении считаем
     /// включённой: проверка не должна блокировать чтение сама по себе.
+    ///
+    /// lx-legacy: до M (API 23) чтение SSID от геолокации не зависит (а
+    /// `LOCATION_MODE` ниже KitKat нет вовсе) — считаем включённой.
     private fun isLocationEnabled(ctx: Context): Boolean = try {
         if (Build.VERSION.SDK_INT >= 28) {
             val lm = ctx.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
             lm?.isLocationEnabled ?: true
+        } else if (Build.VERSION.SDK_INT < 23) {
+            true
         } else {
             @Suppress("DEPRECATION")
             Settings.Secure.getInt(ctx.contentResolver, Settings.Secure.LOCATION_MODE) !=

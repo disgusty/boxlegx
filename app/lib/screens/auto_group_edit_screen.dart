@@ -274,7 +274,7 @@ class _AutoGroupEditScreenState extends State<AutoGroupEditScreen> {
 
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, _) {
+      onPopInvoked: (didPop) {
         if (!didPop) _handleBack();
       },
       child: Scaffold(
@@ -342,7 +342,7 @@ class _AutoGroupEditScreenState extends State<AutoGroupEditScreen> {
               showSelectedIcon: false,
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
-                textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 12)),
+                textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 12)),
               ),
               onSelectionChanged: (s) => setState(() {
                 final next = s.first;
@@ -424,7 +424,7 @@ class _AutoGroupEditScreenState extends State<AutoGroupEditScreen> {
               showSelectedIcon: false,
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
-                textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 12)),
+                textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 12)),
               ),
               onSelectionChanged: (s) => setState(() {
                 switch (s.first) {
@@ -501,24 +501,22 @@ class _AutoGroupEditScreenState extends State<AutoGroupEditScreen> {
       Text(getLocalText.s("Selected server"),
           style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant)),
       const SizedBox(height: 4),
-      RadioGroup<String>(
-        groupValue: current,
-        onChanged: (v) => setState(() => _default = v ?? ''),
-        child: Column(
-          children: [
-            for (final c in matched)
-              RadioListTile<String>(
-                key: ValueKey('auto-group-default-${c.key.tag}'),
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                visualDensity: VisualDensity.compact,
-                value: c.key.tag,
-                title: Text(c.label,
-                    style: const TextStyle(fontSize: 13),
-                    overflow: TextOverflow.ellipsis),
-              ),
-          ],
-        ),
+      Column(
+        children: [
+          for (final c in matched)
+            RadioListTile<String>(
+              key: ValueKey('auto-group-default-${c.key.tag}'),
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              visualDensity: VisualDensity.compact,
+              groupValue: current,
+              onChanged: (v) => setState(() => _default = v ?? ''),
+              value: c.key.tag,
+              title: Text(c.label,
+                  style: const TextStyle(fontSize: 13),
+                  overflow: TextOverflow.ellipsis),
+            ),
+        ],
       ),
     ];
   }
@@ -572,13 +570,13 @@ class _AutoGroupEditScreenState extends State<AutoGroupEditScreen> {
             leading: Icon(
               inPool ? Icons.check_circle_outline : Icons.remove_circle_outline,
               size: 18,
-              color: inPool ? cs.primary : cs.onSurfaceVariant.withValues(alpha: .5),
+              color: inPool ? cs.primary : cs.onSurfaceVariant.withOpacity(.5),
             ),
             title: Text(
               c.label,
               style: TextStyle(
                 fontSize: 13,
-                color: inPool ? null : cs.onSurfaceVariant.withValues(alpha: .5),
+                color: inPool ? null : cs.onSurfaceVariant.withOpacity(.5),
               ),
               overflow: TextOverflow.ellipsis,
             ),

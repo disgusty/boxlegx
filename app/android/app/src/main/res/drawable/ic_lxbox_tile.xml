@@ -12,8 +12,14 @@
   адаптирована под 24dp: линии — stroke c round-cap. Этот же drawable
   стоит статичной иконкой TileService в манифесте — иначе редактор/превью
   QS показывает лаунчер-лого как белый квадрат.
+
+  lx-legacy: drawable нужен только QS-плитке (API 24+) и ярлыкам (API 25+);
+  PNG, который AGP генерирует для minSdk < 21, тинт-атрибут игнорирует —
+  отсюда tools:targetApi (theme-ссылка в drawable — API 21+).
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="24"
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
@@ -22,7 +28,7 @@
 
     <!-- Буква L: вертикаль + низ -->
     <path
-        android:strokeColor="@android:color/white"
+        android:strokeColor="#FFFFFFFF"
         android:strokeWidth="2.0"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
@@ -30,7 +36,7 @@
 
     <!-- × в центре: две диагонали -->
     <path
-        android:strokeColor="@android:color/white"
+        android:strokeColor="#FFFFFFFF"
         android:strokeWidth="2.0"
         android:strokeLineCap="round"
         android:pathData="M8.8,9.8 L14.2,15.2 M8.8,15.2 L14.2,9.8" />
@@ -39,6 +45,6 @@
          Угол при острие = 90° (прямоугольный треугольник) → «жирная»
          стрелка наружу, а не узкая иголка. -->
     <path
-        android:fillColor="@android:color/white"
+        android:fillColor="#FFFFFFFF"
         android:pathData="M20.7,3.3 L16.1,3.3 L20.7,7.9 Z" />
 </vector>

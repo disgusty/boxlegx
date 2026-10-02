@@ -274,7 +274,7 @@ class _RoutingScreenState extends State<RoutingScreen>
               // кнопка появлялась уже во время свайпа, а не по его завершении.
               AnimatedBuilder(
                 animation: DefaultTabController.of(tabCtx).animation!,
-                builder: (_, _) {
+                builder: (_, __) {
                   final onRulesTab =
                       DefaultTabController.of(
                         tabCtx,
@@ -363,7 +363,7 @@ class _RoutingScreenState extends State<RoutingScreen>
       duration: appStyle.motion(const Duration(milliseconds: 200)),
       decoration: highlighted
           ? BoxDecoration(
-              color: cs.primaryContainer.withValues(alpha: 0.5),
+              color: cs.primaryContainer.withOpacity(0.5),
               border: Border(left: BorderSide(color: cs.primary, width: 3)),
             )
           : null,
@@ -734,10 +734,10 @@ class _RoutingScreenState extends State<RoutingScreen>
           final tmpDir = await getTemporaryDirectory();
           final path = '${tmpDir.path}/$filename';
           await File(path).writeAsString(json);
-          await SharePlus.instance.share(ShareParams(
-            files: [XFile(path, mimeType: 'application/json', name: filename)],
+          await Share.shareXFiles(
+            [XFile(path, mimeType: 'application/json', name: filename)],
             subject: 'LxBox rules',
-          ));
+          );
           showSnack(getLocalText.s("Rules exported"));
           return;
       }

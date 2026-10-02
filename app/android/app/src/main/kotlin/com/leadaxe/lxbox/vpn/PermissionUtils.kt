@@ -3,6 +3,7 @@ package com.leadaxe.lxbox.vpn
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.core.content.ContextCompat
 
 /**
  * §051 — единый helper для permission checks, чтобы не дублировать
@@ -22,7 +23,10 @@ object PermissionUtils {
     /// `minSdk` чтобы pre-N устройства не валились на checkSelfPermission.
     fun has(ctx: Context, name: String, minSdk: Int = 0): Boolean {
         if (Build.VERSION.SDK_INT < minSdk) return true
-        return ctx.checkSelfPermission(name) ==
+        // lx-legacy: Context.checkSelfPermission — API 23 (lint не видит из-за
+        // гейта по переменной minSdk); ContextCompat на старых API идёт через
+        // checkPermission(pid, uid) — install-time разрешения.
+        return ContextCompat.checkSelfPermission(ctx, name) ==
             PackageManager.PERMISSION_GRANTED
     }
 }

@@ -962,8 +962,8 @@ class BoxVpnClient {
         'group': group,
         // null-aware element: ключ пропускается когда список null (native по
         // отсутствию ключа не трогает кеш — обновляем только активное состояние).
-        'nodes': ?nodes,
-        'groups': ?groups,
+        if (nodes != null) 'nodes': nodes,
+        if (groups != null) 'groups': groups,
       },
       timeout: _Timeouts.settings,
       onTimeoutValue: null,

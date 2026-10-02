@@ -523,7 +523,7 @@ class _WarpWizardScreenState extends State<WarpWizardScreen> with SnackHelper {
                           const SizedBox(width: 16),
                           Expanded(
                             child: DropdownButtonFormField<String>(
-                              initialValue: _masqueNetwork,
+                              value: _masqueNetwork,
                               isDense: true,
                               decoration: const InputDecoration(
                                 isDense: true,
@@ -610,7 +610,7 @@ class _WarpWizardScreenState extends State<WarpWizardScreen> with SnackHelper {
                             child: DropdownButtonFormField<String>(
                               // Текущее значение порта; если его нет в наборе
                               // транспорта — всё равно валидно (custom).
-                              initialValue: _masquePort.text.isEmpty
+                              value: _masquePort.text.isEmpty
                                   ? null
                                   : _masquePort.text,
                               isExpanded: true,
@@ -785,7 +785,7 @@ class _WarpWizardScreenState extends State<WarpWizardScreen> with SnackHelper {
                 ExpansionPanelRadio(
                   value: 'advanced',
                   canTapOnHeader: true,
-                  headerBuilder: (_, _) =>
+                  headerBuilder: (_, __) =>
                       ListTile(title: Text(getLocalText.s("Advanced"))),
                   body: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -887,7 +887,7 @@ class _WarpWizardScreenState extends State<WarpWizardScreen> with SnackHelper {
                               const SizedBox(width: 16),
                               Expanded(
                                 child: DropdownButtonFormField<String>(
-                                  initialValue: _masqIp,
+                                  value: _masqIp,
                                   isDense: true,
                                   decoration: const InputDecoration(
                                     isDense: true,
@@ -970,7 +970,7 @@ class _WarpWizardScreenState extends State<WarpWizardScreen> with SnackHelper {
                                 const SizedBox(width: 16),
                                 Expanded(
                                   child: DropdownButtonFormField<String>(
-                                    initialValue: _masqIb,
+                                    value: _masqIb,
                                     isDense: true,
                                     decoration: const InputDecoration(
                                       isDense: true,

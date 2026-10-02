@@ -39,10 +39,7 @@ class AppearanceTab extends StatelessWidget {
         Text(getLocalText.s("Appearance"),
             style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
-        RadioGroup<ThemeMode>(
-          groupValue: themeNotifier.mode,
-          onChanged: (v) { if (v != null) themeNotifier.setMode(v); },
-          child: Column(
+        Column(
             children: ThemeMode.values.map((mode) {
               final label = switch (mode) {
                 ThemeMode.system => getLocalText.s("System"),
@@ -56,22 +53,20 @@ class AppearanceTab extends StatelessWidget {
               };
               return RadioListTile<ThemeMode>(
                 value: mode,
+                groupValue: themeNotifier.mode,
+                onChanged: (v) { if (v != null) themeNotifier.setMode(v); },
                 title: Text(label),
                 secondary: Icon(icon),
               );
             }).toList(),
           ),
-        ),
         const SizedBox(height: 8),
         // Стиль интерфейса: Material 3 (исходный) / Material 1 / Holo.
         // Применяется сразу — MaterialApp слушает appStyle.
         Text(getLocalText.s("Interface style"),
             style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
-        RadioGroup<UiStyle>(
-          groupValue: appStyle.style,
-          onChanged: (v) { if (v != null) appStyle.setStyle(v); },
-          child: Column(
+        Column(
             children: UiStyle.values.map((style) {
               final (label, subtitle) = switch (style) {
                 UiStyle.material3 => (
@@ -89,6 +84,8 @@ class AppearanceTab extends StatelessWidget {
               };
               return RadioListTile<UiStyle>(
                 value: style,
+                groupValue: appStyle.style,
+                onChanged: (v) { if (v != null) appStyle.setStyle(v); },
                 title: Text(label),
                 subtitle: Text(subtitle),
                 secondary: Icon(switch (style) {
@@ -99,7 +96,6 @@ class AppearanceTab extends StatelessWidget {
               );
             }).toList(),
           ),
-        ),
         SwitchListTile(
           title: Text(getLocalText.s("Simplified animations")),
           subtitle: Text(getLocalText.s("Instant screen transitions and fewer moving effects. Smoother on old and slow devices.")),
@@ -136,34 +132,27 @@ class AppearanceTab extends StatelessWidget {
         Text(getLocalText.s("Language"),
             style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
-        RadioGroup<String>(
-          groupValue: LocaleController.I.setting,
-          onChanged: (v) { if (v != null) LocaleController.I.set(v); },
-          child: Column(
-            children: [
-              RadioListTile<String>(
-                value: 'system',
-                title: Text(getLocalText.s("System default")),
-                secondary: const Icon(Icons.language),
-              ),
-              // Эндонимы: каждая метка на своём языке, сознательно не из ARB
-              // текущей локали.
-              const RadioListTile<String>(
-                value: 'en',
-                title: Text('English'), // l10n-exempt: endonym
-              ),
-              const RadioListTile<String>(
-                value: 'ru',
-                title: Text('Русский'), // l10n-exempt: endonym
-              ),
-              const RadioListTile<String>(
-                value: 'zh',
-                title: Text('中文（简体）'), // l10n-exempt: endonym
-              ),
-            ],
-          ),
+        Column(
+          children: [
+            _langTile('system', getLocalText.s("System default"),
+                icon: Icons.language),
+            // Эндонимы: каждая метка на своём языке, сознательно не из ARB
+            // текущей локали.
+            _langTile('en', 'English'), // l10n-exempt: endonym
+            _langTile('ru', 'Русский'), // l10n-exempt: endonym
+            _langTile('zh', '中文（简体）'), // l10n-exempt: endonym
+          ],
         ),
       ],
     );
   }
+
+  Widget _langTile(String value, String title, {IconData? icon}) =>
+      RadioListTile<String>(
+        value: value,
+        groupValue: LocaleController.I.setting,
+        onChanged: (v) { if (v != null) LocaleController.I.set(v); },
+        title: Text(title),
+        secondary: icon == null ? null : Icon(icon),
+      );
 }

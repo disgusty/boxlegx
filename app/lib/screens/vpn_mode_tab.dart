@@ -335,7 +335,6 @@ class _VpnModeTabState extends State<VpnModeTab>
         enableFilter: false,
         label: Text(_listenNode.title),
         expandedInsets: EdgeInsets.zero,
-        keyboardType: const TextInputType.numberWithOptions(decimal: true),
         errorText: _listenError.isEmpty ? null : _listenError,
         dropdownMenuEntries: _listenNode.options
             .map((o) => DropdownMenuEntry(value: o.value, label: o.title))

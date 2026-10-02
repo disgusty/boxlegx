@@ -215,7 +215,7 @@ Widget _autoRecordOffBanner(BuildContext ctx, BuildContext outerCtx) {
     margin: const EdgeInsets.fromLTRB(16, 12, 16, 4),
     padding: const EdgeInsets.all(12),
     decoration: BoxDecoration(
-      color: Theme.of(ctx).colorScheme.surfaceContainerHighest,
+      color: Theme.of(ctx).colorScheme.surfaceVariant,
       borderRadius: BorderRadius.circular(8),
     ),
     child: Row(

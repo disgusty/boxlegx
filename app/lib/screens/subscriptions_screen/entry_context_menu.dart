@@ -63,8 +63,7 @@ void showEntryContextMenu(
               title: Text(getLocalText.s("Share URL…")),
               onTap: () async {
                 Navigator.pop(ctx);
-                await SharePlus.instance.share(ShareParams(
-                    text: entry.url, subject: 'LxBox subscription'));
+                await Share.share(entry.url, subject: 'LxBox subscription');
               },
             ),
           ListTile(
@@ -229,24 +228,24 @@ Future<void> showEditSourceDialog(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RadioGroup<bool>(
-              groupValue: fileMode,
-              onChanged: (v) => setLocal(() => fileMode = v ?? false),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  RadioListTile<bool>(
-                    value: false,
-                    title: Text(getLocalText.s("Online URL")),
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                  RadioListTile<bool>(
-                    value: true,
-                    title: Text(getLocalText.s("Local file")),
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                ],
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RadioListTile<bool>(
+                  value: false,
+                  groupValue: fileMode,
+                  onChanged: (v) => setLocal(() => fileMode = v ?? false),
+                  title: Text(getLocalText.s("Online URL")),
+                  contentPadding: EdgeInsets.zero,
+                ),
+                RadioListTile<bool>(
+                  value: true,
+                  groupValue: fileMode,
+                  onChanged: (v) => setLocal(() => fileMode = v ?? false),
+                  title: Text(getLocalText.s("Local file")),
+                  contentPadding: EdgeInsets.zero,
+                ),
+              ],
             ),
             const SizedBox(height: 8),
             if (!fileMode)

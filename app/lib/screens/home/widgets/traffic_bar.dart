@@ -57,7 +57,7 @@ class TrafficBar extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
         child: AnimatedBuilder(
           animation: TrafficProfiler.I,
-          builder: (_, _) {
+          builder: (_, __) {
             final profiler = TrafficProfiler.I;
             return Row(
               children: [

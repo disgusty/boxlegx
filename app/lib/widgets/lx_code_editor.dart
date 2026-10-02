@@ -336,7 +336,7 @@ class _LxToolbarOverlay extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: Material(
         elevation: 4,
-        color: cs.surfaceContainerHighest,
+        color: cs.surfaceVariant,
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         child: Row(
           mainAxisSize: MainAxisSize.min,

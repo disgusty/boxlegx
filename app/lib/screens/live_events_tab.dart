@@ -121,8 +121,7 @@ class _LiveEventsTabState extends State<LiveEventsTab> {
               title: Text(getLocalText.plural("Share %d events (JSON)", _events.length)),
               onTap: () {
                 Navigator.pop(sheetCtx);
-                SharePlus.instance.share(
-                    ShareParams(text: json, subject: 'LxBox profiler export'));
+                Share.share(json, subject: 'LxBox profiler export');
               },
             ),
             ListTile(

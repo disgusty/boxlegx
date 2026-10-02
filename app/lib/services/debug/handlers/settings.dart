@@ -616,8 +616,8 @@ Future<DebugResponse> _putGroupPing(
     'ok': true,
     'action': 'settings-ping-options-group-put',
     'group': tag,
-    'url': ?url,
-    'timeout_ms': ?timeoutMs,
+    if (url != null) 'url': url,
+    if (timeoutMs != null) 'timeout_ms': timeoutMs,
   });
 }
 

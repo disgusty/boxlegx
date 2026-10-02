@@ -15,8 +15,26 @@ part of '../post_steps.dart';
 ///
 /// Если `mode != off` но `packages` пустой — silently no-op (нечего apply'ить).
 /// Если в config нет tun-inbound — silently no-op (некуда apply'ить).
-void applyTunPackages(Map<String, dynamic> config, TunAppsConfig tunApps) {
+///
+/// lx-legacy: [viaRules] — Android < 5.0, где у VpnService нет per-app API.
+/// Список уходит в route-правило ядра `package_name` (владельца соединения
+/// ядро находит по /proc/net): deny — эти приложения на direct-out, allow —
+/// они на прежний final, а final — direct-out. Трафик исключённых приложений
+/// при этом проходит через tun, но не через VPN-сервер.
+void applyTunPackages(Map<String, dynamic> config, TunAppsConfig tunApps,
+    {bool viaRules = false}) {
   if (tunApps.isOff || tunApps.packages.isEmpty) return;
+  if (viaRules) {
+    final route = config['route'];
+    if (route is! Map<String, dynamic>) return;
+    _insertAfterLeadingRules(route, <String, dynamic>{
+      'package_name': List<String>.from(tunApps.packages),
+      'action': 'route',
+      'outbound':
+          tunApps.isDeny ? kDirectOutboundTag : _takeProxyFinal(route),
+    });
+    return;
+  }
 
   final inbounds = config['inbounds'];
   if (inbounds is! List) return;

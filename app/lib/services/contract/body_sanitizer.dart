@@ -1473,7 +1473,7 @@ final class _Ctx {
     if (code == null) return;
     final paths = ((rel['paths'] as List?) ?? const []).map((e) => '$e');
     final path = paths.isEmpty ? null : paths.first;
-    if (!_cooccurrenceSeen.add('$code $path')) return;
+    if (!_cooccurrenceSeen.add('$code\u0000$path')) return;
     // §577 — код до флага: [dropFrom] указывает на код снятия.
     warn(code, path: path);
     if (rel['action'] == 'drop_node') {
@@ -1482,7 +1482,7 @@ final class _Ctx {
     }
   }
 
-  /// Уже поставленные коды `cooccurrence`: `<код> <путь>`.
+  /// Уже поставленные коды `cooccurrence`: `<код>\u0000<путь>`.
   final Set<String> _cooccurrenceSeen = <String>{};
 
   /// Оператор `$range_width`: ширина диапазона хотя бы у одного из путей

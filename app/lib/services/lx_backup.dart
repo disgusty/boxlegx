@@ -889,8 +889,8 @@ List<Map<String, dynamic>> _exportSources({
       );
   if (sourceKeys == null) {
     return [
-      for (final list in lists) ?ofList(list),
-      for (final c in chains) ?ofChain(c),
+      for (final list in lists) if (ofList(list) case final v?) v,
+      for (final c in chains) if (ofChain(c) case final v?) v,
     ];
   }
   final listByKey = {for (final l in lists) 'id:${l.id}': l};
@@ -2665,7 +2665,7 @@ List<CustomRule> _jsonRule0x(
   return [
     for (final part in _splitRuleBodies(
         record, match is Map ? [match] : match, 'rules[$name].match', warnings))
-      ?ruleFromRecord(part).value,
+      if (ruleFromRecord(part).value case final v?) v,
   ];
 }
 
@@ -3107,7 +3107,7 @@ LxFolder _folder10(Map<String, dynamic> j, int position) {
   return (
     chain: chain,
     hops: [
-      for (final h in _list(j['hops'])) ?nodeLinkFromRecord(h),
+      for (final h in _list(j['hops'])) if (nodeLinkFromRecord(h) case final v?) v,
     ],
   );
 }
@@ -3178,7 +3178,7 @@ List<CustomRule> _rule10(
   return [
     for (final part in _splitRuleBodies(
         record, record['body'], 'rules[$label].body', warnings))
-      ?_ruleRecord10(part, kind, knownPresets, warnings),
+      if (_ruleRecord10(part, kind, knownPresets, warnings) case final v?) v,
   ];
 }
 

@@ -379,7 +379,13 @@ class MainActivity : FlutterActivity() {
     /// `frameworkpackagestubs` и на GET_CONTENT (`Stubs$MediaStub`), без
     /// фильтра §372 сломался бы.
     private fun filePickerAction(): String? {
-        for (action in listOf(Intent.ACTION_OPEN_DOCUMENT, Intent.ACTION_GET_CONTENT)) {
+        // lx-legacy: SAF (ACTION_OPEN_DOCUMENT) — с API 19; ниже только GET_CONTENT.
+        val actions = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            listOf(Intent.ACTION_OPEN_DOCUMENT, Intent.ACTION_GET_CONTENT)
+        } else {
+            listOf(Intent.ACTION_GET_CONTENT)
+        }
+        for (action in actions) {
             val intent = Intent(action)
                 .addCategory(Intent.CATEGORY_OPENABLE)
                 .setType("*/*")
@@ -409,7 +415,10 @@ class MainActivity : FlutterActivity() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
             .addCategory(Intent.CATEGORY_OPENABLE)
             .setType("*/*")
-            .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultiple)
+        // lx-legacy: EXTRA_ALLOW_MULTIPLE — API 18; на 17 выбор всегда одиночный.
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultiple)
+        }
         try {
             pendingPickResult = result
             startActivityForResult(intent, GET_CONTENT_REQUEST_CODE)

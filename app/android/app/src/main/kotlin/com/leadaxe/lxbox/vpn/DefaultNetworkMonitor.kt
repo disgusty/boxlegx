@@ -4,6 +4,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import io.nekohasekai.libbox.InterfaceUpdateListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,9 +31,20 @@ object DefaultNetworkMonitor {
     private var lastIfName: String? = null
     private var resetJob: Job? = null
 
+    /// lx-legacy — подписка на CONNECTIVITY_ACTION вместо NetworkCallback (API < 21).
+    private var legacyReceiver: LegacyNetwork.ConnectivityReceiver? = null
+
     suspend fun start(scope: CoroutineScope, onNetworkSwitch: () -> Unit) {
         this.scope = scope
         this.onNetworkSwitch = onNetworkSwitch
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // lx-legacy: `Network` нет — `defaultNetwork` остаётся null, ядру
+            // отдаём имя/индекс интерфейса с дефолтным маршрутом (LegacyNetwork).
+            val r = LegacyNetwork.ConnectivityReceiver { checkLegacyUpdate() }
+            if (r.register(BoxApplication.application)) legacyReceiver = r
+            Log.i("LxBoxNet", "[init] legacy defaultInterface=${LegacyNetwork.defaultInterface()}")
+            return
+        }
         // §119 — seed `defaultNetwork` из getActiveNetwork(), но НИКОГДА не нашим
         // же VPN. getActiveNetwork() возвращает per-app default, который штатно
         // ВКЛЮЧАЕТ наш tun, если VPN уже поднят к моменту start() (док:
@@ -58,7 +70,12 @@ object DefaultNetworkMonitor {
     }
 
     suspend fun stop() {
-        DefaultNetworkListener.stop(this)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            legacyReceiver?.unregister(BoxApplication.application)
+            legacyReceiver = null
+        } else {
+            DefaultNetworkListener.stop(this)
+        }
         resetJob?.cancel()
         resetJob = null
         onNetworkSwitch = null
@@ -86,6 +103,10 @@ object DefaultNetworkMonitor {
     /// рефакторинг (через scope, как в `checkUpdate`) меняет контракт первичной
     /// нотификации → отдельная device-verified задача.
     private fun notifySync(network: Network?, listener: InterfaceUpdateListener) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            notifyLegacySync(listener)
+            return
+        }
         runCatching {
             if (network == null) {
                 listener.updateDefaultInterface("", -1, false, false)
@@ -114,6 +135,49 @@ object DefaultNetworkMonitor {
         }
     }
 
+    /// lx-legacy — первичная нотификация на API < 21 (тот же JNI no-throw
+    /// контракт, что у [notifySync]).
+    private fun notifyLegacySync(listener: InterfaceUpdateListener) {
+        runCatching {
+            val iface = LegacyNetwork.defaultInterface()
+            if (iface == null) {
+                listener.updateDefaultInterface("", -1, false, false)
+            } else {
+                lastIfName = iface.name  // §087 — baseline
+                listener.updateDefaultInterface(iface.name, iface.index, false, false)
+            }
+        }.onFailure { e ->
+            Log.e("LxBoxNet", "notifyLegacySync failed (fail-safe empty interface)", e)
+            runCatching { listener.updateDefaultInterface("", -1, false, false) }
+        }
+    }
+
+    /// lx-legacy — аналог [checkUpdate] на CONNECTIVITY_ACTION (API < 21).
+    /// Broadcast приходит раньше, чем маршрут попадает в /proc/net/route, —
+    /// пока сеть подключена, а маршрута нет, коротко ждём (как retry в checkUpdate).
+    private fun checkLegacyUpdate() {
+        val l = listener ?: return
+        val s = scope ?: return  // service already dead — don't touch Go objects
+        s.launch(Dispatchers.IO) {
+            var iface = LegacyNetwork.defaultInterface()
+            var attempt = 0
+            while (iface == null && attempt++ < 10 && LegacyNetwork.isConnected()) {
+                delay(100)
+                iface = LegacyNetwork.defaultInterface()
+            }
+            Log.i("LxBoxNet", "[update] legacy defaultInterface=$iface")
+            if (iface == null) {
+                // §087 — disconnect: baseline lastIfName не трогаем, не ресетим.
+                runCatching { l.updateDefaultInterface("", -1, false, false) }
+                return@launch
+            }
+            maybeResetOnSwitch(iface.name, s)  // §087
+            lastIfName = iface.name
+            runCatching { l.updateDefaultInterface(iface.name, iface.index, false, false) }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun checkUpdate(network: Network?) {
         val l = listener ?: return
         val s = scope ?: return  // service already dead — don't touch Go objects
@@ -166,6 +230,7 @@ object DefaultNetworkMonitor {
     /// Источник истины: ConnectivityManager.getActiveNetwork() и
     /// registerDefaultNetworkCallback() отдают per-app default, который штатно
     /// включает VPN, применённый к процессу — это AOSP-поведение, не баг прошивки.
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun isVpn(network: Network): Boolean =
         BoxApplication.connectivity.getNetworkCapabilities(network)
             ?.hasTransport(NetworkCapabilities.TRANSPORT_VPN) == true
@@ -186,6 +251,7 @@ object DefaultNetworkMonitor {
     ///   [update] — приходит из NetworkRequest с NOT_VPN (default-capability,
     ///              API ≥ 28), поэтому штатно `false`. `true` — аномалия:
     ///              underlying-сеть не сматчилась, выбран VPN вопреки NOT_VPN.
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun logDefaultNetwork(where: String, network: Network?) {
         runCatching {
             if (network == null) {

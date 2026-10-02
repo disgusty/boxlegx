@@ -1,5 +1,6 @@
 package com.leadaxe.lxbox.vpn
 
+import android.app.PendingIntent
 import android.net.IpPrefix
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,6 +16,11 @@ fun StringIterator.toList(): List<String> {
         }
     }
 }
+
+/// lx-legacy: `PendingIntent.FLAG_IMMUTABLE` появился в API 23 — ниже флаг
+/// системе неизвестен, не передаём его (требование неизменяемости — с API 31).
+val PI_FLAG_IMMUTABLE: Int
+    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun RoutePrefix.toIpPrefix(): IpPrefix = IpPrefix(InetAddress.getByName(address()), prefix())

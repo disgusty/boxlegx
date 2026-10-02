@@ -202,7 +202,7 @@ class _ConnectionsViewState extends State<ConnectionsView> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: cs.surfaceContainerLow,
+            color: cs.surface,
             border: Border(bottom: BorderSide(color: cs.outlineVariant)),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -255,7 +255,7 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                   ? Center(child: Text(getLocalText.s("No active connections")))
                   : ListView.separated(
                       itemCount: list.length,
-                      separatorBuilder: (_, _) => const Divider(height: 1),
+                      separatorBuilder: (_, __) => const Divider(height: 1),
                       itemBuilder: (context, i) => _buildTile(list[i]),
                     ),
         ),
@@ -301,7 +301,7 @@ class _ConnectionsViewState extends State<ConnectionsView> {
     return Container(
       // §153 — розовый фон у однобоких (зависших) TCP; закрытые — без подсветки.
       color: oneWay && !closed
-          ? Color.alphaBlend(Colors.pink.withValues(alpha: 0.16), cs.surface)
+          ? Color.alphaBlend(Colors.pink.withOpacity(0.16), cs.surface)
           : null,
       child: Opacity(
         opacity: closed ? 0.5 : 1.0,

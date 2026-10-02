@@ -19,6 +19,7 @@ import '../controllers/subscription_controller.dart';
 import '../services/app_info_cache.dart';
 import '../services/settings_storage.dart' show SettingsStorage, TunAppsConfig;
 import 'app_picker_screen.dart';
+import '../legacy/legacy_platform.dart';
 import 'lazy_persist_mixin.dart';
 import 'settings_screen.dart';
 import '../services/l10n/locale_controller.dart';
@@ -261,6 +262,15 @@ class _TunAppsTabState extends State<TunAppsTab>
           _modeDescription(_cfg.mode),
           style: tt.bodySmall?.copyWith(color: cs.onSurfaceVariant),
         ),
+        // lx-legacy: на Android < 5.0 у VpnService нет per-app API — список
+        // применяется правилами ядра (applyTunPackages viaRules).
+        if (LegacyPlatform.isPreLollipop) ...[
+          const SizedBox(height: 8),
+          Text(
+            getLocalText.s("On Android 4.x the list is applied by the core's routing rules: excluded apps still pass through the tunnel, but go directly, bypassing the VPN server."),
+            style: tt.bodySmall?.copyWith(color: cs.tertiary),
+          ),
+        ],
 
         // §076: локальный «Restart needed» banner удалён.
         // Home banner единый source-of-truth для «Apply / Restart».
@@ -330,7 +340,7 @@ class _TunAppsTabState extends State<TunAppsTab>
     } else {
       leading = CircleAvatar(
         radius: 18,
-        backgroundColor: cs.surfaceContainerHighest,
+        backgroundColor: cs.surfaceVariant,
         child: Icon(
           uninstalled ? Icons.help_outline : Icons.android,
           size: 20,

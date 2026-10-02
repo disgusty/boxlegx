@@ -134,7 +134,7 @@ class DnsServerParamsTab extends StatelessWidget {
               margin: const EdgeInsets.only(top: 12),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: cs.primaryContainer.withValues(alpha: 0.4),
+                color: cs.primaryContainer.withOpacity(0.4),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(

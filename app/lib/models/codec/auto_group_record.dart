@@ -309,7 +309,8 @@ AutoSelectParams autoSelectParamsFromStrategy(Object? raw) {
             ? const <StickyHashKey>[]
             : [
                 for (final k in sticky)
-                  ?StickyHashKey.fromWire(k is String ? k : null),
+                  if (StickyHashKey.fromWire(k is String ? k : null) != null)
+                    StickyHashKey.fromWire(k is String ? k : null)!,
               ])
         : d.stickyHash,
   );

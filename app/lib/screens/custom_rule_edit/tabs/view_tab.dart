@@ -120,7 +120,7 @@ class ViewTab extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest,
+              color: theme.colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(6),
             ),
             constraints: const BoxConstraints(maxHeight: 180),
@@ -150,7 +150,7 @@ class ViewTab extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: theme.colorScheme.errorContainer
-                    .withValues(alpha: 0.4),
+                    .withOpacity(0.4),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(warnings.join('\n'),
@@ -163,7 +163,7 @@ class ViewTab extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest,
+                color: theme.colorScheme.surfaceVariant,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: SingleChildScrollView(

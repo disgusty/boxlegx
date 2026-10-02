@@ -205,7 +205,7 @@ class ProbeController {
   /// порядку, так что удаление первого сдвигает номер второму.
   static List<String> probeKeys(List<FolderMember> members) {
     final identities =
-        sourceNodeIdentities([for (final m in members) ?m.node]);
+        sourceNodeIdentities([for (final m in members) if (m.node != null) m.node!]);
     return _dedupKeys([
       for (final (i, m) in members.indexed)
         m.node == null
@@ -218,7 +218,7 @@ class ProbeController {
   /// raw-члена, null-слот — по позиции). Идентичность переживает refresh
   /// подписки: инстансы подменяются, тег — нет.
   static List<String> probeKeysForNodes(List<NodeSpec?> nodes) {
-    final identities = sourceNodeIdentities([for (final n in nodes) ?n]);
+    final identities = sourceNodeIdentities([for (final n in nodes) if (n != null) n]);
     return _dedupKeys([
       for (final (i, n) in nodes.indexed)
         n == null ? 'slot:$i' : (identities[n] ?? 'slot:$i'),

@@ -115,7 +115,7 @@ class _SupportMessageScreenState extends State<SupportMessageScreen> {
       if (isInPlaceSupportAction(action)) {
         buttons.add(FilledButton.tonal(
           onPressed: () => unawaited(
-              SharePlus.instance.share(ShareParams(text: action.payload))),
+              Share.share(action.payload)),
           child: Text(spec.label),
         ));
         continue;

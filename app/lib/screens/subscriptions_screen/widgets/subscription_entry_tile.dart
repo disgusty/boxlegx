@@ -52,8 +52,8 @@ class SubscriptionEntryTile extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ?summary == null ? null : EntryWarningBadge(summary),
-        ?typeIcon,
+        if (summary != null) EntryWarningBadge(summary),
+        if (typeIcon != null) typeIcon,
       ],
     );
   }

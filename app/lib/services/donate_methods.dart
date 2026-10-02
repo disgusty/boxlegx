@@ -131,7 +131,10 @@ class DonateMethods {
       final raw = jsonDecode(body);
       final list = (raw is Map ? raw['methods'] : null);
       if (list is! List) return const [];
-      return [for (final m in list) ?DonateMethod.fromJson(m)];
+      return [
+        for (final m in list)
+          if (DonateMethod.fromJson(m) != null) DonateMethod.fromJson(m)!,
+      ];
     } catch (_) {
       return const [];
     }

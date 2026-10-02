@@ -9,6 +9,7 @@ import android.net.wifi.WifiInfo
 import android.os.Build
 import android.os.SystemClock
 import android.util.Log
+import androidx.annotation.RequiresApi
 
 /**
  * §569 — кэш текущей Wi-Fi сети для Android 12+ (API 31+).
@@ -107,6 +108,8 @@ class WifiStateCache(private val ctx: Context) {
     @Synchronized
     fun stop() {
         latest = null
+        // Колбэк регистрируется только на 31+ — ниже снимать нечего.
+        if (Build.VERSION.SDK_INT < 31) return
         val cb = callback ?: return
         callback = null
         registeredWith = null
@@ -115,6 +118,7 @@ class WifiStateCache(private val ctx: Context) {
         Log.d(TAG, "stopped")
     }
 
+    @RequiresApi(31)
     private fun newCallback(): ConnectivityManager.NetworkCallback =
         object : ConnectivityManager.NetworkCallback(
             ConnectivityManager.NetworkCallback.FLAG_INCLUDE_LOCATION_INFO,

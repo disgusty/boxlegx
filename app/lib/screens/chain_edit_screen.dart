@@ -342,7 +342,7 @@ class _ChainEditScreenState extends State<ChainEditScreen> with SnackHelper {
 
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, _) {
+      onPopInvoked: (didPop) {
         if (!didPop) _handleBack();
       },
       child: Scaffold(
@@ -362,7 +362,7 @@ class _ChainEditScreenState extends State<ChainEditScreen> with SnackHelper {
               tooltip: getLocalText.s("Save"),
               icon: Icon(Icons.check,
                   color: !canSave
-                      ? cs.onSurfaceVariant.withValues(alpha: 0.4)
+                      ? cs.onSurfaceVariant.withOpacity(0.4)
                       : (dirty ? cs.primary : cs.onSurfaceVariant)),
               onPressed: canSave ? _save : null,
             ),
@@ -428,7 +428,7 @@ class _ChainEditScreenState extends State<ChainEditScreen> with SnackHelper {
             color: switch (i.level) {
               ChainIssueLevel.blocking => cs.errorContainer,
               ChainIssueLevel.warning => cs.tertiaryContainer,
-              ChainIssueLevel.info => cs.surfaceContainerHighest,
+              ChainIssueLevel.info => cs.surfaceVariant,
             },
             borderRadius: BorderRadius.circular(8),
           ),
@@ -480,7 +480,7 @@ class _ChainEditScreenState extends State<ChainEditScreen> with SnackHelper {
       physics: const NeverScrollableScrollPhysics(),
       buildDefaultDragHandles: false,
       itemCount: _hops.length,
-      onReorderItem: _reorderHop,
+      onReorder: (o, n) => _reorderHop(o, n > o ? n - 1 : n),
       itemBuilder: (ctx, i) =>
           KeyedSubtree(key: ValueKey('hop-${_hops[i]}'), child: _hopTile(i, cs)),
     );

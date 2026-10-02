@@ -307,7 +307,7 @@ class _OverviewTabState extends State<OverviewTab> {
             child: LinearProgressIndicator(
               value: pct,
               minHeight: 6,
-              backgroundColor: cs.surfaceContainerHighest,
+              backgroundColor: cs.surfaceVariant,
             ),
           ),
           const SizedBox(width: 8),

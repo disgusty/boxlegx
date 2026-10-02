@@ -53,9 +53,15 @@ class ServiceNotification(private val service: Service) {
         /// остаётся). Единственный путь — bounce сервиса
         /// (`BoxVpnService.clearStaleNotification`): AMS снимает уведомление
         /// сам при штатной остановке foreground-сервиса.
-        fun isStalePresent(): Boolean = runCatching {
-            BoxApplication.notificationManager.activeNotifications.any { it.id == NOTIFICATION_ID }
-        }.getOrDefault(false)
+        ///
+        /// lx-legacy: `getActiveNotifications` — API 23; ниже проверить нечем,
+        /// считаем, что зависшего уведомления нет.
+        fun isStalePresent(): Boolean {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false
+            return runCatching {
+                BoxApplication.notificationManager.activeNotifications.any { it.id == NOTIFICATION_ID }
+            }.getOrDefault(false)
+        }
 
         /// §428 — обычное уведомление на том же канале, живёт после stopSelf()
         /// и без сервиса (зовётся и из VpnWatchdogReceiver). Без
@@ -74,7 +80,7 @@ class ServiceNotification(private val service: Service) {
                 builder.setContentIntent(
                     PendingIntent.getActivity(
                         ctx, 0, openIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PI_FLAG_IMMUTABLE,
                     )
                 )
             }
@@ -103,7 +109,7 @@ class ServiceNotification(private val service: Service) {
         val pendingIntent = if (openIntent != null) {
             PendingIntent.getActivity(
                 service, 0, openIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT or PI_FLAG_IMMUTABLE
             )
         } else null
 
@@ -141,7 +147,7 @@ class ServiceNotification(private val service: Service) {
         val intent = Intent(action).setPackage(service.packageName)
         return PendingIntent.getBroadcast(
             service, requestCode, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            PendingIntent.FLAG_UPDATE_CURRENT or PI_FLAG_IMMUTABLE,
         )
     }
 

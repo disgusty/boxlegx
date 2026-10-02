@@ -187,7 +187,7 @@ class EmojiChipsRow extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.zero,
         itemCount: emojis.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 4),
+        separatorBuilder: (_, __) => const SizedBox(width: 4),
         itemBuilder: (_, i) {
           final e = emojis[i];
           return FilterChip(
@@ -246,7 +246,7 @@ class MultiSelectChipsRow extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.zero,
               itemCount: options.length,
-              separatorBuilder: (_, _) => const SizedBox(width: 6),
+              separatorBuilder: (_, __) => const SizedBox(width: 6),
               itemBuilder: (_, i) {
                 final (id, label) = options[i];
                 return FilterChip(

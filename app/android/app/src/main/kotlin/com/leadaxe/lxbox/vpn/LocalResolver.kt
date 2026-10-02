@@ -90,6 +90,10 @@ object LocalResolver : LocalDNSTransport {
     }
 
     override fun lookup(ctx: ExchangeContext, network: String, domain: String) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            lookupLegacy(ctx, domain)
+            return
+        }
         // §151 F3 — см. exchange(): null defaultNetwork → SERVFAIL ядру, не throw.
         // Явный non-null тип, чтобы вложенные замыкания захватили корректно.
         val dn = DefaultNetworkMonitor.defaultNetwork
@@ -168,5 +172,20 @@ object LocalResolver : LocalDNSTransport {
                 ctx.success(answer.mapNotNull { it.hostAddress }.joinToString("\n"))
             }
         }
+    }
+
+    /// lx-legacy (API < 21): `Network` нет — привязать запрос к underlying-сети
+    /// нечем, резолвим системным резолвером (как до §049 F26). На 4.x наш же
+    /// UID не исключён из туннеля, поэтому запрос может пройти через tun —
+    /// риск рекурсии из шапки файла здесь не снят (правило DNS ядра, ведущее
+    /// в `local`, на 4.x лучше не использовать для всего трафика).
+    private fun lookupLegacy(ctx: ExchangeContext, domain: String) {
+        val answer = try {
+            InetAddress.getAllByName(domain)
+        } catch (_: UnknownHostException) {
+            ctx.errorCode(RCODE_NXDOMAIN)
+            return
+        }
+        ctx.success(answer.mapNotNull { it.hostAddress }.joinToString("\n"))
     }
 }

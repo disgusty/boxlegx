@@ -128,40 +128,48 @@ class ParamsTab extends StatelessWidget {
         const Divider(),
         Text(getLocalText.s("Source"), style: theme.textTheme.titleSmall),
         const SizedBox(height: 4),
-        RadioGroup<CustomRuleKind>(
-          groupValue: c.kind,
-          onChanged: (v) {
-            if (v == null) return;
-            c.setKind(v);
-          },
-          child: Row(
-            children: [
-              Expanded(
-                child: RadioListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  value: CustomRuleKind.inline,
-                  title: Text(getLocalText.s("Inline")),
-                ),
+        Row(
+          children: [
+            Expanded(
+              child: RadioListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                groupValue: c.kind,
+                onChanged: (v) {
+                  if (v == null) return;
+                  c.setKind(v);
+                },
+                value: CustomRuleKind.inline,
+                title: Text(getLocalText.s("Inline")),
               ),
-              Expanded(
-                child: RadioListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  value: CustomRuleKind.srs,
-                  title: Text(getLocalText.s("Remote (.srs)")),
-                ),
+            ),
+            Expanded(
+              child: RadioListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                groupValue: c.kind,
+                onChanged: (v) {
+                  if (v == null) return;
+                  c.setKind(v);
+                },
+                value: CustomRuleKind.srs,
+                title: Text(getLocalText.s("Remote (.srs)")),
               ),
-              Expanded(
-                child: RadioListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  value: CustomRuleKind.json,
-                  title: Text(getLocalText.s("Raw JSON")),
-                ),
+            ),
+            Expanded(
+              child: RadioListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                groupValue: c.kind,
+                onChanged: (v) {
+                  if (v == null) return;
+                  c.setKind(v);
+                },
+                value: CustomRuleKind.json,
+                title: Text(getLocalText.s("Raw JSON")),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         const Divider(),
         // §225 — json-режим: только тело правила, остальные секции скрыты.

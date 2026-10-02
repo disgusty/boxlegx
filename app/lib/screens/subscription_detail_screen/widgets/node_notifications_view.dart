@@ -246,7 +246,6 @@ class _NotificationTile extends StatelessWidget {
 
     return ExpansionTile(
       initiallyExpanded: initiallyExpanded,
-      dense: true,
       leading: Icon(icon, size: 18, color: color),
       tilePadding: const EdgeInsets.symmetric(horizontal: 16),
       childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -326,7 +325,6 @@ class _NotificationGroupTile extends StatelessWidget {
 
     return ExpansionTile(
       initiallyExpanded: initiallyExpanded,
-      dense: true,
       leading: Icon(icon, size: 18, color: color),
       tilePadding: const EdgeInsets.symmetric(horizontal: 16),
       childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 8),

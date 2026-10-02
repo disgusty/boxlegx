@@ -93,9 +93,11 @@ object L10n {
         // 3. Shortcuts: updateShortcuts — оба ярлыка + pinned-копии.
         runCatching { QuickShortcuts.relabel(base) }
             .onFailure { Log.w(TAG, "shortcuts relabel failed: ${it.message}") }
-        // 4. QS-тайл.
-        runCatching { LxBoxTileService.refreshTile(base) }
-            .onFailure { Log.w(TAG, "tile refresh failed: ${it.message}") }
+        // 4. QS-тайл (lx-legacy: класс TileService-наследника ниже API 24 не грузим).
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            runCatching { LxBoxTileService.refreshTile(base) }
+                .onFailure { Log.w(TAG, "tile refresh failed: ${it.message}") }
+        }
         // 5. Локаль ядра.
         applyLibboxLocale(base)
     }
@@ -114,7 +116,7 @@ object L10n {
                 // комбинации язык+регион → fallback на голый язык.
                 runCatching {
                     Libbox.setLocale(
-                        Locale.getDefault().toLanguageTag().replace("-", "_"))
+                        languageTag(Locale.getDefault()).replace("-", "_"))
                 }.recoverCatching {
                     Libbox.setLocale(Locale.getDefault().language)
                 }.getOrThrow()
@@ -122,6 +124,14 @@ object L10n {
                 Libbox.setLocale(s)
             }
         }.onFailure { Log.w(TAG, "Libbox.setLocale failed: ${it.message}") }
+    }
+
+    /// lx-legacy: `Locale.toLanguageTag` — API 21; ниже собираем `язык-РЕГИОН`
+    /// сами (скрипт/вариант ядру не нужны — при отказе всё равно голый язык).
+    private fun languageTag(l: Locale): String = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> l.toLanguageTag()
+        l.country.isEmpty() -> l.language
+        else -> "${l.language}-${l.country}"
     }
 
     /// §279 (спека §6.4) — снимок per-app-локалей для Dart-reconciliation.

@@ -37,14 +37,7 @@ void applyRouteSites(Map<String, dynamic> config, RouteSitesConfig sites) {
   if (sites.isDeny) {
     target = kDirectOutboundTag;
   } else {
-    final prevFinal = route['final'];
-    target = prevFinal is String &&
-            prevFinal.isNotEmpty &&
-            prevFinal != kDirectOutboundTag &&
-            prevFinal != kBlockOutboundTag
-        ? prevFinal
-        : 'vpn-1';
-    route['final'] = kDirectOutboundTag;
+    target = _takeProxyFinal(route);
   }
 
   final rule = <String, dynamic>{
@@ -54,6 +47,13 @@ void applyRouteSites(Map<String, dynamic> config, RouteSitesConfig sites) {
     'outbound': target,
   };
 
+  _insertAfterLeadingRules(route, rule);
+}
+
+/// Вставляет [rule] сразу за головными служебными правилами
+/// (`sniff`/`hijack-dns`/`resolve`/`route-options`) — до пользовательских.
+void _insertAfterLeadingRules(
+    Map<String, dynamic> route, Map<String, dynamic> rule) {
   final rules = route['rules'] is List
       ? List<dynamic>.from(route['rules'] as List)
       : <dynamic>[];
@@ -69,4 +69,17 @@ void applyRouteSites(Map<String, dynamic> config, RouteSitesConfig sites) {
   }
   rules.insert(at, rule);
   route['rules'] = rules;
+}
+
+/// Цель «через VPN» для режима allow-list: прежний `route.final`, если он
+/// не direct/block, иначе `vpn-1`. Переводит `route.final` на direct-out.
+String _takeProxyFinal(Map<String, dynamic> route) {
+  final prevFinal = route['final'];
+  route['final'] = kDirectOutboundTag;
+  return prevFinal is String &&
+          prevFinal.isNotEmpty &&
+          prevFinal != kDirectOutboundTag &&
+          prevFinal != kBlockOutboundTag
+      ? prevFinal
+      : 'vpn-1';
 }

@@ -76,8 +76,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
       final dir = await getTemporaryDirectory();
       final file = File('${dir.path}/lxbox_config.json');
       await file.writeAsString(text);
-      await SharePlus.instance.share(
-          ShareParams(files: [XFile(file.path)], text: 'LxBox config'));
+      await Share.shareXFiles([XFile(file.path)], text: 'LxBox config');
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -201,7 +200,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     margin: const EdgeInsets.only(bottom: 8),
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: cs.surfaceContainerHighest,
+                      color: cs.surfaceVariant,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(

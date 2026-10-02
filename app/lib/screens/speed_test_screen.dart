@@ -343,7 +343,7 @@ class _SpeedTestScreenState extends State<SpeedTestScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: cs.surfaceContainerHighest,
+              color: cs.surfaceVariant,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -408,7 +408,7 @@ class _SpeedTestScreenState extends State<SpeedTestScreen>
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    initialValue:
+                    value:
                         _servers.isEmpty ? null : _serverId(_selectedServer),
                     decoration: InputDecoration(
                       labelText: getLocalText.s("Server"),
@@ -428,7 +428,7 @@ class _SpeedTestScreenState extends State<SpeedTestScreen>
                 SizedBox(
                   width: 100,
                   child: DropdownButtonFormField<int>(
-                    initialValue: _streams,
+                    value: _streams,
                     decoration: InputDecoration(
                       labelText: getLocalText.s("Streams"),
                       isDense: true,

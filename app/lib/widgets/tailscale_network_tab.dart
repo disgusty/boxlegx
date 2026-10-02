@@ -368,27 +368,29 @@ class _TailscaleNetworkTabState extends State<TailscaleNetworkTab> {
               ),
           ],
         ),
-        RadioGroup<String>(
-          groupValue: activeId,
-          onChanged: (v) {
-            if (v != null && !_busy) unawaited(_choose(v));
-          },
-          child: Column(
-            children: [
+        Column(
+          children: [
+            RadioListTile<String>(
+              dense: true,
+              groupValue: activeId,
+              onChanged: (v) {
+                if (v != null && !_busy) unawaited(_choose(v));
+              },
+              value: '',
+              title: Text(getLocalText.s("None")),
+            ),
+            for (final p in options)
               RadioListTile<String>(
                 dense: true,
-                value: '',
-                title: Text(getLocalText.s("None")),
+                groupValue: activeId,
+                onChanged: (v) {
+                  if (v != null && !_busy) unawaited(_choose(v));
+                },
+                value: p.stableId,
+                title: Text(p.hostName),
+                subtitle: p.online ? null : Text(getLocalText.s("offline")),
               ),
-              for (final p in options)
-                RadioListTile<String>(
-                  dense: true,
-                  value: p.stableId,
-                  title: Text(p.hostName),
-                  subtitle: p.online ? null : Text(getLocalText.s("offline")),
-                ),
-            ],
-          ),
+          ],
         ),
         if (mismatch != ExitNodeMismatch.none)
           Padding(

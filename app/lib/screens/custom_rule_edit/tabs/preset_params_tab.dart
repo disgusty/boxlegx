@@ -37,7 +37,7 @@ class PresetParamsTab extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: cs.errorContainer.withValues(alpha: 0.5),
+              color: cs.errorContainer.withOpacity(0.5),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
@@ -106,7 +106,7 @@ class PresetParamsTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: cs.primaryContainer.withValues(alpha: 0.4),
+            color: cs.primaryContainer.withOpacity(0.4),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -125,7 +125,7 @@ class PresetParamsTab extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       border:
-                          Border.all(color: cs.primary.withValues(alpha: 0.5)),
+                          Border.all(color: cs.primary.withOpacity(0.5)),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
@@ -163,7 +163,7 @@ class PresetParamsTab extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: cs.primaryContainer.withValues(alpha: 0.4),
+              color: cs.primaryContainer.withOpacity(0.4),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

@@ -20,7 +20,7 @@ Widget? buildSubscriptionEntrySubtitle(
   SubscriptionController subController,
 ) {
   final scheme = Theme.of(context).colorScheme;
-  final muted = entry.enabled ? scheme.onSurfaceVariant : scheme.onSurfaceVariant.withValues(alpha: 0.6);
+  final muted = entry.enabled ? scheme.onSurfaceVariant : scheme.onSurfaceVariant.withOpacity(0.6);
   final parts = <Widget>[];
   final textStyle = TextStyle(fontSize: 12, color: muted);
 

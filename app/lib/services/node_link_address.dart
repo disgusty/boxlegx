@@ -66,7 +66,8 @@ NodeLink? nodeAddressIn(
 List<NodeLink> sourceNodeAddresses(ServerList l) {
   final raw = l is UserServer ? null : containerRawTags(l);
   return [
-    for (final n in containerNodes(l)) ?nodeAddressIn(l, n, raw: raw),
+    for (final n in containerNodes(l))
+      if (nodeAddressIn(l, n, raw: raw) case final a?) a,
   ];
 }
 

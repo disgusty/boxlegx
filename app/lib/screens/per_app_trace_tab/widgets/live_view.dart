@@ -57,7 +57,7 @@ class LiveView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               width: double.infinity,
-              color: cs.surfaceContainerHigh,
+              color: cs.surfaceVariant,
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
               child: Row(
                 children: [
@@ -148,7 +148,7 @@ class LiveView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 4, vertical: 1),
                       decoration: BoxDecoration(
-                        color: kindColor.withValues(alpha: 0.18),
+                        color: kindColor.withOpacity(0.18),
                         borderRadius: BorderRadius.circular(3),
                       ),
                       child: Text(kindLabel,
@@ -264,7 +264,7 @@ class LiveView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
       decoration: BoxDecoration(
-        color: cs.secondary.withValues(alpha: 0.16),
+        color: cs.secondary.withOpacity(0.16),
         borderRadius: BorderRadius.circular(3),
       ),
       child: Row(
@@ -348,7 +348,7 @@ class LiveView extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
         decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.18),
+          color: color.withOpacity(0.18),
           borderRadius: BorderRadius.circular(3),
         ),
         child: Text(label,

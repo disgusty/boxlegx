@@ -49,12 +49,6 @@ class _InstantPageTransitionsBuilder extends PageTransitionsBuilder {
   const _InstantPageTransitionsBuilder();
 
   @override
-  Duration get transitionDuration => Duration.zero;
-
-  @override
-  Duration get reverseTransitionDuration => Duration.zero;
-
-  @override
   Widget buildTransitions<T>(
     PageRoute<T> route,
     BuildContext context,
@@ -112,13 +106,11 @@ ThemeData _material1(Brightness brightness) {
           errorContainer: Color(0xFF8C1D18),
           onErrorContainer: Color(0xFFFFCDD2),
           surface: Color(0xFF303030),
+          background: Color(0xFF303030),
           onSurface: Colors.white,
+          onBackground: Colors.white,
           onSurfaceVariant: Color(0xB3FFFFFF),
-          surfaceContainerLowest: Color(0xFF212121),
-          surfaceContainerLow: Color(0xFF383838),
-          surfaceContainer: Color(0xFF424242),
-          surfaceContainerHigh: Color(0xFF4A4A4A),
-          surfaceContainerHighest: Color(0xFF545454),
+          surfaceVariant: Color(0xFF545454),
           outline: Color(0xFF8A8A8A),
           outlineVariant: Color(0xFF5C5C5C),
           inverseSurface: Color(0xFFFAFAFA),
@@ -147,13 +139,11 @@ ThemeData _material1(Brightness brightness) {
           errorContainer: Color(0xFFFFCDD2),
           onErrorContainer: Color(0xFFB71C1C),
           surface: Color(0xFFFAFAFA),
+          background: Color(0xFFFAFAFA),
           onSurface: Color(0xDE000000),
+          onBackground: Color(0xDE000000),
           onSurfaceVariant: Color(0x8A000000),
-          surfaceContainerLowest: Colors.white,
-          surfaceContainerLow: Color(0xFFF5F5F5),
-          surfaceContainer: Color(0xFFEEEEEE),
-          surfaceContainerHigh: Color(0xFFE6E6E6),
-          surfaceContainerHighest: Color(0xFFE0E0E0),
+          surfaceVariant: Color(0xFFE0E0E0),
           outline: Color(0xFF9E9E9E),
           outlineVariant: Color(0xFFE0E0E0),
           inverseSurface: Color(0xFF323232),
@@ -201,7 +191,7 @@ ThemeData _material1(Brightness brightness) {
       iconTheme: const IconThemeData(color: Colors.white),
       actionsIconTheme: const IconThemeData(color: Colors.white),
     ),
-    tabBarTheme: const TabBarThemeData(
+    tabBarTheme: const TabBarTheme(
       labelColor: Colors.white,
       unselectedLabelColor: Color(0xB3FFFFFF),
       indicatorColor: _pinkA200,
@@ -210,13 +200,13 @@ ThemeData _material1(Brightness brightness) {
       labelStyle: buttonText,
       unselectedLabelStyle: buttonText,
     ),
-    cardTheme: CardThemeData(
+    cardTheme: CardTheme(
       color: cardBg,
       elevation: 2,
       shape: shape2,
       margin: const EdgeInsets.all(4),
     ),
-    dialogTheme: DialogThemeData(
+    dialogTheme: DialogTheme(
       backgroundColor: cardBg,
       elevation: 24,
       shape: shape2,
@@ -268,10 +258,12 @@ ThemeData _material1(Brightness brightness) {
       ),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
-      style: SegmentedButton.styleFrom(
-        shape: shape2,
-        selectedBackgroundColor: cs.primaryContainer,
-        selectedForegroundColor: cs.onPrimaryContainer,
+      style: ButtonStyle(
+        shape: const MaterialStatePropertyAll(shape2),
+        backgroundColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected) ? cs.primaryContainer : null),
+        foregroundColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected) ? cs.onPrimaryContainer : null),
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -281,24 +273,24 @@ ThemeData _material1(Brightness brightness) {
       shape: CircleBorder(),
     ),
     switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected)
+      thumbColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected)
               ? _pinkA200
               : (dark ? const Color(0xFFBDBDBD) : const Color(0xFFF1F1F1))),
-      trackColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected)
-              ? _pinkA200.withValues(alpha: 0.5)
+      trackColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected)
+              ? _pinkA200.withOpacity(0.5)
               : (dark ? const Color(0x4DFFFFFF) : const Color(0x42000000))),
     ),
     checkboxTheme: CheckboxThemeData(
-      fillColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected) ? _pinkA200 : null),
+      fillColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected) ? _pinkA200 : null),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(2))),
     ),
     radioTheme: RadioThemeData(
-      fillColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected) ? _pinkA200 : cs.onSurfaceVariant),
+      fillColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected) ? _pinkA200 : cs.onSurfaceVariant),
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(color: cs.secondary),
     inputDecorationTheme: InputDecorationTheme(
@@ -344,13 +336,11 @@ ThemeData _holo(Brightness brightness) {
           errorContainer: Color(0xFF5C1414),
           onErrorContainer: Color(0xFFFFC2C2),
           surface: Color(0xFF101010),
-          onSurface: Color(0xFFF3F3F3), // bright_foreground_holo_dark
+          background: Color(0xFF101010),
+          onSurface: Color(0xFFF3F3F3),
+          onBackground: Color(0xFFF3F3F3), // bright_foreground_holo_dark
           onSurfaceVariant: Color(0xFFBEBEBE), // dim_foreground_holo_dark
-          surfaceContainerLowest: Color(0xFF000000),
-          surfaceContainerLow: Color(0xFF1A1A1A),
-          surfaceContainer: Color(0xFF222222),
-          surfaceContainerHigh: Color(0xFF282828),
-          surfaceContainerHighest: Color(0xFF323232),
+          surfaceVariant: Color(0xFF323232),
           outline: Color(0xFF6E6E6E),
           outlineVariant: Color(0xFF3A3A3A),
           inverseSurface: Color(0xFFF3F3F3),
@@ -378,14 +368,12 @@ ThemeData _holo(Brightness brightness) {
           onError: Colors.white,
           errorContainer: Color(0xFFFFD6D6),
           onErrorContainer: Color(0xFF5C0000),
-          surface: Color(0xFFF3F3F3), // background_holo_light
-          onSurface: Colors.black, // bright_foreground_holo_light
+          surface: Color(0xFFF3F3F3),
+          background: Color(0xFFF3F3F3), // background_holo_light
+          onSurface: Colors.black,
+          onBackground: Colors.black, // bright_foreground_holo_light
           onSurfaceVariant: Color(0xFF5A5A5A),
-          surfaceContainerLowest: Colors.white,
-          surfaceContainerLow: Color(0xFFFAFAFA),
-          surfaceContainer: Color(0xFFEAEAEA),
-          surfaceContainerHigh: Color(0xFFE2E2E2),
-          surfaceContainerHighest: Color(0xFFD9D9D9),
+          surfaceVariant: Color(0xFFD9D9D9),
           outline: Color(0xFF9A9A9A),
           outlineVariant: Color(0xFFCCCCCC),
           inverseSurface: Color(0xFF282828),
@@ -402,8 +390,8 @@ ThemeData _holo(Brightness brightness) {
   const shape2 = RoundedRectangleBorder(borderRadius: r2);
   final panelBg = dark ? const Color(0xFF282828) : Colors.white;
   final buttonBg = dark ? const Color(0xFF3A3A3A) : const Color(0xFFDDDDDD);
-  final pressed = _holoBlue.withValues(alpha: 0.6);
-  final focused = _holoBlue.withValues(alpha: 0.3);
+  final pressed = _holoBlue.withOpacity(0.6);
+  final focused = _holoBlue.withOpacity(0.3);
   final hairline = BorderSide(color: cs.outlineVariant);
   final typography = Typography.material2014(platform: TargetPlatform.android);
   final base = dark ? typography.white : typography.black;
@@ -416,22 +404,22 @@ ThemeData _holo(Brightness brightness) {
     titleLarge: colored.titleLarge?.copyWith(fontWeight: FontWeight.w400),
   );
 
-  WidgetStateProperty<Color?> overlay() =>
-      WidgetStateProperty.resolveWith((s) {
-        if (s.contains(WidgetState.pressed)) return pressed;
-        if (s.contains(WidgetState.focused) ||
-            s.contains(WidgetState.hovered)) {
+  MaterialStateProperty<Color?> overlay() =>
+      MaterialStateProperty.resolveWith((s) {
+        if (s.contains(MaterialState.pressed)) return pressed;
+        if (s.contains(MaterialState.focused) ||
+            s.contains(MaterialState.hovered)) {
           return focused;
         }
         return null;
       });
 
   final flatButton = ButtonStyle(
-    shape: const WidgetStatePropertyAll(shape2),
-    elevation: const WidgetStatePropertyAll(0),
+    shape: const MaterialStatePropertyAll(shape2),
+    elevation: const MaterialStatePropertyAll(0),
     overlayColor: overlay(),
     splashFactory: NoSplash.splashFactory,
-    textStyle: const WidgetStatePropertyAll(
+    textStyle: const MaterialStatePropertyAll(
         TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
   );
 
@@ -466,7 +454,7 @@ ThemeData _holo(Brightness brightness) {
     ),
     // Табы ICS: подписи заглавными у Holo были, но регистр строк — дело
     // локализации; полоса-индикатор — Holo Blue на всю ширину таба.
-    tabBarTheme: const TabBarThemeData(
+    tabBarTheme: const TabBarTheme(
       labelColor: Color(0xFFF3F3F3),
       unselectedLabelColor: Color(0xFFBEBEBE),
       indicator: UnderlineTabIndicator(
@@ -479,13 +467,13 @@ ThemeData _holo(Brightness brightness) {
       unselectedLabelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
       splashFactory: NoSplash.splashFactory,
     ),
-    cardTheme: CardThemeData(
+    cardTheme: CardTheme(
       color: panelBg,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: r2, side: hairline),
       margin: const EdgeInsets.all(4),
     ),
-    dialogTheme: DialogThemeData(
+    dialogTheme: DialogTheme(
       backgroundColor: panelBg,
       elevation: 0,
       shape: shape2,
@@ -522,54 +510,54 @@ ThemeData _holo(Brightness brightness) {
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: flatButton.copyWith(
-        backgroundColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.disabled)
-                ? buttonBg.withValues(alpha: 0.5)
+        backgroundColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.disabled)
+                ? buttonBg.withOpacity(0.5)
                 : buttonBg),
-        foregroundColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.disabled)
-                ? cs.onSurface.withValues(alpha: 0.38)
+        foregroundColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.disabled)
+                ? cs.onSurface.withOpacity(0.38)
                 : cs.onSurface),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: flatButton.copyWith(
-        backgroundColor: WidgetStatePropertyAll(buttonBg),
-        foregroundColor: WidgetStatePropertyAll(cs.onSurface),
+        backgroundColor: MaterialStatePropertyAll(buttonBg),
+        foregroundColor: MaterialStatePropertyAll(cs.onSurface),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: flatButton.copyWith(
-        foregroundColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.disabled)
-                ? cs.onSurface.withValues(alpha: 0.38)
+        foregroundColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.disabled)
+                ? cs.onSurface.withOpacity(0.38)
                 : cs.onSurface),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: flatButton.copyWith(
-        foregroundColor: WidgetStatePropertyAll(cs.onSurface),
-        side: WidgetStatePropertyAll(BorderSide(color: cs.outline)),
+        foregroundColor: MaterialStatePropertyAll(cs.onSurface),
+        side: MaterialStatePropertyAll(BorderSide(color: cs.outline)),
       ),
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         overlayColor: overlay(),
         splashFactory: NoSplash.splashFactory,
-        shape: const WidgetStatePropertyAll(shape2),
+        shape: const MaterialStatePropertyAll(shape2),
       ),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: ButtonStyle(
-        shape: const WidgetStatePropertyAll(shape2),
-        side: WidgetStatePropertyAll(BorderSide(color: cs.outline)),
+        shape: const MaterialStatePropertyAll(shape2),
+        side: MaterialStatePropertyAll(BorderSide(color: cs.outline)),
         overlayColor: overlay(),
         splashFactory: NoSplash.splashFactory,
-        backgroundColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.selected)
-                ? _holoBlue.withValues(alpha: 0.35)
+        backgroundColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected)
+                ? _holoBlue.withOpacity(0.35)
                 : null),
-        foregroundColor: WidgetStatePropertyAll(cs.onSurface),
+        foregroundColor: MaterialStatePropertyAll(cs.onSurface),
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -580,25 +568,25 @@ ThemeData _holo(Brightness brightness) {
       shape: RoundedRectangleBorder(borderRadius: r2, side: hairline),
     ),
     switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected)
+      thumbColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected)
               ? _holoBlue
               : (dark ? const Color(0xFF9A9A9A) : const Color(0xFFBDBDBD))),
-      trackColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected)
-              ? _holoBlue.withValues(alpha: 0.4)
+      trackColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected)
+              ? _holoBlue.withOpacity(0.4)
               : (dark ? const Color(0xFF3A3A3A) : const Color(0xFFDDDDDD))),
-      trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
+      trackOutlineColor: const MaterialStatePropertyAll(Colors.transparent),
     ),
     checkboxTheme: CheckboxThemeData(
-      fillColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected) ? _holoBlue : null),
-      checkColor: const WidgetStatePropertyAll(Colors.black),
+      fillColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected) ? _holoBlue : null),
+      checkColor: const MaterialStatePropertyAll(Colors.black),
       shape: const RoundedRectangleBorder(),
     ),
     radioTheme: RadioThemeData(
-      fillColor: WidgetStateProperty.resolveWith((s) =>
-          s.contains(WidgetState.selected) ? _holoBlue : cs.onSurfaceVariant),
+      fillColor: MaterialStateProperty.resolveWith((s) =>
+          s.contains(MaterialState.selected) ? _holoBlue : cs.onSurfaceVariant),
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: _holoBlue,
@@ -619,7 +607,7 @@ ThemeData _holo(Brightness brightness) {
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: _holoBlue,
-      selectionColor: _holoBlue.withValues(alpha: 0.4),
+      selectionColor: _holoBlue.withOpacity(0.4),
       selectionHandleColor: _holoBlue,
     ),
     tooltipTheme: const TooltipThemeData(
@@ -641,9 +629,6 @@ ThemeData _holo(Brightness brightness) {
 /// масштабированием (activity_open_enter_holo).
 class _HoloPageTransitionsBuilder extends PageTransitionsBuilder {
   const _HoloPageTransitionsBuilder();
-
-  @override
-  Duration get transitionDuration => const Duration(milliseconds: 200);
 
   @override
   Widget buildTransitions<T>(

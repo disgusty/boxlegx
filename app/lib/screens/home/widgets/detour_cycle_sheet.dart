@@ -51,7 +51,7 @@ class _DetourCycleSheet extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: cs.onSurfaceVariant.withValues(alpha: 0.4),
+              color: cs.onSurfaceVariant.withOpacity(0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -175,7 +175,7 @@ class _CulpritTile extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              border: Border.all(color: cs.error.withValues(alpha: 0.5)),
+              border: Border.all(color: cs.error.withOpacity(0.5)),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(

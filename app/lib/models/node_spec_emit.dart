@@ -246,8 +246,8 @@ Outbound emitHysteria2(Hysteria2Spec s, TemplateVars vars) {
     out['obfs'] = {
       'type': s.obfs,
       if (s.obfsPassword.isNotEmpty) 'password': s.obfsPassword,
-      'min_packet_size': ?s.obfsMinPacketSize,
-      'max_packet_size': ?s.obfsMaxPacketSize,
+      if (s.obfsMinPacketSize != null) 'min_packet_size': s.obfsMinPacketSize,
+      if (s.obfsMaxPacketSize != null) 'max_packet_size': s.obfsMaxPacketSize,
     };
   }
   if (s.upMbps != null) out['up_mbps'] = s.upMbps;
@@ -443,8 +443,8 @@ Outbound emitMasque(MasqueSpec s, TemplateVars vars) {
     // §582 — пустой ключ = ключа нет (тело своего сервера без ключей).
     if (s.privateKeyDer.isNotEmpty) 'private_key': s.privateKeyDer,
     if (s.publicKeyDer.isNotEmpty) 'public_key': s.publicKeyDer,
-    'ip': ?ip,
-    'ipv6': ?ipv6,
+    if (ip != null) 'ip': ip,
+    if (ipv6 != null) 'ipv6': ipv6,
     if (tls.isNotEmpty) 'tls': tls,
     if (s.mtu != null) 'mtu': s.mtu,
     if (s.idleTimeout.isNotEmpty) 'idle_timeout': s.idleTimeout,

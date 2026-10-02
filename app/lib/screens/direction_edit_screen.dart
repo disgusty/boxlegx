@@ -393,7 +393,7 @@ class _DirectionEditScreenState extends State<DirectionEditScreen> {
 
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, _) {
+      onPopInvoked: (didPop) {
         if (!didPop) _handleBack();
       },
       child: Scaffold(
@@ -718,7 +718,7 @@ class _DirectionEditScreenState extends State<DirectionEditScreen> {
                 showSelectedIcon: false,
                 style: const ButtonStyle(
                   visualDensity: VisualDensity.compact,
-                  textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 12)),
+                  textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 12)),
                 ),
                 onSelectionChanged: (s) =>
                     setState(() => _autoMode = s.first),

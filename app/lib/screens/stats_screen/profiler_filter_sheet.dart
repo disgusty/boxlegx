@@ -319,7 +319,7 @@ class _ProfilerFilterSheetState extends State<_ProfilerFilterSheet>
     AppInfoCache.ensure(pkg);
     return AnimatedBuilder(
       animation: AppInfoCache.revision,
-      builder: (_, _) {
+      builder: (_, __) {
         final info = AppInfoCache.of(pkg);
         if (info?.icon != null) {
           return ClipRRect(
@@ -338,7 +338,7 @@ class _ProfilerFilterSheetState extends State<_ProfilerFilterSheet>
           width: 28,
           height: 28,
           child: CircleAvatar(
-            backgroundColor: cs.surfaceContainerHighest,
+            backgroundColor: cs.surfaceVariant,
             child: Text(
               label.isEmpty ? '?' : label.characters.first.toUpperCase(),
               style: TextStyle(fontSize: 11, color: cs.onSurface),
@@ -449,7 +449,7 @@ class _ProfilerFilterSheetState extends State<_ProfilerFilterSheet>
               child: SingleChildScrollView(
                 child: AnimatedBuilder(
                   animation: _tab,
-                  builder: (_, _) {
+                  builder: (_, __) {
                     final defs = _tabDefs;
                     final i = _tab.index.clamp(0, defs.length - 1);
                     return defs[i].$3();

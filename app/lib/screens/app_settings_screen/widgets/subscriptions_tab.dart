@@ -184,7 +184,7 @@ class SubscriptionsTab extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ?extra,
+          if (extra != null) extra,
           IconButton(
             icon: const Icon(Icons.edit_outlined, size: 20),
             tooltip: getLocalText.s("Edit"),

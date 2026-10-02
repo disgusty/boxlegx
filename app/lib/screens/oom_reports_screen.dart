@@ -153,7 +153,7 @@ class _OomReportsTabState extends State<OomReportsTab>
   Widget _buildList(BuildContext context, List<OomReportFile> reports) {
     return ListView.separated(
       itemCount: reports.length,
-      separatorBuilder: (_, _) => const Divider(height: 1),
+      separatorBuilder: (_, __) => const Divider(height: 1),
       itemBuilder: (context, i) {
         final r = reports[i];
         return ListTile(

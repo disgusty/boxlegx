@@ -124,7 +124,7 @@ class _ReadOnlyPreview extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest,
+              color: theme.colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(6),
             ),
             constraints: const BoxConstraints(maxHeight: 180),
@@ -153,7 +153,7 @@ class _ReadOnlyPreview extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest,
+                color: theme.colorScheme.surfaceVariant,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: SingleChildScrollView(

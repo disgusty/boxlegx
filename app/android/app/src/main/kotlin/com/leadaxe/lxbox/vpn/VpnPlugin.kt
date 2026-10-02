@@ -260,11 +260,14 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
         // (например при гонке с фоновыми ограничениями) → краш прямо в
         // onAttachedToEngine, до того как плагин готов. Симметрично к
         // runCatching на unregisterReceiver в onDetachedFromEngine.
+        // lx-legacy: registerReceiver(…, flags) — API 26; ContextCompat (как в
+        // BoxService) на старых API регистрирует без флагов.
         runCatching {
-            context.registerReceiver(
+            androidx.core.content.ContextCompat.registerReceiver(
+                context,
                 statusReceiver,
                 IntentFilter(BoxVpnService.BROADCAST_STATUS),
-                Context.RECEIVER_NOT_EXPORTED
+                androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
             )
         }.onFailure { Log.e(TAG, "[vpn] registerReceiver(statusReceiver) failed: $it") }
     }
@@ -577,8 +580,14 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
                 }
             }
             "isIgnoringBatteryOptimizations" -> {
-                val pm = context.getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
-                result.success(pm.isIgnoringBatteryOptimizations(context.packageName))
+                // lx-legacy: Doze и battery-optimization — с API 23; ниже
+                // ограничивать нечему → true (Dart не показывает предупреждение).
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    result.success(true)
+                } else {
+                    val pm = context.getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
+                    result.success(pm.isIgnoringBatteryOptimizations(context.packageName))
+                }
             }
             "openBatteryOptimizationSettings" -> {
                 // Primary — system one-tap prompt («Allow L×Box to ignore
@@ -589,7 +598,8 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
                 // Fallback — общая страница battery-optimization с списком
                 // всех apps (юзеру нужно ткнуть в L×Box). Срабатывает на OEM
                 // (ColorOS/MIUI/HyperOS), где direct-prompt молча отбрасывается.
-                result.success(openSystemSettings(
+                // lx-legacy: экранов battery-optimization до API 23 нет → false.
+                result.success(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && openSystemSettings(
                     primaryAction = android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
                     primaryWithPackage = true,
                     fallbackAction = android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS,
@@ -663,10 +673,13 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
             "openVpnSettings" -> {
                 // §241 — системный экран Settings → VPN: активный VPN там
                 // помечен «Connected», юзер видит, кто держит слот. Action
-                // public с API 24 (minSdk), package в URI не нужен.
+                // public с API 24, package в URI не нужен. lx-legacy: на 4.x
+                // action есть, но скрытый — если не найдётся, «Беспроводные сети»
+                // (там пункт VPN).
                 result.success(openSystemSettings(
                     primaryAction = android.provider.Settings.ACTION_VPN_SETTINGS,
                     primaryWithPackage = false,
+                    fallbackAction = android.provider.Settings.ACTION_WIRELESS_SETTINGS,
                 ))
             }
             "requestAddTile" -> {
@@ -1184,7 +1197,10 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
         }
 
         fun kb(statName: String, fallbackKb: Int = 0): Long {
-            val parsed = mi.getMemoryStat(statName)?.toLongOrNull() ?: 0L
+            // lx-legacy: getMemoryStat — API 23; ниже только поля-fallback.
+            val parsed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mi.getMemoryStat(statName)?.toLongOrNull() ?: 0L
+            } else 0L
             val value = if (parsed > 0L) parsed else fallbackKb.toLong()
             return value * 1024L
         }
@@ -1247,7 +1263,13 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
                 .redirectErrorStream(true)
                 .start()
             val out = proc.inputStream.bufferedReader().readText()
-            proc.waitFor(2, java.util.concurrent.TimeUnit.SECONDS)
+            // lx-legacy: waitFor(timeout) — API 26. Ниже — обычный waitFor():
+            // stdout уже дочитан до EOF, `logcat -d` к этому моменту завершён.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                proc.waitFor(2, java.util.concurrent.TimeUnit.SECONDS)
+            } else {
+                proc.waitFor()
+            }
             out
         }.getOrElse {
             Log.w(TAG, "logcat tail failed: ${it.message}")
@@ -1322,6 +1344,13 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
     /// поэтому helper `openSystemSettings` не подходит). Если активити не
     /// найдена (старый Android / OEM без экрана) — fallback на app details.
     private fun openNotificationSettings(): Boolean {
+        // lx-legacy: ACTION_APP_NOTIFICATION_SETTINGS — API 26; ниже сразу app details.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return openSystemSettings(
+                primaryAction = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                primaryWithPackage = true,
+            )
+        }
         val act = activity
         val launchCtx: Context = act ?: context
         val useNewTask = act == null
@@ -1458,6 +1487,16 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
     private fun isForeignVpnActive(): Boolean {
         if (BoxVpnService.currentStatus != VpnStatus.Stopped) return false
         val cm = BoxApplication.connectivity
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            // lx-legacy: activeNetwork — API 23. На 21–22 VPN виден типом
+            // activeNetworkInfo; на < 21 чужой VPN в ConnectivityManager не
+            // отражается вовсе — считаем, что его нет (establish() его отзовёт).
+            @Suppress("DEPRECATION")
+            val type = runCatching { cm.activeNetworkInfo?.type }.getOrNull()
+            @android.annotation.SuppressLint("InlinedApi") // TYPE_VPN (21) — константа, на < 21 не совпадёт
+            val isVpn = type == android.net.ConnectivityManager.TYPE_VPN
+            return isVpn
+        }
         return try {
             val n = cm.activeNetwork ?: return false
             val caps = cm.getNetworkCapabilities(n) ?: return false
