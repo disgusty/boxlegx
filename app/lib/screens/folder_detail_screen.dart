@@ -34,6 +34,7 @@ import '../widgets/reorder_grab_strip.dart';
 import '../services/l10n/locale_controller.dart';
 import '../services/file_import.dart';
 import '../widgets/app_bottom_sheet.dart';
+import '../theme/app_style.dart';
 
 /// §234 — экран папки серверов. Зеркалит SubscriptionDetailScreen: вкладка
 /// членов (per-member toggle, drag-reorder, long-press меню) + Settings
@@ -1247,7 +1248,7 @@ class _FolderDetailScreenState extends State<FolderDetailScreen>
       key: ValueKey('member-$i-${m.raw.hashCode}'),
       child: AnimatedContainer(
         key: _memberKey(i),
-        duration: const Duration(milliseconds: 200),
+        duration: appStyle.motion(const Duration(milliseconds: 200)),
         decoration: highlighted
             ? BoxDecoration(
                 color: cs.primaryContainer.withValues(alpha: 0.5),

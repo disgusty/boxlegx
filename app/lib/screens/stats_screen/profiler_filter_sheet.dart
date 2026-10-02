@@ -433,6 +433,12 @@ class _ProfilerFilterSheetState extends State<_ProfilerFilterSheet>
               controller: _tab,
               isScrollable: true,
               tabAlignment: TabAlignment.start,
+              // Таб внутри экрана, не в AppBar: цвета явно (= дефолт M3),
+              // иначе в стилях Material 1 / Holo подписи светлые, как на панели.
+              labelColor: Theme.of(context).colorScheme.primary,
+              unselectedLabelColor:
+                  Theme.of(context).colorScheme.onSurfaceVariant,
+              indicatorColor: Theme.of(context).colorScheme.primary,
               tabs: [
                 for (final (label, active, _) in _tabDefs)
                   _dotTab(label, active),

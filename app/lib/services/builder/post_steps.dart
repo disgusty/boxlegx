@@ -15,7 +15,8 @@ import '../core_duration.dart';
 import '../json_clone.dart';
 import '../parser/uri_utils.dart' show isValidRealityPublicKey;
 import '../parser/utls_fingerprint.dart';
-import '../settings_storage.dart' show SettingsStorage, TunAppsConfig;
+import '../settings_storage.dart'
+    show RouteSitesConfig, SettingsStorage, TunAppsConfig;
 import 'detour_yields.dart' show yieldToBuildDetour;
 import 'if_engine.dart' show Dropped, walk;
 import 'preset_expand.dart';
@@ -26,6 +27,7 @@ import 'rule_set_registry.dart';
 //
 //   - tls_transforms.dart — applyMixedCaseSni / applyTlsFragment (§028)
 //   - tun_packages.dart   — applyTunPackages (§046)
+//   - route_sites.dart    — applyRouteSites (маршрутизация сайтов)
 //   - dns_rules.dart      — applyCustomDns / resolveDnsRulesList (§061+§033)
 //   - custom_rules.dart   — applyPresetBundles / applyCustomRules /
 //                           applyAllCustomRules / _outboundToRoute (§030+§062)
@@ -35,6 +37,7 @@ import 'rule_set_registry.dart';
 //                           висячего detour (§441/§443, SPEC 129 Н10)
 part 'post_steps/tls_transforms.dart';
 part 'post_steps/tun_packages.dart';
+part 'post_steps/route_sites.dart';
 part 'post_steps/dns_rules.dart';
 part 'post_steps/custom_rules.dart';
 part 'post_steps/dns_servers.dart';

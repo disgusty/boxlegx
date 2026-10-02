@@ -29,6 +29,8 @@ import 'services/version_info.dart';
 import 'services/workspaces/workspace_controller.dart';
 import 'services/workspaces/workspace_store.dart';
 import 'services/wifi_history_listener.dart';
+import 'theme/app_style.dart';
+import 'theme/app_themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -188,6 +190,8 @@ void main() async {
   } catch (_) {
     // Storage недоступен — остаётся дефолт (true).
   }
+  // Стиль интерфейса — до первого кадра, чтобы не мигал дефолтный.
+  await appStyle.ready;
   runApp(const LxBoxApp());
 }
 
@@ -288,34 +292,31 @@ final themeNotifier = ThemeNotifier();
 class LxBoxApp extends StatelessWidget {
   const LxBoxApp({super.key});
 
-  static const _seed = Colors.indigo;
-
   @override
   Widget build(BuildContext context) {
     // §279 — merged Listenable: смена локали = механизм themeNotifier
     // (rebuild единственного MaterialApp, без remount и подъёма контроллеров).
     return AnimatedBuilder(
       animation: Listenable.merge(
-        [themeNotifier, LocaleController.I, WorkspaceController.I],
+        [themeNotifier, appStyle, LocaleController.I, WorkspaceController.I],
       ),
       builder: (context, _) {
         // §285 — getLocalText отслеживает применяемую локаль через
         // LocaleController._applyLocale (dict-reload на каждую смену); отдельного
         // per-build присваивания активного локализатора не требуется.
+        // Стиль интерфейса (Material 3 / Material 1 / Holo) и упрощённые
+        // анимации — App Settings → Appearance, см. lib/theme/.
+        final style = appStyle.style;
+        final reduce = appStyle.reduceMotion;
         return MaterialApp(
           title: 'L×Box',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: _seed),
-            useMaterial3: true,
-          ),
-          darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: _seed,
-              brightness: Brightness.dark,
-            ),
-            useMaterial3: true,
-          ),
+          theme: buildAppTheme(style, Brightness.light, reduceMotion: reduce),
+          darkTheme:
+              buildAppTheme(style, Brightness.dark, reduceMotion: reduce),
           themeMode: themeNotifier.mode,
+          // Плавная смена темы перерисовывает всё дерево ~200 мс; при
+          // упрощённых анимациях — мгновенно.
+          themeAnimationDuration: appStyle.motion(kThemeAnimationDuration),
           // §279 — ВСЕГДА подаём явную локаль (effective уже резолвит
           // 'system' по языку устройства через PlatformDispatcher). Ранее
           // 'system' давал locale: null, и Flutter полагался на собственный

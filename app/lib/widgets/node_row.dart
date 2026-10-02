@@ -9,6 +9,7 @@ import '../services/networks_direction.dart';
 import '../services/l10n/locale_controller.dart';
 // §535 — CcEndpointState: имена состояний endpoint'а приходят из ядра.
 import '../vpn/cc_channel.dart' show CcEndpointState;
+import '../theme/app_style.dart';
 
 /// One row в node list на главной screen'е. Read-only widget от
 /// [NodeViewItem] data + callbacks.
@@ -565,7 +566,7 @@ class NodeRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
+                duration: appStyle.motion(const Duration(milliseconds: 200)),
                 width: (item.active || item.highlighted) ? 3 : 0,
                 color: (item.active || item.highlighted)
                     ? colorScheme.primary

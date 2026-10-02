@@ -2966,6 +2966,7 @@ class SubscriptionController extends ChangeNotifier {
       coreVersion:
           await CoreVersionCache.ensure(BoxVpnClient().getCoreVersion),
       tunApps: await SettingsStorage.getTunApps(),
+      routeSites: await SettingsStorage.getRouteSites(),
       vpnMode: await SettingsStorage.getVpnMode(),
       idleSuspend: await SettingsStorage.getIdleSuspend(), // §215
       idleSuspendReachable:

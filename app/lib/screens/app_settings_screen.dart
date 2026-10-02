@@ -24,6 +24,7 @@ import 'app_settings_screen/widgets/diagnostics_tab.dart';
 import 'app_settings_screen/widgets/general_tab.dart';
 import 'app_settings_screen/widgets/subscriptions_tab.dart';
 import 'backup_screen.dart';
+import '../theme/app_style.dart';
 
 class AppSettingsScreen extends StatefulWidget {
   const AppSettingsScreen({
@@ -496,7 +497,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> with WidgetsBindi
       // rebuild корневого MaterialApp его не перестраивает (Navigator держит
       // route поверх). Без подписки смена языка не двигала radio-галку picker'а
       // и не перерисовывала строки самого экрана настроек.
-      animation: Listenable.merge([themeNotifier, LocaleController.I]),
+      animation: Listenable.merge([themeNotifier, appStyle, LocaleController.I]),
       builder: (context, _) {
         return DefaultTabController(
           length: 5,

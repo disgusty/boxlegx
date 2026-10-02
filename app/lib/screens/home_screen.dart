@@ -58,6 +58,7 @@ import '../widgets/double_back_to_exit.dart';
 import '../services/probe/probe_lifecycle.dart';
 import '../services/workspaces/workspace_controller.dart';
 import 'home/widgets/workspace_menu.dart';
+import '../theme/app_style.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -344,9 +345,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver, Ti
     // нарушало «build чистый» (multiple rebuilds в секунду на hot path'е
     // heartbeat'а / ping'а → лишние .repeat/.stop/.reset вызовы).
     final isConnecting = now == TunnelStatus.connecting;
-    if (isConnecting && !_connectingAnim.isAnimating) {
+    // Упрощённые анимации: без вращения — статичный значок не гоняет
+    // перерисовку 60 раз в секунду всё время подключения.
+    if (isConnecting && !appStyle.reduceMotion && !_connectingAnim.isAnimating) {
       _connectingAnim.repeat();
-    } else if (!isConnecting && _connectingAnim.isAnimating) {
+    } else if ((!isConnecting || appStyle.reduceMotion) &&
+        _connectingAnim.isAnimating) {
       _connectingAnim.stop();
       _connectingAnim.reset();
     }

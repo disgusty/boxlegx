@@ -47,8 +47,10 @@ import 'routing_screen/widgets/route_final_tile.dart';
 import 'routing_screen/widgets/routing_group_tile.dart';
 import 'routing_screen/widgets/routing_tabs.dart';
 import 'routing_screen/widgets/srs_status_button.dart';
+import 'route_sites_tab.dart';
 import 'tun_apps_tab.dart';
 import '../services/l10n/locale_controller.dart';
+import '../theme/app_style.dart';
 
 part 'routing_screen/routing_srs_cache.dart';
 
@@ -257,7 +259,7 @@ class _RoutingScreenState extends State<RoutingScreen>
     final bottomPad = MediaQuery.of(context).padding.bottom + 24;
 
     return DefaultTabController(
-      length: 4,
+      length: 5,
       // §262 — таб Presets (index 1) первым при навигации из DNS-health листа.
       initialIndex: widget.initialPresetsTab ? 1 : 0,
       child: Builder(
@@ -299,6 +301,7 @@ class _RoutingScreenState extends State<RoutingScreen>
                 Tab(text: getLocalText.s("Presets")),
                 Tab(text: getLocalText.s("Rules")),
                 Tab(text: getLocalText.s("Tunnel apps")),
+                Tab(text: getLocalText.s("Sites")),
               ],
             ),
           ),
@@ -338,6 +341,12 @@ class _RoutingScreenState extends State<RoutingScreen>
                 homeController: widget.homeController,
                 subController: widget.subController,
               ),
+
+              // ─── Sites: маршрутизация сайтов (аналог Amnezia VPN) ───
+              RouteSitesTab(
+                homeController: widget.homeController,
+                subController: widget.subController,
+              ),
             ],
           ),
         ),
@@ -351,7 +360,7 @@ class _RoutingScreenState extends State<RoutingScreen>
     final highlighted = _highlightedDirectionTag == direction.tag;
     return AnimatedContainer(
       key: _directionKeys.putIfAbsent(direction.tag, GlobalKey.new),
-      duration: const Duration(milliseconds: 200),
+      duration: appStyle.motion(const Duration(milliseconds: 200)),
       decoration: highlighted
           ? BoxDecoration(
               color: cs.primaryContainer.withValues(alpha: 0.5),

@@ -342,6 +342,12 @@ class _FilterPanelState extends State<FilterPanel>
                   isScrollable: true,
                   tabAlignment: TabAlignment.start,
                   labelPadding: const EdgeInsets.symmetric(horizontal: 14),
+                  // Таб внутри экрана, не в AppBar: цвета явно (= дефолт M3),
+                  // иначе в стилях Material 1 / Holo подписи светлые, как на панели.
+                  labelColor: Theme.of(context).colorScheme.primary,
+                  unselectedLabelColor:
+                      Theme.of(context).colorScheme.onSurfaceVariant,
+                  indicatorColor: Theme.of(context).colorScheme.primary,
                   tabs: [
                     _dotTab('Regex', f.regexActive),
                     _dotTab('Protocol', f.protocolActive || f.variantActive),

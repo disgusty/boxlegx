@@ -36,6 +36,7 @@ import 'subscriptions_screen/widgets/subscription_entry_tile.dart';
 import 'subscriptions_screen/widgets/subscriptions_empty_state.dart';
 import '../services/l10n/locale_controller.dart';
 import '../services/file_import.dart';
+import '../theme/app_style.dart';
 
 class SubscriptionsScreen extends StatefulWidget {
   const SubscriptionsScreen({
@@ -1165,7 +1166,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
           key: ValueKey(entry.id),
           child: AnimatedContainer(
             key: _tileKey(entry.id),
-            duration: const Duration(milliseconds: 400),
+            duration: appStyle.motion(const Duration(milliseconds: 400)),
             decoration: highlighted
                 ? BoxDecoration(
                     color: cs.primaryContainer

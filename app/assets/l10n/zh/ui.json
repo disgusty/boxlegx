@@ -550,8 +550,17 @@
   "ACTIVE": {
     "value": "在用"
   },
+  "Add site": {
+    "value": "添加网站"
+  },
+  "Add sites": {
+    "value": "添加网站"
+  },
   "Add tile dismissed.": {
     "value": "已取消添加磁贴。"
+  },
+  "Add to list": {
+    "value": "添加到列表"
   },
   "Amnezia VPN config": {
     "value": "Amnezia VPN 配置"
@@ -976,6 +985,15 @@
   "Check skipped: %s": {
     "value": "已跳过检查：%s"
   },
+  "Choose which websites go through the VPN.\n\n• Off — sites are routed by your normal rules (default)\n• Allow-list — ONLY listed sites go through VPN; everything else goes directly\n• Deny-list — listed sites go directly; everything else goes through VPN\n\nA domain also covers all of its subdomains (example.com matches www.example.com). IP addresses and subnets (10.0.0.0/8) are supported too.\n\nThe list works inside the core, so it also applies in Proxy mode. Changes apply after the core restarts or reloads from the home screen banner.\n\nImport and export use the Amnezia VPN site list format (JSON); plain text files with one site per line can be imported too.": {
+    "value": "选择哪些网站通过 VPN。\n\n• 关闭 — 网站按常规规则路由（默认）\n• 白名单 — 仅列表中的网站通过 VPN，其余直连\n• 黑名单 — 列表中的网站直连，其余通过 VPN\n\n域名同时涵盖其所有子域名（example.com 包含 www.example.com）。也支持 IP 地址和子网（10.0.0.0/8）。\n\n该列表在核心内部生效，因此在代理模式下同样有效。更改将在从主屏幕横幅重启或重新加载核心后生效。\n\n导入和导出使用 Amnezia VPN 网站列表格式（JSON）；也可以导入每行一个网站的纯文本文件。"
+  },
+  "Classic look of Android 5.0 Lollipop": {
+    "value": "Android 5.0 Lollipop 的经典外观"
+  },
+  "Clear all sites?": {
+    "value": "清空所有网站？"
+  },
   "Connect": {
     "value": "连接"
   },
@@ -1385,6 +1403,9 @@
   },
   "debug config": {
     "value": "Debug API 配置"
+  },
+  "Default modern look": {
+    "value": "默认的现代外观"
   },
   "Detour copied": {
     "value": "已复制 detour"
@@ -1860,6 +1881,9 @@
   "Every year": {
     "value": "每年"
   },
+  "example.com, 1.2.3.4, 10.0.0.0/8": {
+    "value": "example.com, 1.2.3.4, 10.0.0.0/8"
+  },
   "Exclude (regex)": {
     "value": "排除（正则）"
   },
@@ -1901,6 +1925,9 @@
   },
   "Export to clipboard": {
     "value": "导出到剪贴板"
+  },
+  "Export to file": {
+    "value": "导出到文件"
   },
   "Export without DNS": {
     "value": "导出（不含 DNS）"
@@ -1969,14 +1996,41 @@
   "fetching subscriptions…": {
     "value": "正在获取订阅…"
   },
+  "Found %d sites in the file.": {
+    "value": "文件中找到 %d 个网站。"
+  },
+  "Holo": {
+    "value": "Holo"
+  },
+  "Import from file": {
+    "value": "从文件导入"
+  },
+  "Import sites": {
+    "value": "导入网站"
+  },
+  "Imported sites: %d": {
+    "value": "已导入网站：%d"
+  },
   "Imported: %s": {
     "value": "已导入：%s"
+  },
+  "Instant screen transitions and fewer moving effects. Smoother on old and slow devices.": {
+    "value": "屏幕切换即时完成，动态效果更少。在旧设备和低性能设备上更流畅。"
+  },
+  "Interface style": {
+    "value": "界面风格"
   },
   "Light": {
     "value": "浅色"
   },
+  "Listed sites go directly. Everything else goes through VPN.": {
+    "value": "列表中的网站直连，其余通过 VPN。"
+  },
   "Loading…": {
     "value": "加载中…"
+  },
+  "Look of Android 4.0–4.4": {
+    "value": "Android 4.0–4.4 的外观"
   },
   "Manual": {
     "value": "手动"
@@ -2638,6 +2692,12 @@
   "Matches when traffic is on a selected network AND matches a selected L7 protocol.": {
     "value": "当流量位于所选网络且匹配所选 L7 协议时命中。"
   },
+  "Material Design 1": {
+    "value": "Material Design 1"
+  },
+  "Material Design 3": {
+    "value": "Material Design 3"
+  },
   "Measuring…": {
     "value": "正在测量…"
   },
@@ -2788,6 +2848,12 @@
   "No OOM reports": {
     "value": "没有 OOM 报告"
   },
+  "No sites found in the file.": {
+    "value": "文件中未找到网站。"
+  },
+  "No sites yet. Tap \"Add site\" or import a list.": {
+    "value": "暂无网站。点击“添加网站”或导入列表。"
+  },
   "No Tailscale nodes yet — add one on the Servers screen first": {
     "value": "还没有 Tailscale 节点——请先在「服务器」页添加一个"
   },
@@ -2926,6 +2992,9 @@
   "Nothing imported": {
     "value": "未导入任何内容"
   },
+  "Only listed sites go through VPN. Everything else goes directly.": {
+    "value": "仅列表中的网站通过 VPN，其余直连。"
+  },
   "Rebuild config + connect": {
     "value": "重建配置并连接"
   },
@@ -2934,6 +3003,12 @@
   },
   "Reconnect": {
     "value": "重新连接"
+  },
+  "Remove all %d sites from the list. The mode is kept.": {
+    "value": "从列表中移除全部 %d 个网站。模式将保留。"
+  },
+  "Replace list": {
+    "value": "替换列表"
   },
   "routing (%d rules)": {
     "value": {
@@ -2950,6 +3025,9 @@
       "other": "路由 — %d 条规则"
     }
   },
+  "Search": {
+    "value": "搜索"
+  },
   "Select apps…": {
     "value": "选择应用…"
   },
@@ -2964,11 +3042,35 @@
   "Server copied": {
     "value": "已复制服务器"
   },
+  "Several entries — separate with spaces, commas or new lines": {
+    "value": "多个条目请用空格、逗号或换行分隔"
+  },
+  "Simplified animations": {
+    "value": "简化动画"
+  },
   "sing-box %s · via libbox": {
     "value": "sing-box %s · 通过 libbox"
   },
   "sing-box (version unknown)": {
     "value": "sing-box（版本未知）"
+  },
+  "Sites": {
+    "value": "网站"
+  },
+  "Sites are routed by the normal rules (default).": {
+    "value": "网站按常规规则路由（默认）。"
+  },
+  "Sites exported": {
+    "value": "网站已导出"
+  },
+  "Sites in this list (%d)": {
+    "value": "列表中的网站（%d）"
+  },
+  "Sites — split tunneling by address": {
+    "value": "网站 — 按地址分流"
+  },
+  "Skipped invalid entries: %d": {
+    "value": "已跳过无效条目：%d"
   },
   "Stream": {
     "value": "流"

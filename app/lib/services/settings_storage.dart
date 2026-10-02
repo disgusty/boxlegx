@@ -37,6 +37,7 @@ part 'settings_storage/directions.dart';
 part 'settings_storage/chains.dart';
 part 'settings_storage/network.dart';
 part 'settings_storage/backup_tun.dart';
+part 'settings_storage/route_sites.dart';
 part 'settings_storage/vpn_mode.dart';
 part 'settings_storage/warp.dart';
 part 'settings_storage/native_prefs.dart';
@@ -190,6 +191,7 @@ class SettingsStorage {
     // намеренно: её переименовывает миграция формы (§439, `migrateStorageDoc`)
     // и в файле на диске, и в снимке `replaceRaw` до allowlist'а.
     'tun_apps',
+    'route_sites', // маршрутизация сайтов (Routing → Sites)
     'vpn_mode',
     'warp_account',
     'masque_account', // §130/§219 — MASQUE-WARP аккаунт; был в бэкапе, но не в
@@ -1115,6 +1117,13 @@ class SettingsStorage {
   /// валидность. Дубликаты в `packages` schлопываются (idempotent).
   static Future<void> setTunApps(TunAppsConfig cfg, {bool flush = true}) =>
       _setTunApps(cfg, flush: flush);
+
+  /// Маршрутизация сайтов (Routing → Sites). Default: {mode: 'off', sites: []}.
+  static Future<RouteSitesConfig> getRouteSites() => _getRouteSites();
+
+  /// Persist `route_sites`: записи нормализуются, мусор и дубликаты выпадают.
+  static Future<void> setRouteSites(RouteSitesConfig cfg, {bool flush = true}) =>
+      _setRouteSites(cfg, flush: flush);
 
   // ---------------------------------------------------------------------------
   // VPN mode — Proxy / VPN / VPN+Proxy (§119)

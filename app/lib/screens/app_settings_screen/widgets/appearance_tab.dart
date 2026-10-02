@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../main.dart';
 import '../../../services/l10n/locale_controller.dart';
+import '../../../theme/app_style.dart';
 
 /// §541 — Appearance tab для App Settings: всё про внешний вид (тема,
 /// компоновка — поворот и две колонки списка узлов, язык).
@@ -60,6 +61,51 @@ class AppearanceTab extends StatelessWidget {
               );
             }).toList(),
           ),
+        ),
+        const SizedBox(height: 8),
+        // Стиль интерфейса: Material 3 (исходный) / Material 1 / Holo.
+        // Применяется сразу — MaterialApp слушает appStyle.
+        Text(getLocalText.s("Interface style"),
+            style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 8),
+        RadioGroup<UiStyle>(
+          groupValue: appStyle.style,
+          onChanged: (v) { if (v != null) appStyle.setStyle(v); },
+          child: Column(
+            children: UiStyle.values.map((style) {
+              final (label, subtitle) = switch (style) {
+                UiStyle.material3 => (
+                    getLocalText.s("Material Design 3"),
+                    getLocalText.s("Default modern look"),
+                  ),
+                UiStyle.material1 => (
+                    getLocalText.s("Material Design 1"),
+                    getLocalText.s("Classic look of Android 5.0 Lollipop"),
+                  ),
+                UiStyle.holo => (
+                    getLocalText.s("Holo"),
+                    getLocalText.s("Look of Android 4.0–4.4"),
+                  ),
+              };
+              return RadioListTile<UiStyle>(
+                value: style,
+                title: Text(label),
+                subtitle: Text(subtitle),
+                secondary: Icon(switch (style) {
+                  UiStyle.material3 => Icons.auto_awesome_outlined,
+                  UiStyle.material1 => Icons.layers_outlined,
+                  UiStyle.holo => Icons.grid_view,
+                }),
+              );
+            }).toList(),
+          ),
+        ),
+        SwitchListTile(
+          title: Text(getLocalText.s("Simplified animations")),
+          subtitle: Text(getLocalText.s("Instant screen transitions and fewer moving effects. Smoother on old and slow devices.")),
+          secondary: const Icon(Icons.animation),
+          value: appStyle.reduceMotion,
+          onChanged: appStyle.setReduceMotion,
         ),
         const SizedBox(height: 8),
         // §541 — компоновка: поворот и две колонки списка узлов в одном месте.

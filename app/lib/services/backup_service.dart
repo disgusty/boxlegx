@@ -45,6 +45,7 @@ const _topLevelRoutingKeys = {
   'urltest_passive_check', // §272 — passive health check
   'enabled_groups', // §125 — DEPRECATED (legacy, читается только миграцией)
   'tun_apps',
+  'route_sites', // маршрутизация сайтов (Routing → Sites)
   'vpn_mode',
   kDnsKey,
 };

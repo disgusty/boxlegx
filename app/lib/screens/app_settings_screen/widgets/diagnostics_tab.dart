@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../services/settings_storage.dart';
 import '../../../services/l10n/locale_controller.dart';
+import '../../../theme/app_style.dart';
 
 /// Diagnostics tab для App Settings.
 ///
@@ -269,7 +270,7 @@ class DiagnosticsTab extends StatelessWidget {
         // вынесена в полноширинный блок ниже.
         AnimatedContainer(
           key: coreLogsTileKey,
-          duration: const Duration(milliseconds: 400),
+          duration: appStyle.motion(const Duration(milliseconds: 400)),
           curve: Curves.easeOut,
           color: coreLogsHighlighted
               ? Theme.of(context).colorScheme.tertiaryContainer

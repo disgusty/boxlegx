@@ -739,8 +739,17 @@
   "ACTIVE": {
     "value": "АКТИВЕН"
   },
+  "Add site": {
+    "value": "Добавить сайт"
+  },
+  "Add sites": {
+    "value": "Добавить сайты"
+  },
   "Add tile dismissed.": {
     "value": "Добавление плитки отменено."
+  },
+  "Add to list": {
+    "value": "Добавить к списку"
   },
   "Amnezia VPN config": {
     "value": "Конфиг Amnezia VPN"
@@ -1164,6 +1173,15 @@
   },
   "Check skipped: %s": {
     "value": "Проверка пропущена: %s"
+  },
+  "Choose which websites go through the VPN.\n\n• Off — sites are routed by your normal rules (default)\n• Allow-list — ONLY listed sites go through VPN; everything else goes directly\n• Deny-list — listed sites go directly; everything else goes through VPN\n\nA domain also covers all of its subdomains (example.com matches www.example.com). IP addresses and subnets (10.0.0.0/8) are supported too.\n\nThe list works inside the core, so it also applies in Proxy mode. Changes apply after the core restarts or reloads from the home screen banner.\n\nImport and export use the Amnezia VPN site list format (JSON); plain text files with one site per line can be imported too.": {
+    "value": "Выберите, какие сайты пойдут через VPN.\n\n• Выключено — сайты маршрутизируются обычными правилами (по умолчанию)\n• Белый список — ТОЛЬКО сайты из списка идут через VPN, всё остальное — напрямую\n• Чёрный список — сайты из списка идут напрямую, всё остальное — через VPN\n\nДомен охватывает и все свои поддомены (example.com включает www.example.com). Поддерживаются также IP-адреса и подсети (10.0.0.0/8).\n\nСписок работает внутри ядра, поэтому действует и в режиме прокси. Изменения применяются после перезапуска или перезагрузки ядра из баннера на главном экране.\n\nИмпорт и экспорт — в формате списка сайтов Amnezia VPN (JSON); также можно импортировать текстовый файл, по одному сайту в строке."
+  },
+  "Classic look of Android 5.0 Lollipop": {
+    "value": "Классический вид Android 5.0 Lollipop"
+  },
+  "Clear all sites?": {
+    "value": "Очистить список сайтов?"
   },
   "Connect": {
     "value": "Подключить"
@@ -1604,6 +1622,9 @@
   },
   "debug config": {
     "value": "конфигурация Debug API"
+  },
+  "Default modern look": {
+    "value": "Современный вид по умолчанию"
   },
   "Detour copied": {
     "value": "Detour скопирован"
@@ -2088,6 +2109,9 @@
   "Every year": {
     "value": "Каждый год"
   },
+  "example.com, 1.2.3.4, 10.0.0.0/8": {
+    "value": "example.com, 1.2.3.4, 10.0.0.0/8"
+  },
   "Exclude (regex)": {
     "value": "Исключить (regex)"
   },
@@ -2129,6 +2153,9 @@
   },
   "Export to clipboard": {
     "value": "Экспорт в буфер обмена"
+  },
+  "Export to file": {
+    "value": "Экспорт в файл"
   },
   "Export without DNS": {
     "value": "Экспорт без DNS"
@@ -2200,14 +2227,41 @@
   "fetching subscriptions…": {
     "value": "загрузка подписок…"
   },
+  "Found %d sites in the file.": {
+    "value": "Сайтов в файле: %d."
+  },
+  "Holo": {
+    "value": "Holo"
+  },
+  "Import from file": {
+    "value": "Импорт из файла"
+  },
+  "Import sites": {
+    "value": "Импорт сайтов"
+  },
+  "Imported sites: %d": {
+    "value": "Импортировано сайтов: %d"
+  },
   "Imported: %s": {
     "value": "Импортировано: %s"
+  },
+  "Instant screen transitions and fewer moving effects. Smoother on old and slow devices.": {
+    "value": "Мгновенные переходы между экранами и меньше движущихся эффектов. Плавнее на старых и слабых устройствах."
+  },
+  "Interface style": {
+    "value": "Стиль интерфейса"
   },
   "Light": {
     "value": "Светлая"
   },
+  "Listed sites go directly. Everything else goes through VPN.": {
+    "value": "Сайты из списка идут напрямую. Всё остальное — через VPN."
+  },
   "Loading…": {
     "value": "Загрузка…"
+  },
+  "Look of Android 4.0–4.4": {
+    "value": "Вид Android 4.0–4.4"
   },
   "Manual": {
     "value": "Вручную"
@@ -2881,6 +2935,12 @@
   "Matches when traffic is on a selected network AND matches a selected L7 protocol.": {
     "value": "Совпадает, когда трафик идёт по выбранной сети И соответствует выбранному L7-протоколу."
   },
+  "Material Design 1": {
+    "value": "Material Design 1"
+  },
+  "Material Design 3": {
+    "value": "Material Design 3"
+  },
   "Measuring…": {
     "value": "Замеряю…"
   },
@@ -3031,6 +3091,12 @@
   "No OOM reports": {
     "value": "Отчётов OOM нет"
   },
+  "No sites found in the file.": {
+    "value": "В файле не найдено сайтов."
+  },
+  "No sites yet. Tap \"Add site\" or import a list.": {
+    "value": "Сайтов пока нет. Нажмите «Добавить сайт» или импортируйте список."
+  },
   "No Tailscale nodes yet — add one on the Servers screen first": {
     "value": "Узлов Tailscale пока нет — сначала добавьте узел на экране Servers"
   },
@@ -3169,6 +3235,9 @@
   "Nothing imported": {
     "value": "Ничего не импортировано"
   },
+  "Only listed sites go through VPN. Everything else goes directly.": {
+    "value": "Только сайты из списка идут через VPN. Всё остальное — напрямую."
+  },
   "Rebuild config + connect": {
     "value": "Пересобрать конфиг + подключить"
   },
@@ -3177,6 +3246,12 @@
   },
   "Reconnect": {
     "value": "Переподключить"
+  },
+  "Remove all %d sites from the list. The mode is kept.": {
+    "value": "Удалить из списка все сайты (%d). Режим сохранится."
+  },
+  "Replace list": {
+    "value": "Заменить список"
   },
   "routing (%d rules)": {
     "value": {
@@ -3202,6 +3277,9 @@
       "other": "Маршрутизация — %d правила"
     }
   },
+  "Search": {
+    "value": "Поиск"
+  },
   "Select apps…": {
     "value": "Выбрать приложения…"
   },
@@ -3219,11 +3297,35 @@
   "Server copied": {
     "value": "Сервер скопирован"
   },
+  "Several entries — separate with spaces, commas or new lines": {
+    "value": "Несколько записей — через пробел, запятую или с новой строки"
+  },
+  "Simplified animations": {
+    "value": "Упрощённые анимации"
+  },
   "sing-box %s · via libbox": {
     "value": "sing-box %s · через libbox"
   },
   "sing-box (version unknown)": {
     "value": "sing-box (версия неизвестна)"
+  },
+  "Sites": {
+    "value": "Сайты"
+  },
+  "Sites are routed by the normal rules (default).": {
+    "value": "Сайты маршрутизируются обычными правилами (по умолчанию)."
+  },
+  "Sites exported": {
+    "value": "Сайты экспортированы"
+  },
+  "Sites in this list (%d)": {
+    "value": "Сайты в списке (%d)"
+  },
+  "Sites — split tunneling by address": {
+    "value": "Сайты — раздельное туннелирование по адресам"
+  },
+  "Skipped invalid entries: %d": {
+    "value": "Пропущено некорректных записей: %d"
   },
   "Stream": {
     "value": "Поток"

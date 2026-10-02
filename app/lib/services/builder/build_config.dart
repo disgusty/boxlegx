@@ -126,6 +126,9 @@ class BuildSettings {
   /// дефолт (mode=off — все apps через tun, sing-box обычное поведение).
   final TunAppsConfig? tunApps;
 
+  /// Маршрутизация сайтов (Routing → Sites). `null` / mode=off — no-op.
+  final RouteSitesConfig? routeSites;
+
   /// §119: VPN-mode (proxy/vpn/vpn_proxy). `null` = mode=vpn (текущее
   /// поведение, post-step no-op).
   final VpnModeConfig? vpnMode;
@@ -185,6 +188,7 @@ class BuildSettings {
     this.coreVersion = '',
     this.coreBuildTags = kCoreBuildTags,
     this.tunApps,
+    this.routeSites,
     this.vpnMode,
     this.idleSuspend = '',
     this.idleSuspendReachable = '',
@@ -808,6 +812,13 @@ Future<BuildResult> _buildConfig({
       finalTag = 'vpn-1';
     }
     route['final'] = finalTag;
+  }
+
+  // Маршрутизация сайтов (Routing → Sites). ПОСЛЕ резолва route.final: в
+  // режиме allow-list шаг сам переводит final на direct-out, а сайты списка
+  // уводит на прежний final.
+  if (settings.routeSites != null) {
+    applyRouteSites(config, settings.routeSites!);
   }
 
   // Фича 565 фаза B (§74 п.4) — правило на свёртку, чья группа не написана
