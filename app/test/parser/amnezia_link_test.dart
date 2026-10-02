@@ -263,7 +263,7 @@ PersistentKeepalive = 25-35
           'awg': {
             'last_config': jsonEncode({
               'config': awg3Ini,
-              'mtu': ?mtu,
+              if (mtu != null) 'mtu': mtu,
               'port': '30565',
               'protocol_version': '3.1',
             }),

@@ -56,7 +56,7 @@ void main() {
         body: ReorderableListView.builder(
           buildDefaultDragHandles: false,
           itemCount: rules.length,
-          onReorderItem: (_, _) {},
+          onReorder: (_, __) {},
           itemBuilder: (ctx, i) => tile(i, rules),
         ),
       ),
@@ -76,7 +76,7 @@ void main() {
         body: ReorderableListView.builder(
           buildDefaultDragHandles: false,
           itemCount: rules.length,
-          onReorderItem: (_, _) {},
+          onReorder: (_, __) {},
           itemBuilder: (ctx, i) => tile(i, rules),
         ),
       ),

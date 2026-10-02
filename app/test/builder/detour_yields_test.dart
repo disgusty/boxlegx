@@ -14,7 +14,7 @@ void main() {
         'type': 'wireguard',
         'tag': 'wg',
         'listen_port': 51820,
-        'detour': ?detour,
+        if (detour != null) 'detour': detour,
       };
 
   test('listen_port уступает detour — код связи, хоп сохранён', () {

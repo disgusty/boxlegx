@@ -494,7 +494,7 @@ void main() {
               'source': 'query.flag',
               'maps_to': 'transport.flag',
               'type': type,
-              'emit_as': ?emitAs,
+              if (emitAs != null) 'emit_as': emitAs,
             },
           },
         };

@@ -470,6 +470,8 @@ void main() {
     // «setState after dispose», либо меню остаётся поверх прошлого экрана.
     nav.currentState!.pop();
     await tester.pump(const Duration(milliseconds: 400));
+    // Flutter 3.13: удаление маршрута из дерева — отдельным кадром после конца анимации.
+    await tester.pump();
 
     expect(tester.takeException(), isNull,
         reason: 'исключение при снятии OverlayEntry на уходе с экрана');

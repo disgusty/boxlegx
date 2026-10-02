@@ -29,7 +29,7 @@ Map<String, dynamic> _server(String tag, String host, {Object? sections}) => {
       'tag': tag,
       'enabled': true,
       'body': {'type': 'trojan', 'server': host, 'server_port': 443, 'password': 'p'},
-      'sections': ?sections,
+      if (sections != null) 'sections': sections,
     };
 
 ({List<ServerList> lists, List<CustomRule> rules}) _apply(

@@ -46,7 +46,7 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    final captureButtons = find.byType(OutlinedButton);
+    final captureButtons = find.bySubtype<OutlinedButton>();
     expect(captureButtons, findsWidgets);
 
     await tester.tap(captureButtons.first);

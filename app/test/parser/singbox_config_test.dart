@@ -21,7 +21,7 @@ Map<String, dynamic> vless(String tag, String server,
       'server': server,
       'server_port': port,
       'uuid': uuid,
-      'detour': ?detour,
+      if (detour != null) 'detour': detour,
     };
 
 Map<String, dynamic> cfg(List<Map<String, dynamic>> outbounds,

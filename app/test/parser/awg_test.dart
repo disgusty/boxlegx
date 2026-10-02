@@ -230,7 +230,7 @@ void main() {
             'tag': 't',
             'private_key': _testPriv,
             'address': ['10.0.0.2/32'],
-            'mtu': ?mtu,
+            if (mtu != null) 'mtu': mtu,
             if (awg) 'jc': 10,
             'peers': [
               {

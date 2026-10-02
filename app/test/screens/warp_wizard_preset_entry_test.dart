@@ -8,15 +8,15 @@ void main() {
   test('§424 label = чистое значение, пометка только в labelWidget', () {
     final e = warpPresetEntry('a.example', 'a.example', mark);
     expect(e.label, 'a.example');
-    expect(e.labelWidget, isA<Text>());
-    expect((e.labelWidget as Text).data, 'a.example $mark');
+    expect(e.trailingIcon, isA<Text>());
+    expect((e.trailingIcon as Text).data, mark);
 
     final plain = warpPresetEntry('b.example', 'a.example', mark);
     expect(plain.label, 'b.example');
-    expect(plain.labelWidget, isNull);
+    expect(plain.trailingIcon, isNull);
 
     // Пустой recommended → пометок нет ни у кого.
-    expect(warpPresetEntry('', '', mark).labelWidget, isNull);
+    expect(warpPresetEntry('', '', mark).trailingIcon, isNull);
   });
 
   testWidgets('§424 выбор recommended-пункта кладёт в контроллер чистое значение',
@@ -40,10 +40,8 @@ void main() {
     await tester.pumpAndSettle();
     // В меню пометка видна (DropdownMenu держит вторую, невидимую копию
     // пунктов для замера ширины — потому findsWidgets, не findsOneWidget).
-    expect(find.text('consumer-masque.cloudflareclient.com $mark'),
-        findsWidgets);
-    await tester
-        .tap(find.text('consumer-masque.cloudflareclient.com $mark').last);
+    expect(find.text(mark), findsWidgets);
+    await tester.tap(find.text('consumer-masque.cloudflareclient.com').last);
     await tester.pumpAndSettle();
     expect(c.text, 'consumer-masque.cloudflareclient.com');
   });

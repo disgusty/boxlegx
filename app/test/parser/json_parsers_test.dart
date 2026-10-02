@@ -40,10 +40,10 @@ void main() {
             'server_port': 443,
             'uuid': uuid,
             'flow': 'xtls-rprx-vision',
-            'encryption': ?encryption,
+            if (encryption != null) 'encryption': encryption,
             'tls': {'enabled': true, 'server_name': 'w.example'},
             'transport': transport,
-            'detour': ?detour,
+            if (detour != null) 'detour': detour,
           };
       Map<String, dynamic> emitted(NodeSpec n) =>
           n.emit(TemplateVars.empty).map;

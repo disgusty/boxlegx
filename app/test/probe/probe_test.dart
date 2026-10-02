@@ -684,7 +684,7 @@ void main() {
         nodesOf(folder()),
         url: '',
         timeoutMs: 0,
-        onResult: (_, _) {},
+        onResult: (_, __) {},
       );
       expect(err, contains('boom'));
     });

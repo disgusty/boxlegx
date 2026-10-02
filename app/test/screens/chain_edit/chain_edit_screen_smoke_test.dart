@@ -83,11 +83,11 @@ void main() {
         const SourceChain(tag: 'via-de', hops: [NodeLink(tag: 'home'), NodeLink(tag: 'de-exit')])));
     await tester.pumpAndSettle();
     // Логика порядка, не жест: дёргаем колбэк списка так же, как это сделал бы
-    // drag позиции 1 на место позиции 2. onReorderItem уже нормализует
-    // newIndex под удалённый элемент, поэтому «вниз на одну» это ровно 1.
+    // drag позиции 1 на место позиции 2. onReorder (legacy) отдаёт newIndex до удаления,
+    // поэтому «вниз на одну» это newIndex = 2.
     final list = tester.widget<ReorderableListView>(
         find.byType(ReorderableListView));
-    list.onReorderItem!(0, 1);
+    list.onReorder(0, 2);
     await tester.pumpAndSettle();
     // Порядок читаем по номерам-аватарам: позиция 1 теперь de-exit.
     final tiles = tester.widgetList<ListTile>(find.byType(ListTile)).toList();

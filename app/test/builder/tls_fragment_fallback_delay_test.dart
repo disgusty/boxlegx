@@ -21,7 +21,7 @@ String? _delayFor(String? delay) {
     'outbounds': [ob],
   }, {
     'tls_fragment': 'true',
-    'tls_fragment_fallback_delay': ?delay,
+    if (delay != null) 'tls_fragment_fallback_delay': delay,
   });
   final tls = ob['tls'] as Map<String, dynamic>;
   expect(tls['fragment'], isTrue);

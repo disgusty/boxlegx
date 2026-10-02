@@ -139,7 +139,7 @@ void main() {
             'wireguard': {
               'v4_cidr': ['162.159.192.0/24'],
               'ports': [2408],
-              'keepalive': ?keepalive,
+              if (keepalive != null) 'keepalive': keepalive,
             },
           });
 

@@ -332,7 +332,7 @@ Direction _toDirection(Map<String, dynamic> c) {
 SourceChain _toChain(Map<String, dynamic> c) => SourceChain(
       tag: c['tag'] as String? ?? '',
       hops: [
-        for (final h in (c['hops'] as List?) ?? const []) ?nodeLinkFromRecord(h),
+        for (final h in (c['hops'] as List?) ?? const []) if (nodeLinkFromRecord(h) != null) nodeLinkFromRecord(h)!,
       ],
       idleTimeout: c['idle_timeout'] as String? ?? '',
       stripEvasion:

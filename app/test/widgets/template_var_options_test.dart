@@ -75,7 +75,7 @@ void main() {
   testWidgets('text + закрытые options — dropdown, свободного ввода нет',
       (tester) async {
     await _pump(tester,
-        v: _var('text', def: 'b'), value: 'b', onChanged: (_, _) {});
+        v: _var('text', def: 'b'), value: 'b', onChanged: (_, __) {});
     expect(find.byKey(const ValueKey('options-x')), findsOneWidget);
     expect(find.byType(TextField), findsNothing);
   });

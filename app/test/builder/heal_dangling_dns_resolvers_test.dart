@@ -20,11 +20,11 @@ void main() {
       {
         'dns': {
           'servers': servers,
-          'final': ?dnsFinal,
+          if (dnsFinal != null) 'final': dnsFinal,
         },
         'route': {
           'rules': <dynamic>[],
-          'default_domain_resolver': ?resolver,
+          if (resolver != null) 'default_domain_resolver': resolver,
         },
       };
 

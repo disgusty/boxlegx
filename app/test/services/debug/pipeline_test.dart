@@ -29,7 +29,7 @@ DebugRequest _req({
       path: path,
       headers: {
         'host': host,
-        'authorization': ?auth,
+        if (auth != null) 'authorization': auth,
       },
     );
 

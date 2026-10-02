@@ -145,7 +145,7 @@ void main() {
               ]),
         ],
         initialValues: {'strategy': 'prefer_ipv4'},
-        onChanged: (_, _) {},
+        onChanged: (_, __) {},
       );
       expect(find.text('prefer_ipv4'), findsOneWidget);
       // Программное изменение (как on_change галки ipv6).
@@ -160,7 +160,7 @@ void main() {
         tester,
         vars: [WizardVar(name: 'flag', type: 'bool', defaultValue: 'false')],
         initialValues: {'flag': 'false'},
-        onChanged: (_, _) {},
+        onChanged: (_, __) {},
       );
       var sw = tester.widget<SwitchListTile>(find.byType(SwitchListTile));
       expect(sw.value, isFalse);

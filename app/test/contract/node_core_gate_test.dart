@@ -27,7 +27,7 @@ void main() {
             'address': '1.2.3.4',
             'port': 51820,
             'public_key': 'YNXtAzepDqRv9H52osJVDQnznT5AM11eCK3ESpwSt04=',
-            'persistent_keepalive_interval': ?keepalive,
+            if (keepalive != null) 'persistent_keepalive_interval': keepalive,
           },
         ],
       };

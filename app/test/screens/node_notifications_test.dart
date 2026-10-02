@@ -139,7 +139,10 @@ void main() {
 
     testWidgets('строка объявлена кнопкой для screen reader', (tester) async {
       final handle = tester.ensureSemantics();
-      await pumpRow(tester, const [_warnTransport]);
+      // Flutter 3.13: ListTile с onTap сливает семантику потомков в один узел,
+      // поэтому строку проверяем отдельно, без обёртки ListTile.
+      await tester.pumpWidget(const MaterialApp(
+          home: Scaffold(body: NodeWarningRow([_warnTransport]))));
       expect(
         tester.getSemantics(find.byType(NodeWarningRow)),
         matchesSemantics(

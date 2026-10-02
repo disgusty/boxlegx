@@ -67,7 +67,7 @@ void main() {
       ));
 
   /// Единственная кнопка блока — она же «пробить»/«пробить снова».
-  final probeButton = find.byType(OutlinedButton);
+  final probeButton = find.bySubtype<OutlinedButton>();
 
   testWidgets('до прогона: позиции видны, замеров нет', (tester) async {
     await pump(tester, () => _StubProbe(report: reportOf(const [])));

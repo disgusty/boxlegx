@@ -52,7 +52,7 @@ Future<String> vmProfile(
     return c.future;
   }
 
-  final isolateId = Service.getIsolateId(Isolate.current)!;
+  final isolateId = Service.getIsolateID(Isolate.current)!;
   await call('setFlag', {'name': 'profiler', 'value': 'true'});
   final period = await call('setFlag', {
     'name': 'profile_period',

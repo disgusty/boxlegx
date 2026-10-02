@@ -25,7 +25,7 @@ void main() {
       );
 
   Future<bool> none(String _) async => false;
-  Future<bool> nonePreset(String _, String _) async => false;
+  Future<bool> nonePreset(String _, String __) async => false;
 
   test('включённые правила без файлов остаются включёнными', () async {
     final srs = srsRule();
@@ -57,7 +57,7 @@ void main() {
     final scan = await RoutingHelpers.scanSrsCache([srs, pr],
         presetFor: (_) => preset,
         isCached: (_) async => true,
-        isPresetCached: (_, _) async => true);
+        isPresetCached: (_, __) async => true);
 
     expect(scan.cached, containsAll(<String>['srs-1', '${pr.id}|geo']));
     expect(RoutingHelpers.waitingForDownload(srs, null, scan.cached), isFalse);

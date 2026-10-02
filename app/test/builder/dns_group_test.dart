@@ -16,8 +16,8 @@ void main() {
       {
         'type': 'group',
         'servers': members,
-        'mode': ?mode,
-        'error_ttl': ?errorTtl,
+        if (mode != null) 'mode': mode,
+        if (errorTtl != null) 'error_ttl': errorTtl,
       };
 
   List<Map<String, dynamic>> emit(List<DnsServerRef> refs,
@@ -206,10 +206,10 @@ void main() {
           ],
           'route': {
             'final': 'vpn-1',
-            'default_domain_resolver': ?resolver,
+            if (resolver != null) 'default_domain_resolver': resolver,
           },
           'dns': {
-            'final': ?dnsFinal,
+            if (dnsFinal != null) 'final': dnsFinal,
             'servers': [
               {'tag': 'fakeip', 'type': 'fakeip'},
               {'tag': 'h', 'type': 'hosts'},

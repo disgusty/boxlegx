@@ -17,8 +17,8 @@ Map<String, dynamic> _ob(String tag, String type,
     {
       'tag': tag,
       'type': type,
-      'detour': ?detour,
-      'outbounds': ?members,
+      if (detour != null) 'detour': detour,
+      if (members != null) 'outbounds': members,
     };
 
 List<String> _tags(List<RuntimeHop> hops) => [for (final h in hops) h.tag];

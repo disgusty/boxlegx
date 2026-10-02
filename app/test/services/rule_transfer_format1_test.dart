@@ -183,8 +183,8 @@ void main() {
                   {'kind': 'inline', 'name': 'filler'},
                 ]
               : rules,
-          'dns_servers': ?(dnsServers.isEmpty ? null : dnsServers),
-          'dns_rules': ?(dnsRules.isEmpty ? null : dnsRules),
+          if (dnsServers.isNotEmpty) 'dns_servers': dnsServers,
+          if (dnsRules.isNotEmpty) 'dns_rules': dnsRules,
         };
 
     RulesImportContents parse(Map<String, dynamic> doc) =>

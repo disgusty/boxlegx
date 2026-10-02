@@ -12,8 +12,8 @@ import '../contract_paths.dart';
 Map<String, dynamic> _masque({String? vhttp, Map<String, dynamic>? tls}) => {
       'tag': 'masque-out',
       'type': 'masque',
-      'vhttp': ?vhttp,
-      'tls': ?tls,
+      if (vhttp != null) 'vhttp': vhttp,
+      if (tls != null) 'tls': tls,
     };
 
 Map<String, dynamic> _config(List<Map<String, dynamic>> outbounds) => {

@@ -41,7 +41,7 @@ void main() {
               urltestNow: null,
               hasDetour: false,
               protocolLabel:
-                  [proto, ?n.transportLabel, ?n.securityLabel].join('·'),
+                  [proto, if (n.transportLabel != null) n.transportLabel!, if (n.securityLabel != null) n.securityLabel!].join('·'),
             ),
             onHighlight: () {},
             onActivate: () {},

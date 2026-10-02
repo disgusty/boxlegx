@@ -31,7 +31,7 @@ Map<String, dynamic> _inline10(String name, String domain, {int? num}) => {
       'kind': 'inline',
       'name': name,
       'enabled': true,
-      'num': ?num,
+      if (num != null) 'num': num,
       'body': {
         'domain': [domain],
         'outbound': 'direct-out',
@@ -39,7 +39,7 @@ Map<String, dynamic> _inline10(String name, String domain, {int? num}) => {
     };
 
 Map<String, dynamic> _preset10(String ref, {int? num}) =>
-    {'kind': 'preset', 'ref': ref, 'enabled': true, 'num': ?num};
+    {'kind': 'preset', 'ref': ref, 'enabled': true, if (num != null) 'num': num};
 
 List<String> _axis(List<CustomRule> rules) =>
     [for (final r in rules) '${r.name}=${r.orderNum}'];

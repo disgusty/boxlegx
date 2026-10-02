@@ -70,7 +70,7 @@ void main() {
         body: TemplateVarListView(
           vars: vars,
           model: model,
-          onChanged: (_, _) {},
+          onChanged: (_, __) {},
         ),
       ),
     ));
@@ -170,7 +170,7 @@ void main() {
               for (final name in counts.keys)
                 ValueListenableBuilder<String>(
                   valueListenable: model.notifier(name),
-                  builder: (_, value, _) => _BuildCounter(
+                  builder: (_, value, __) => _BuildCounter(
                     tick: () => counts[name] = counts[name]! + 1,
                     child: SizedBox(key: ValueKey('probe-$name')),
                   ),

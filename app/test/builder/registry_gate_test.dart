@@ -162,7 +162,7 @@ void main() {
         Endpoint(<String, dynamic>{
           'type': 'wireguard',
           'tag': tag,
-          'mtu': ?mtu,
+          if (mtu != null) 'mtu': mtu,
           'address': ['10.0.0.2/32'],
           'private_key': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaA=',
           'jc': 10,
