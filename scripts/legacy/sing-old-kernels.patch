@@ -1,0 +1,80 @@
+diff --git a/common/bufio/vectorised_unix.go b/common/bufio/vectorised_unix.go
+index 6e39b04..b35553d 100644
+--- a/common/bufio/vectorised_unix.go
++++ b/common/bufio/vectorised_unix.go
+@@ -107,7 +107,7 @@ func (w *SyscallVectorisedPacketWriter) WriteVectorisedPacket(buffers []*buf.Buf
+ 		}
+ 		for {
+ 			//nolint:staticcheck
+-			_, _, innerErr = unix.RawSyscall(unix.SYS_SENDMSG, fd, uintptr(unsafe.Pointer(&msg)), 0)
++			innerErr = rawSendmsg(fd, &msg)
+ 			if innerErr == unix.EINTR {
+ 				continue
+ 			}
+diff --git a/common/control/reuse_unix.go b/common/control/reuse_unix.go
+index 9ab455e..fe6a23c 100644
+--- a/common/control/reuse_unix.go
++++ b/common/control/reuse_unix.go
+@@ -13,9 +13,16 @@ import (
+ func ReuseAddr() Func {
+ 	return func(network, address string, conn syscall.RawConn) error {
+ 		return Raw(conn, func(fd uintptr) error {
++			reusePortErr := unix.SetsockoptInt(int(fd), unix.SOL_SOCKET, unix.SO_REUSEPORT, 1)
++			// lx-legacy: SO_REUSEPORT appeared in Linux 3.9; older kernels
++			// (Android 4.x) reject it with ENOPROTOOPT/EINVAL. SO_REUSEADDR alone
++			// is enough there, so the missing option is not fatal.
++			if reusePortErr == unix.ENOPROTOOPT || reusePortErr == unix.EINVAL {
++				reusePortErr = nil
++			}
+ 			return E.Errors(
+ 				unix.SetsockoptInt(int(fd), unix.SOL_SOCKET, unix.SO_REUSEADDR, 1),
+-				unix.SetsockoptInt(int(fd), unix.SOL_SOCKET, unix.SO_REUSEPORT, 1),
++				reusePortErr,
+ 			)
+ 		})
+ 	}
+diff --git a/common/bufio/sendmsg_raw_linux_386.go b/common/bufio/sendmsg_raw_linux_386.go
+new file mode 100644
+--- /dev/null
++++ b/common/bufio/sendmsg_raw_linux_386.go
+@@ -0,0 +1,20 @@
++//go:build linux && 386
++
++package bufio
++
++import (
++	"unsafe"
++
++	"golang.org/x/sys/unix"
++)
++
++// lx-legacy: direct socket syscalls (SYS_SENDMSG = 370) exist on i386 only
++// since Linux 4.3; older kernels (Android 4.x devices ship 3.0-3.10) return
++// ENOSYS for every write. socketcall(2) is available on all i386 kernels.
++const socketcallSendmsg = 16 // SYS_SENDMSG sub-call of socketcall(2)
++
++func rawSendmsg(fd uintptr, msg *unix.Msghdr) unix.Errno {
++	args := [3]uintptr{fd, uintptr(unsafe.Pointer(msg)), 0}
++	_, _, errno := unix.RawSyscall(unix.SYS_SOCKETCALL, socketcallSendmsg, uintptr(unsafe.Pointer(&args[0])), 0)
++	return errno
++}
+diff --git a/common/bufio/sendmsg_raw_other.go b/common/bufio/sendmsg_raw_other.go
+new file mode 100644
+--- /dev/null
++++ b/common/bufio/sendmsg_raw_other.go
+@@ -0,0 +1,15 @@
++//go:build !windows && !(linux && 386)
++
++package bufio
++
++import (
++	"unsafe"
++
++	"golang.org/x/sys/unix"
++)
++
++func rawSendmsg(fd uintptr, msg *unix.Msghdr) unix.Errno {
++	//nolint:staticcheck
++	_, _, errno := unix.RawSyscall(unix.SYS_SENDMSG, fd, uintptr(unsafe.Pointer(msg)), 0)
++	return errno
++}

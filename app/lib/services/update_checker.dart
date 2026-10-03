@@ -49,8 +49,14 @@ class UpdateChecker {
   ///
   /// §605 — публичная и статическая: first-run вопрос об автопроверке
   /// (`home_dialogs.dart`) проверяет dev-сборку тем же правилом.
+  /// Также сборки форка (`-fork` / `-legacy`): релизы на GitHub — это
+  /// оригинальный LxBox (без функций форка, на Android < 7.0 не ставится,
+  /// подписан другим ключом), предлагать их как обновление нельзя.
   static bool isDevBuild(String version) =>
-      version.contains('-dev') || version.startsWith('0.0.0');
+      version.contains('-dev') ||
+      version.startsWith('0.0.0') ||
+      version.contains('-fork') ||
+      version.contains('-legacy');
 
   Future<void> hydrate({required String localVersion}) async {
     if (isDevBuild(localVersion)) return;
