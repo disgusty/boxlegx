@@ -1,5 +1,6 @@
 package com.leadaxe.lxbox.vpn
 
+import com.leadaxe.lxbox.R
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -90,12 +91,12 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
 
         /// §047 outgoing emit: Dart (`AutomationEventEmitter`) шлёт событие
         /// наружу. action — короткое имя (`VPN_CONNECTED`), namespace'ится в
-        /// `com.leadaxe.lxbox.event.<action>`. Открыт всем подписчикам — события
+        /// `com.disgusty.boxlegx.event.<action>`. Открыт всем подписчикам — события
         /// не содержат секретов (только лейблы: теги нод, группы, статус); см.
         /// §157 (permission-фильтр удалён вместе с нерабочей галкой).
         fun sendAutomationBroadcast(action: String, extras: Map<String, Any?>) {
             val ctx = appContext ?: return
-            val intent = Intent("com.leadaxe.lxbox.event.$action")
+            val intent = Intent("com.disgusty.boxlegx.event.$action")
             for ((k, v) in extras) {
                 when (v) {
                     null -> {}
@@ -590,13 +591,13 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
                 }
             }
             "openBatteryOptimizationSettings" -> {
-                // Primary — system one-tap prompt («Allow L×Box to ignore
+                // Primary — system one-tap prompt («Allow boxlegx to ignore
                 // battery optimizations?»). It targets exactly our package via
                 // `package:` URI, requires REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
                 // permission (declared in manifest), and is the path used by
                 // SFA / NekoBox.
                 // Fallback — общая страница battery-optimization с списком
-                // всех apps (юзеру нужно ткнуть в L×Box). Срабатывает на OEM
+                // всех apps (юзеру нужно ткнуть в boxlegx). Срабатывает на OEM
                 // (ColorOS/MIUI/HyperOS), где direct-prompt молча отбрасывается.
                 // lx-legacy: экранов battery-optimization до API 23 нет → false.
                 result.success(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && openSystemSettings(
@@ -684,7 +685,7 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
             }
             "requestAddTile" -> {
                 // §032 Quick Connect. API 33+ позволяет приложению попросить
-                // систему показать prompt «Add L×Box to Quick Settings?».
+                // систему показать prompt «Add boxlegx to Quick Settings?».
                 // На API < 33 возвращаем "unsupported" — Dart-сторона покажет
                 // текстовую инструкцию вместо кнопки.
                 requestAddQuickSettingsTile(result)
@@ -1398,7 +1399,7 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware,
                 context, com.leadaxe.lxbox.vpn.LxBoxTileService::class.java
             )
             val icon = android.graphics.drawable.Icon.createWithResource(
-                context, android.R.drawable.ic_lock_lock
+                context, R.drawable.ic_lxbox_tile
             )
             // Защита от двойного success() если система зовёт consumer
             // несколько раз (наблюдалось на отдельных OEM).

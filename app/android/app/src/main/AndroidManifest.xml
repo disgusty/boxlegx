@@ -110,21 +110,7 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
             </intent-filter>
         </activity>
-        <!-- lx-legacy: запуск с программным рендерингом (Skia на CPU) — вход в
-             приложение, если GPU-драйвер старого устройства не рисует интерфейс.
-             Виден в лаунчере только до Android 5.0 (@bool/lx_cpu_launcher). -->
-        <activity-alias
-            android:name=".CpuRenderingAlias"
-            android:targetActivity=".MainActivity"
-            android:exported="true"
-            android:enabled="@bool/lx_cpu_launcher"
-            android:label="@string/label_cpu_rendering"
-            android:icon="@mipmap/ic_launcher">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity-alias>
+
 
         <service
             android:name=".vpn.BoxVpnService"
@@ -199,20 +185,20 @@
             android:exported="true"
             android:enabled="false">
             <intent-filter>
-                <action android:name="com.leadaxe.lxbox.START_VPN" />
-                <action android:name="com.leadaxe.lxbox.STOP_VPN" />
-                <action android:name="com.leadaxe.lxbox.TOGGLE_VPN" />
-                <action android:name="com.leadaxe.lxbox.SWITCH_NODE" />
-                <action android:name="com.leadaxe.lxbox.SET_GROUP" />
-                <action android:name="com.leadaxe.lxbox.REBUILD_CONFIG" />
-                <action android:name="com.leadaxe.lxbox.REFRESH_SUBS" />
-                <action android:name="com.leadaxe.lxbox.RESET_NETWORK" />
-                <action android:name="com.leadaxe.lxbox.URLTEST_GROUP" />
+                <action android:name="com.disgusty.boxlegx.START_VPN" />
+                <action android:name="com.disgusty.boxlegx.STOP_VPN" />
+                <action android:name="com.disgusty.boxlegx.TOGGLE_VPN" />
+                <action android:name="com.disgusty.boxlegx.SWITCH_NODE" />
+                <action android:name="com.disgusty.boxlegx.SET_GROUP" />
+                <action android:name="com.disgusty.boxlegx.REBUILD_CONFIG" />
+                <action android:name="com.disgusty.boxlegx.REFRESH_SUBS" />
+                <action android:name="com.disgusty.boxlegx.RESET_NETWORK" />
+                <action android:name="com.disgusty.boxlegx.URLTEST_GROUP" />
             </intent-filter>
         </receiver>
 
         <!-- §047 Шаг 2 — Locale / Tasker plugin-стандарт (twofortyfouram).
-             L×Box виден в Tasker как Plugin (Action + State). Edit-Activity
+             boxlegx виден в Tasker как Plugin (Action + State). Edit-Activity
              exported (хост открывает их). Fire/Query receiver'ы БЕЗ
              `android:permission` (стандарт запрещает — хост проверяет права
              сам); `enabled="false"` — включаются мастер-toggle'ом

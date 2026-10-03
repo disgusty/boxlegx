@@ -46,7 +46,7 @@ class SubscriptionsEmptyState extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(getLocalText.s("2. Paste it into the field above, or tap ⋮ → «Paste from clipboard», «Scan QR code».")),
                 const SizedBox(height: 8),
-                Text(getLocalText.s("3. Hit «+». L×Box will fetch, parse and configure — and you can connect from the Home tab.")),
+                Text(getLocalText.s("3. Hit «+». boxlegx will fetch, parse and configure — and you can connect from the Home tab.")),
                 if (onPickPublicTestServer != null) ...[
                 const SizedBox(height: 18),
                 Text(

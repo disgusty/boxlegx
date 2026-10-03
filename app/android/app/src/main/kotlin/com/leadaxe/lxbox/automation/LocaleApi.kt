@@ -7,7 +7,7 @@ import org.json.JSONObject
 
 /// §047 Шаг 2 — Locale / Tasker plugin-стандарт (twofortyfouram).
 ///
-/// Константы протокола + (de)serialize нашего bundle. L×Box выступает и как
+/// Константы протокола + (de)serialize нашего bundle. boxlegx выступает и как
 /// **setting**-плагин (FIRE_SETTING исполняет команду), и как **condition**-
 /// плагин (QUERY_CONDITION отвечает result code'ом).
 ///

@@ -5,8 +5,8 @@ import 'package:lxbox/services/project_links.dart';
 void main() {
   test('известные плейсхолдеры подставляются', () {
     expect(ProjectLinks.expand('@selfLink'), ProjectLinks.latestRelease);
-    expect(ProjectLinks.expand('L×Box @selfLink'),
-        'L×Box ${ProjectLinks.latestRelease}');
+    expect(ProjectLinks.expand('boxlegx @selfLink'),
+        'boxlegx ${ProjectLinks.latestRelease}');
     expect(ProjectLinks.expand('@repoLink и @tgLink'),
         '${ProjectLinks.repo} и ${ProjectLinks.telegram}');
   });

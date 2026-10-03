@@ -71,7 +71,7 @@ class ServiceNotification(private val service: Service) {
             createChannel(ctx)
             val openIntent = ctx.packageManager.getLaunchIntentForPackage(ctx.packageName)
             val builder = NotificationCompat.Builder(ctx, CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_lock_lock)
+                .setSmallIcon(R.drawable.ic_lxbox_tile)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(text))
@@ -114,7 +114,7 @@ class ServiceNotification(private val service: Service) {
         } else null
 
         val builder = NotificationCompat.Builder(service, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_lock_lock)
+            .setSmallIcon(R.drawable.ic_lxbox_tile)
             .setContentTitle(title)
             .setContentText(text)
             .setPriority(NotificationCompat.PRIORITY_LOW)

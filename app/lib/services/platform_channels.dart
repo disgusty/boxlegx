@@ -16,9 +16,12 @@ class PlatformChannels {
   /// native кладёт именно его (`service.packageName` в `buildOverrideOptions`),
   /// и зеркало override сравнивает по этой строке. Публичный, чтобы литерал не
   /// расползался третьей копией.
-  static const packageName = 'com.leadaxe.lxbox';
+  static const packageName = 'com.disgusty.boxlegx';
 
-  static const _ns = packageName;
+  /// Неймспейс каналов — внутреннее имя, не package name: приложение
+  /// переименовано (boxlegx), а Kotlin-сторона (`VpnPlugin.kt`,
+  /// `MainActivity.kt`) регистрирует каналы под прежним префиксом.
+  static const _ns = 'com.leadaxe.lxbox';
 
   /// Основной двусторонний канал: config/VPN lifecycle/notification/system-proxy
   /// и пр. (`VpnPlugin.kt handleMethodCall`).

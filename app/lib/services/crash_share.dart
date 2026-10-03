@@ -33,7 +33,7 @@ Future<bool> shareCrashReport(CrashReportFile report) async {
     }
     await Share.shareXFiles(
       files,
-      subject: 'L×Box core crash — ${report.mtime.toIso8601String()}',
+      subject: 'boxlegx core crash — ${report.mtime.toIso8601String()}',
     );
     return true;
   } catch (_) {

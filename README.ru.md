@@ -1,3 +1,5 @@
+> **boxlegx** — форк LxBox для Android 4.2+ со стилями интерфейса (Material 3 / Material 1 / Holo), маршрутизацией сайтов и ядром, пересобранным под Android 4.x. Описание форка — в [FORK.md](FORK.md); ниже — README оригинального проекта.
+
 # L×Box
 
 [![GitHub](https://img.shields.io/badge/GitHub-Leadaxe%2FLxBox-blue)](https://github.com/Leadaxe/LxBox)

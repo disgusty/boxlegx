@@ -313,7 +313,7 @@ class LxBoxApp extends StatelessWidget {
         final style = appStyle.style;
         final reduce = appStyle.reduceMotion;
         return MaterialApp(
-          title: 'L×Box',
+          title: 'boxlegx',
           theme: buildAppTheme(style, Brightness.light,
               reduceMotion: reduce, accent: appStyle.accent),
           darkTheme: buildAppTheme(style, Brightness.dark,

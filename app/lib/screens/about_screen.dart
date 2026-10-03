@@ -78,7 +78,7 @@ class AboutScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   // l10n-exempt: app name
-                  'L×Box',
+                  'boxlegx',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -223,7 +223,7 @@ class AboutScreen extends StatelessWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => StyledAlertDialog(
-        title: Text(getLocalText.s("Support L×Box")),
+        title: Text(getLocalText.s("Support boxlegx")),
         contentPadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
         content: SizedBox(
           width: double.maxFinite,
@@ -358,7 +358,7 @@ class _SourcesCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
             child: Text(
-              getLocalText.s("Where to get L×Box"),
+              getLocalText.s("Where to get boxlegx"),
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
@@ -391,7 +391,7 @@ class _SourcesCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
             child: Text(
               getLocalText.s(
-                  "Each source signs the app with its own key, so builds from different sources do not install over each other. To switch: back up your settings, uninstall L×Box, install it from the new source and restore the backup."),
+                  "Each source signs the app with its own key, so builds from different sources do not install over each other. To switch: back up your settings, uninstall boxlegx, install it from the new source and restore the backup."),
               style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
             ),
           ),

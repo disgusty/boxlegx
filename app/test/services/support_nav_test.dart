@@ -60,7 +60,7 @@ void main() {
     });
 
     test('share: непустой payload резолвится и НЕ уводит с экрана', () {
-      final a = SupportLinkAction.parse('lxbox://share:Смотри — L×Box https://x')!;
+      final a = SupportLinkAction.parse('lxbox://share:Смотри — boxlegx https://x')!;
       expect(a.action, 'share');
       expect(isResolvableSupportAction(a), true);
       expect(isInPlaceSupportAction(a), true);

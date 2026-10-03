@@ -36,15 +36,15 @@ class _AutomationTabState extends State<AutomationTab> {
 
   /// (action-строка, подпись с extras) для UI-списка команд.
   static const _commands = <(String, String)>[
-    ('com.leadaxe.lxbox.START_VPN', ''),
-    ('com.leadaxe.lxbox.STOP_VPN', ''),
-    ('com.leadaxe.lxbox.TOGGLE_VPN', ''),
-    ('com.leadaxe.lxbox.SWITCH_NODE', 'extra: tag'),
-    ('com.leadaxe.lxbox.SET_GROUP', 'extra: group'),
-    ('com.leadaxe.lxbox.REBUILD_CONFIG', ''),
-    ('com.leadaxe.lxbox.REFRESH_SUBS', 'extra: force'),
-    ('com.leadaxe.lxbox.RESET_NETWORK', ''),
-    ('com.leadaxe.lxbox.URLTEST_GROUP', 'extra: group'),
+    ('com.disgusty.boxlegx.START_VPN', ''),
+    ('com.disgusty.boxlegx.STOP_VPN', ''),
+    ('com.disgusty.boxlegx.TOGGLE_VPN', ''),
+    ('com.disgusty.boxlegx.SWITCH_NODE', 'extra: tag'),
+    ('com.disgusty.boxlegx.SET_GROUP', 'extra: group'),
+    ('com.disgusty.boxlegx.REBUILD_CONFIG', ''),
+    ('com.disgusty.boxlegx.REFRESH_SUBS', 'extra: force'),
+    ('com.disgusty.boxlegx.RESET_NETWORK', ''),
+    ('com.disgusty.boxlegx.URLTEST_GROUP', 'extra: group'),
   ];
 
   bool _loaded = false;
@@ -128,7 +128,7 @@ class _AutomationTabState extends State<AutomationTab> {
       context: context,
       builder: (ctx) => StyledAlertDialog(
         title: Text(getLocalText.s("Emitting events outward")),
-        content: Text(getLocalText.s("Enabling this category lets other apps receive L×Box events.\n\nEvents do NOT contain subscription / config secrets — only labels (node tags, group names, status).")),
+        content: Text(getLocalText.s("Enabling this category lets other apps receive boxlegx events.\n\nEvents do NOT contain subscription / config secrets — only labels (node tags, group names, status).")),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
@@ -171,7 +171,7 @@ class _AutomationTabState extends State<AutomationTab> {
         SectionTitle(getLocalText.s("Automation API")),
         const SizedBox(height: 4),
         Text(
-          getLocalText.s("Control L×Box from Tasker / Macrodroid / Llama and other automation apps via Android broadcast intents."),
+          getLocalText.s("Control boxlegx from Tasker / Macrodroid / Llama and other automation apps via Android broadcast intents."),
           style: muted,
         ),
         const Divider(height: 28),

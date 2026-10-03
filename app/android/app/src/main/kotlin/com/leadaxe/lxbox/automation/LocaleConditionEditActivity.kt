@@ -16,7 +16,7 @@ import android.widget.TextView
 import com.leadaxe.lxbox.R
 import com.leadaxe.lxbox.vpn.L10n
 
-/// §047 Шаг 2 — edit-экран condition-плагина («State → Plugin → L×Box»).
+/// §047 Шаг 2 — edit-экран condition-плагина («State → Plugin → boxlegx»).
 /// Список проверок сразу (RadioGroup): VPN up / Active node = / Active group =.
 /// Для node/group показывается поле значения. Save → bundle + blurb.
 class LocaleConditionEditActivity : Activity() {

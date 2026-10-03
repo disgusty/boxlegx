@@ -11,7 +11,7 @@ import com.leadaxe.lxbox.vpn.BoxVpnService
 import com.leadaxe.lxbox.vpn.VpnPlugin
 import com.leadaxe.lxbox.vpn.VpnStatus
 
-/// §047 Шаг 2 — setting-плагин (Locale/Tasker «Action → Plugin → L×Box»).
+/// §047 Шаг 2 — setting-плагин (Locale/Tasker «Action → Plugin → boxlegx»).
 ///
 /// Host (Tasker) шлёт `FIRE_SETTING` + `EXTRA_BUNDLE` (наш JSON-конфиг,
 /// собранный в [LocaleSettingEditActivity]). Парсим → исполняем команду через

@@ -11,7 +11,7 @@ import '../../../widgets/app_bottom_sheet.dart';
 import '../../../legacy/pop_scope.dart';
 
 import '../../../theme/styled_widgets.dart';
-/// §417 — кнопка справа от «L×Box»: имя текущего workspace и попап с двумя
+/// §417 — кнопка справа от «boxlegx»: имя текущего workspace и попап с двумя
 /// разделами — Load (слоты, у каждого меню «⋮»: переименовать / удалить) и
 /// Save (Save as…). Отдельного экрана управления нет.
 ///

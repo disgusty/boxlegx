@@ -68,7 +68,9 @@ class AppStyle extends ChangeNotifier {
             : UiStyle.material3,
       );
       _reduceMotion = prefs.getBool(_motionKey) ?? true;
-      _softwareRendering = prefs.getBool(_softwareKey) ?? false;
+      // До Android 5.0 — по умолчанию CPU (как в MainActivity).
+      _softwareRendering =
+          prefs.getBool(_softwareKey) ?? LegacyPlatform.isPreLollipop;
       _accent = AccentPalette.byIndex(prefs.getInt(_accentKey));
       notifyListeners();
     } catch (_) {

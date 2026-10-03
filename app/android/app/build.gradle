@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.leadaxe.lxbox"
+        applicationId "com.disgusty.boxlegx"
         // lx-legacy: Android 4.2 (API 17) minimum. Flutter 3.13 — последний
         // Flutter, чей движок грузится на API 17 (libflutter.so 3.16 импортирует
         // timerfd_*/getline из API 18/19). Ядро — libbox, собранный gomobile с

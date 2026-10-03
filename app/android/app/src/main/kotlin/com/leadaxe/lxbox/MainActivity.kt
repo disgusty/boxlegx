@@ -82,20 +82,14 @@ class MainActivity : FlutterActivity() {
         }
         // lx-legacy: программный рендеринг (Skia на CPU) — настройка «Рисовать
         // на CPU» (Appearance; shared_preferences кладёт её в
-        // FlutterSharedPreferences с префиксом `flutter.`) или запуск через
-        // значок «L×Box (CPU)» (.CpuRenderingAlias) — вход, когда GPU-драйвер
-        // старого устройства не рисует интерфейс.
-        val viaCpuAlias = intent?.component?.className?.endsWith(".CpuRenderingAlias") == true
-        val prefs = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE)
-        val softwarePref = prefs.getBoolean("flutter.app_software_rendering", false)
-        // Запуск через «L×Box (CPU)» включает настройку насовсем: дальше и
-        // обычный значок открывает приложение с программным рендерингом
-        // (выключается в «Внешнем виде»).
-        if (viaCpuAlias && !softwarePref) {
-            prefs.edit().putBoolean("flutter.app_software_rendering", true).apply()
-        }
-        if (viaCpuAlias || softwarePref) {
-            Log.d(TAG, "software rendering (alias=$viaCpuAlias, pref=$softwarePref)")
+        // FlutterSharedPreferences с префиксом `flutter.`). До Android 5.0 —
+        // включён по умолчанию: GPU-драйверы устройств 4.x часто не тянут Skia
+        // (пустой экран), а CPU-путь работает везде.
+        val softwareDefault = Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
+        val software = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE)
+            .getBoolean("flutter.app_software_rendering", softwareDefault)
+        if (software) {
+            Log.d(TAG, "software rendering (default=$softwareDefault)")
             args.add("--enable-software-rendering")
         }
         return args

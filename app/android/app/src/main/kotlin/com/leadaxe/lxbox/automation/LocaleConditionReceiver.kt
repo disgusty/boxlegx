@@ -7,7 +7,7 @@ import android.util.Log
 import com.leadaxe.lxbox.vpn.BoxVpnService
 import com.leadaxe.lxbox.vpn.VpnStatus
 
-/// §047 Шаг 2 — condition-плагин (Locale/Tasker «State → Plugin → L×Box»).
+/// §047 Шаг 2 — condition-плагин (Locale/Tasker «State → Plugin → boxlegx»).
 ///
 /// Host (Tasker) шлёт `QUERY_CONDITION` + `EXTRA_BUNDLE` периодически и читает
 /// **ordered-broadcast result code**: SATISFIED / UNSATISFIED / UNKNOWN.
