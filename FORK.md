@@ -74,13 +74,33 @@ IP и подсети; импорт/экспорт в формате Amnezia VPN 
   старого образа эмулятора: так же не рисуется пустой проект `flutter create`.
   Внешний вид нужно проверять на реальном устройстве.
 
+## Версии и обновления
+
+Версия форка задаётся в `app/pubspec.yaml`: `2.25.10-fork.N` (ветка `main`) и
+`2.25.10-legacy.N` (ветка `legacy-api17`). Суффикс отключает проверку
+обновлений с GitHub оригинального LxBox: его релизы не содержат функций форка,
+не ставятся на Android < 7.0 и подписаны другим ключом.
+
+## Подпись
+
+Обе ветки подписываются одним ключом форка (`CN=LxBox fork`, SHA-256
+сертификата `13:C3:E1:FE:EF:60:47:B2:7C:8C:9D:B1:00:92:61:24:71:51:EC:EF:57:8F:4B:28:21:14:69:8A:0D:49:D0:BA`).
+Ключ и пароль — вне репозитория (`key.properties` в `app/android/` указывает на
+файл ключа; оба в `.gitignore`). Без того же ключа обновление не встанет поверх
+установленного приложения.
+
 ## Сборка
 
 ```
-# ветка legacy-api17, Flutter 3.13.9
+# ветка main — Android 7.0+, Flutter 3.47.1
+flutter build apk --release --split-per-abi
+
+# ветка legacy-api17 — Android 4.2+, Flutter 3.13.9
 flutter build apk --release --target-platform android-arm
 ```
 
-Нужны: `app/android/app/libs/libbox-api17.aar` (ядро под API 17), JDK 17+
-(Gradle 8.5 запускается и на JDK 21). Без `key.properties` APK подписывается
-отладочным ключом.
+Ядро для `legacy-api17` (`app/android/app/libs/libbox-api17.aar`) собирается
+скриптом `scripts/legacy/build-libbox-api17.ps1` (Go 1.25.5, NDK r23c, JDK 17+):
+клонирует `Leadaxe/sing-box-lx`, накладывает `scripts/legacy/sing-old-kernels.patch`
+(исправления для ядер Linux Android 4.x) и собирает AAR gomobile с
+`-androidapi 17`. Сборка воспроизводима: повторный прогон даёт те же `.so`.

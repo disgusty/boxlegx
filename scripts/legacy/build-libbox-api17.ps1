@@ -24,7 +24,9 @@ param(
     [Parameter(Mandatory)] [string]$Out,
     [string]$AndroidHome = "$env:LOCALAPPDATA\Android\Sdk"
 )
-$ErrorActionPreference = 'Stop'
+# Ошибки нативных команд — по коду возврата: PowerShell 5.1 считает ошибкой
+# любую строку в stderr (у git это обычные предупреждения).
+function Check([string]$what) { if ($LASTEXITCODE -ne 0) { throw "$what failed: $LASTEXITCODE" } }
 $patch = Join-Path $PSScriptRoot 'sing-old-kernels.patch'
 $env:PATH = "$GoRoot\bin;$env:PATH"
 $env:GOTOOLCHAIN = 'local'
@@ -34,13 +36,13 @@ $env:PATH = "$gopath\bin;$env:PATH"
 # 1. Исходники ядра.
 $src = Join-Path $WorkDir "sing-box-lx-$Tag"
 if (-not (Test-Path $src)) {
-    git clone -q --depth 1 --branch $Tag https://github.com/Leadaxe/sing-box-lx.git $src
+    git clone -q --depth 1 --branch $Tag https://github.com/Leadaxe/sing-box-lx.git $src 2>$null; Check 'git clone'
     git -C $src submodule update --init --depth 1 `
-        submodules/wireguard-go submodules/sing-tun submodules/gvisor submodules/utls
+        submodules/wireguard-go submodules/sing-tun submodules/gvisor submodules/utls 2>$null; Check 'submodules'
 }
 Push-Location $src
 try {
-    go mod download
+    go mod download; Check 'go mod download'
 
     # 2. Модуль sing с патчами старых ядер.
     if (-not (Test-Path 'submodules/sing')) {
@@ -48,12 +50,12 @@ try {
         $cache = Join-Path (& go env GOMODCACHE) "github.com\sagernet\sing@v$ver"
         Copy-Item $cache 'submodules/sing' -Recurse
         Get-ChildItem 'submodules/sing' -Recurse -File | ForEach-Object { $_.IsReadOnly = $false }
-        git apply --directory=submodules/sing $patch
+        git apply --directory=submodules/sing $patch; Check 'git apply'
         Add-Content go.mod "`n// lx-legacy: sing с исправлениями для ядер Android 4.x.`nreplace github.com/sagernet/sing => ./submodules/sing`n"
     }
 
     # 3. gomobile bind.
-    go install github.com/sagernet/gomobile/cmd/gomobile github.com/sagernet/gomobile/cmd/gobind
+    go install github.com/sagernet/gomobile/cmd/gomobile github.com/sagernet/gomobile/cmd/gobind; Check 'go install gomobile'
     $env:ANDROID_HOME = $AndroidHome
     $env:ANDROID_NDK_HOME = $NdkDir
     $env:GOARM = '7'
@@ -63,7 +65,7 @@ try {
         'ts_omit_webclient,ts_omit_doctor,ts_omit_capture,ts_omit_kube,ts_omit_aws,ts_omit_synology,ts_omit_bird'
     $ld = "-X github.com/sagernet/sing-box/constant.Version=$($Tag.TrimStart('v'))-legacy -s -w -buildid= -checklinkname=0"
     if (Test-Path build) { Remove-Item build -Recurse -Force }
-    $outFull = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot $Out))
+    $outFull = if ([IO.Path]::IsPathRooted($Out)) { $Out } else { [IO.Path]::GetFullPath((Join-Path $PSScriptRoot $Out)) }
     # gomobile через ProcessStartInfo: PowerShell 5.1 режет аргументы вида
     # -javapkg=io.nekohasekai по точке, а cmd.exe оставляет переменные
     # «=C:», на которых gomobile падает.
